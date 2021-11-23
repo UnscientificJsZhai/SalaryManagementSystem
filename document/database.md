@@ -27,11 +27,11 @@ managerId,username,password,truename
 create schema SalarySystem;
 create table department
 (
-	departmentId int auto_increment,
-	name varchar(20) not null,
-	parentId int null,
-	constraint department_pk
-		primary key (departmentId)
+        departmentId int auto_increment
+        primary key,
+        name         varchar(20) not null,
+        parentId     int         null,
+        floor        int         not null
 );
 
 create table staff
