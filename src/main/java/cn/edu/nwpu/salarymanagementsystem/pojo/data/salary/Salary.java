@@ -5,7 +5,7 @@ package cn.edu.nwpu.salarymanagementsystem.pojo.data.salary;
  * 表示薪水的数据类。可供一般用户访问。但是不允许进行修改操作。
  *
  * @author UnscientificJsZhai
- * @version 1
+ * @version 2
  */
 public abstract class Salary {
 
@@ -61,5 +61,14 @@ public abstract class Salary {
 
     public boolean isPaid() {
         return paid;
+    }
+
+    public Salary(int month, double postWage, double meritPay, double seniorityPay, double subsidy, boolean paid) {
+        this.month = month;
+        this.postWage = postWage;
+        this.meritPay = meritPay;
+        this.seniorityPay = seniorityPay;
+        this.subsidy = subsidy;
+        this.paid = paid;
     }
 }

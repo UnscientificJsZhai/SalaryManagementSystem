@@ -5,7 +5,7 @@ package cn.edu.nwpu.salarymanagementsystem.pojo.data.salary;
  * 表示薪水的数据类。是基类的实现。可供管理员进行修改。
  *
  * @author UnscientificJsZhai
- * @version 1
+ * @version 2
  */
 final public class MutableSalary extends Salary {
 
@@ -31,5 +31,9 @@ final public class MutableSalary extends Salary {
 
     public void setPaid(boolean paid) {
         this.paid = paid;
+    }
+
+    public MutableSalary(int month, double postWage, double meritPay, double seniorityPay, double subsidy, boolean paid) {
+        super(month, postWage, meritPay, seniorityPay, subsidy, paid);
     }
 }

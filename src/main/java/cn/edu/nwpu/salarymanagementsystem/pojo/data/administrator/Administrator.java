@@ -5,7 +5,7 @@ package cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator;
  * 管理员数据类，用于显示管理员身份信息。
  *
  * @author UnscientificJsZhai
- * @version 1
+ * @version 2
  */
 final public class Administrator {
 
@@ -32,6 +32,11 @@ final public class Administrator {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Administrator(String username, String name) {
+        this.username = username;
         this.name = name;
     }
 }

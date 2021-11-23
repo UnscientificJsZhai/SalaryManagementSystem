@@ -10,7 +10,7 @@ import java.util.List;
  * 表示员工的数据类，可供员工在个人信息界面中维护自己的个人信息。但是对于修改有一定的限制。
  *
  * @author UnscientificJsZhai
- * @version 1
+ * @version 2
  */
 public abstract class Staff {
 
@@ -75,5 +75,13 @@ public abstract class Staff {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Staff(String username, String name, String phoneNumber, String email, Department department) {
+        this.username = username;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.department = department;
     }
 }
