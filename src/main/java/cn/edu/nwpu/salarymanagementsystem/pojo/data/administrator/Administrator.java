@@ -35,6 +35,12 @@ final public class Administrator {
         this.name = name;
     }
 
+    /**
+     * 默认构造方法。
+     *
+     * @param username 用户名。
+     * @param name     真实姓名。
+     */
     public Administrator(String username, String name) {
         this.username = username;
         this.name = name;

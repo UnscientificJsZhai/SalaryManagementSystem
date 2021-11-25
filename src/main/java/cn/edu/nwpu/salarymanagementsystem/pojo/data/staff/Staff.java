@@ -75,6 +75,15 @@ public abstract class Staff {
         this.email = email;
     }
 
+    /**
+     * 默认构造方法。
+     *
+     * @param username    用户名。
+     * @param name        真实姓名。
+     * @param phoneNumber 手机号。
+     * @param email       邮箱。
+     * @param department  部门。
+     */
     public Staff(String username, String name, String phoneNumber, String email, Department department) {
         this.username = username;
         this.name = name;
