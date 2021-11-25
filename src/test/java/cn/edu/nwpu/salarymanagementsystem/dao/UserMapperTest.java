@@ -15,7 +15,7 @@ public class UserMapperTest {
 
     @Before
     public void setUp() throws Exception {
-       sqlSession =  MyBatisInit.getSqlSession();
+       sqlSession =  MyBatisInit.INSTANCE.getSqlSession();
     }
 
     @Test

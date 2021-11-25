@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.UserMapper">
-    <select id="selectUser" resultType="cn.edu.nwpu.salarymanagementsystem.pojo.data.User">
+    <select id="selectUser" resultType="user">
         select * from mybatis.user
     </select>
 </mapper>
