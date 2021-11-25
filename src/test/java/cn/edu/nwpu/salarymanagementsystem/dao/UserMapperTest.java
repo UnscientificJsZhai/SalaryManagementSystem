@@ -15,18 +15,18 @@ public class UserMapperTest {
 
     @Before
     public void setUp() throws Exception {
-       sqlSession =  MyBatisInit.INSTANCE.getSqlSession();
+        sqlSession = MyBatisInit.INSTANCE.getSqlSession();
     }
 
     @Test
-    public void testUser(){
+    public void testUser() {
 
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         List<User> list = userMapper.selectUser();
-        for (User user:list
-             ) {
+        for (User user : list) {
             System.out.println(user);
         }
-
+        sqlSession.commit();
+        sqlSession.close();
     }
 }
