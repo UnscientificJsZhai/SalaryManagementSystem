@@ -52,4 +52,19 @@ public interface StaffMapper {
      * @return 员工数据类
      */
     Staff queryById(int staffId);
+
+    /**
+     * 返回是否有此用户
+     * @param username 用户
+     * @param password 密码
+     * @return 对象的属性都是null或者对象为null
+     */
+    Staff login(String username,String password);
+
+    /**
+     * 按名字找用户，用户名是唯一的。
+     * @param username 用户名
+     * @return 查询到的该员工
+     */
+    Staff queryByName(String username);
 }

@@ -4,6 +4,7 @@ import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class StaffService {
 
+    
     private StaffMapper staffMapper;
     private SalaryMapper salaryMapper;
     private DepartmentMapper departmentMapper;

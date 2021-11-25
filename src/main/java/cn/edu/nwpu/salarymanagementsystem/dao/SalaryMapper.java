@@ -46,6 +46,13 @@ public interface SalaryMapper {
     List<? extends Salary> queryAll(int staffId);
 
     /**
+     * 得到员工的所有薪水。即每个月的薪水记录
+     * @param username 用户名
+     * salary的list集合
+     */
+    List<? extends Salary> queryByName(String username);
+
+    /**
      * 返回员工指定月份的薪水记录
      *
      * @param staffId 员工Id
