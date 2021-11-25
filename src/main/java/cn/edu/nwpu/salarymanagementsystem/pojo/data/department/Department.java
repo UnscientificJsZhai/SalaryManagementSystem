@@ -33,6 +33,11 @@ public abstract class Department {
         return Objects.hash(name);
     }
 
+    /**
+     * 默认构造方法。
+     *
+     * @param name 部门名称。
+     */
     public Department(String name) {
         this.name = name;
     }

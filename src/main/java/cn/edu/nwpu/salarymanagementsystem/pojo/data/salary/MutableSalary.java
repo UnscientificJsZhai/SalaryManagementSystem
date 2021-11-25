@@ -33,6 +33,16 @@ final public class MutableSalary extends Salary {
         this.paid = paid;
     }
 
+    /**
+     * 默认构造方法。
+     *
+     * @param month        薪水对应的月份。
+     * @param postWage     岗位工资。
+     * @param meritPay     绩效工资。
+     * @param seniorityPay 工龄工资。
+     * @param subsidy      补贴。
+     * @param paid         是否已发放工资。
+     */
     public MutableSalary(int month, double postWage, double meritPay, double seniorityPay, double subsidy, boolean paid) {
         super(month, postWage, meritPay, seniorityPay, subsidy, paid);
     }

@@ -15,7 +15,7 @@ public abstract class Salary {
     protected int month;
 
     /**
-     * 工资。
+     * 岗位工资。
      */
     protected double postWage;
 
@@ -35,7 +35,7 @@ public abstract class Salary {
     protected double subsidy;
 
     /**
-     * 是否以发放工资。
+     * 是否已发放工资。
      */
     protected boolean paid;
 
@@ -63,6 +63,16 @@ public abstract class Salary {
         return paid;
     }
 
+    /**
+     * 默认构造方法。
+     *
+     * @param month        薪水对应的月份。
+     * @param postWage     岗位工资。
+     * @param meritPay     绩效工资。
+     * @param seniorityPay 工龄工资。
+     * @param subsidy      补贴。
+     * @param paid         是否已发放工资。
+     */
     public Salary(int month, double postWage, double meritPay, double seniorityPay, double subsidy, boolean paid) {
         this.month = month;
         this.postWage = postWage;
