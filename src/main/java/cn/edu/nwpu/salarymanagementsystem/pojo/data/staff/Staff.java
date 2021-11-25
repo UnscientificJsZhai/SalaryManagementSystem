@@ -1,16 +1,16 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.staff;
 
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 员工。
  * 表示员工的数据类，可供员工在个人信息界面中维护自己的个人信息。但是对于修改有一定的限制。
  *
  * @author UnscientificJsZhai
- * @version 2
+ * @version 3
  */
 public abstract class Staff {
 
@@ -37,7 +37,7 @@ public abstract class Staff {
     /**
      * 单位。
      */
-    protected Department department;
+    protected String department;
 
     public String getUsername() {
         return username;
@@ -55,11 +55,9 @@ public abstract class Staff {
         return email;
     }
 
-    public Department getDepartment() {
+    public String getDepartment() {
         return department;
     }
-
-    abstract public List<? extends Salary> getSalaryList();
 
     public void setUsername(String username) {
         this.username = username;
@@ -82,6 +80,21 @@ public abstract class Staff {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.department = department;
+        this.department = department.getName();
+    }
+
+    /**
+     * 生成用于数据库操作的Map对象。
+     *
+     * @return 一个HashMap。
+     */
+    public Map<String, Object> generateMap() {
+        final HashMap<String, Object> map = new HashMap<>();
+        map.put("username", this.username);
+        map.put("truename", this.name);
+        map.put("phone", this.phoneNumber);
+        map.put("email", this.email);
+        map.put("department", this.department);
+        return map;
     }
 }
