@@ -20,6 +20,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mapper/Mapper.xml"/>
+        <mapper resource="mapper/StaffMapper.xml"/>
     </mappers>
 </configuration>

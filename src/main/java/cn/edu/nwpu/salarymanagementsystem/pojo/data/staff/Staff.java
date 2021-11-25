@@ -97,4 +97,15 @@ public abstract class Staff {
         map.put("department", this.department);
         return map;
     }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", department='" + department + '\'' +
+                '}';
+    }
 }

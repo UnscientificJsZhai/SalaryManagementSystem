@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper">
+    <resultMap id="staff" type="cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff">
+        <result column="truename" property="name"/>
+        <result column="phone" property="phoneNumber"/>
+    </resultMap>
+    <select id="queryByName" resultType="staff" >
+        select username,truename,phone,email,departmentId from salarysystem.staff where username = #{username}
+    </select>
+</mapper>
