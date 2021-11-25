@@ -36,31 +36,31 @@ public final class MutableDepartment extends Department {
         return childDepartments;
     }
 
-    /**
-     * 设置上级部门。
-     *
-     * @param department 要设置的上级部门，如果为null，则清除上级部门信息。
-     */
-    public void setParentDepartment(@Nullable Department department) {
-        //TODO 等待数据库实现
-    }
-
-    /**
-     * 设置部门名称。
-     *
-     * @param name 新的部门名称。
-     */
-    public synchronized void setDepartmentName(String name) {
-        //TODO 数据库更新
-    }
-
-    /**
-     * 删除部门。
-     *
-     * @return 是否删除成功。
-     */
-    public synchronized boolean deleteDepartment() {
-        //TODO 等待数据库实现。
-        return false;
-    }
+//    /**
+//     * 设置上级部门。
+//     *
+//     * @param department 要设置的上级部门，如果为null，则清除上级部门信息。
+//     */
+//    public void setParentDepartment(@Nullable Department department) {
+//        //TODO 等待数据库实现
+//    }
+//
+//    /**
+//     * 设置部门名称。
+//     *
+//     * @param name 新的部门名称。
+//     */
+//    public synchronized void setDepartmentName(String name) {
+//        //TODO 数据库更新
+//    }
+//
+//    /**
+//     * 删除部门。
+//     *
+//     * @return 是否删除成功。
+//     */
+//    public synchronized boolean deleteDepartment() {
+//        //TODO 等待数据库实现。
+//        return false;
+//    }
 }
