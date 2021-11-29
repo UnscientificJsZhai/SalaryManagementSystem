@@ -4,11 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    <properties resource="db.properties"/>
+    <!--<properties resource="db.properties"/>-->
     <typeAliases>
         <package name="cn.edu.nwpu.salarymanagementsystem.pojo"/>
     </typeAliases>
-    <environments default="development">
+
+<!--    <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
@@ -18,8 +19,8 @@
                 <property name="password" value="${password}"/>
             </dataSource>
         </environment>
-    </environments>
+    </environments>-->
     <mappers>
-        <mapper resource="mapper/Mapper.xml"/>
+        <mapper resource="mapper/StaffMapper.xml"/>
     </mappers>
 </configuration>
