@@ -17,24 +17,10 @@ public class StaffMapperTest {
     SqlSession sqlSession;
     @Before
     public void setUp() throws Exception {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        sqlSession = sqlSessionFactory.openSession();
     }
 
     @Test
     public void test(){
 
-
-        StaffMapper staffMapper = sqlSession.getMapper(StaffMapper.class);
-        Staff staff = staffMapper.queryByName("user1");
-        System.out.println(staff.toString());
-
-
-
-        
-        sqlSession.commit();
-        sqlSession.close();
     }
 }

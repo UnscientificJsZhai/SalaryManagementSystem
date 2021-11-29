@@ -4,7 +4,9 @@ import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,13 +16,15 @@ import java.util.List;
  * @author UnscientificJsZhai
  * @version 1
  */
+@Service
 public class StaffService {
 
-    
+
     private StaffMapper staffMapper;
     private SalaryMapper salaryMapper;
     private DepartmentMapper departmentMapper;
 
+    @Autowired
     public void setStaffMapper(StaffMapper staffMapper) {
         this.staffMapper = staffMapper;
     }
