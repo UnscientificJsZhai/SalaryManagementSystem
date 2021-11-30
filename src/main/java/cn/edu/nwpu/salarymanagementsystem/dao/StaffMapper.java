@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 查询员工信息的Dao接口。
  *
+ * @author mikasa
  */
 public interface StaffMapper {
 
@@ -19,7 +21,7 @@ public interface StaffMapper {
      *
      * @param staff    员工
      * @param password 密码
-     * @throws SQLIntegrityConstraintViolationException 当主键重复时抛出此异常。
+     * @throws SQLIntegrityConstraintViolationException 当用户名重复时抛出此异常。
      */
     void addStaff(@Param("staff") Staff staff, @Param("password") String password) throws SQLIntegrityConstraintViolationException;
 
@@ -41,7 +43,6 @@ public interface StaffMapper {
     /**
      * 修改一个员工的所属。<br/>
      * 应该是存在部门才行！<br/>
-     *
      *
      * @param name 新的部门的名字。
      */
