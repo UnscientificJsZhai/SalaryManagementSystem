@@ -55,7 +55,6 @@ public class StaffService {
     }
 
     public void updatePersonalInformation(Staff information) {
-        staffMapper.addStaff(information.generateMap());
     }
 
     public List<? extends Staff> getSalaryList(String username){
