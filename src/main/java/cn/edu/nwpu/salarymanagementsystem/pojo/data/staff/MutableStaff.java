@@ -28,7 +28,7 @@ final public class MutableStaff extends Staff {
      * @param email       电子邮箱。
      * @param department  部门。
      */
-    public MutableStaff(String username, String name, String phoneNumber, String email, Department department) {
+    public MutableStaff(String username, String name, String phoneNumber, String email, String department) {
         super(username, name, phoneNumber, email, department);
     }
 }

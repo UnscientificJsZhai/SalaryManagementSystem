@@ -78,14 +78,14 @@ public abstract class Staff {
      * @param name        真实姓名。
      * @param phoneNumber 手机号。
      * @param email       邮箱。
-     * @param department  部门。
+     * @param department  部门名字。
      */
-    public Staff(String username, String name, String phoneNumber, String email, Department department) {
+    public Staff(String username, String name, String phoneNumber, String email, String department) {
         this.username = username;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.department = department.getName();
+        this.department = department;
     }
 
     /**

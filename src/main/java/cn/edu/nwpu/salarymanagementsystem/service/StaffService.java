@@ -29,12 +29,10 @@ public class StaffService {
         this.staffMapper = staffMapper;
     }
 
-    @Autowired
     public void setSalaryMapper(SalaryMapper salaryMapper) {
         this.salaryMapper = salaryMapper;
     }
 
-    @Autowired
     public void setDepartmentMapper(DepartmentMapper departmentMapper) {
         this.departmentMapper = departmentMapper;
     }
