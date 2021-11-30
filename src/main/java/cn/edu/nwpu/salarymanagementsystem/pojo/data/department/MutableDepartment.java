@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 部门。
+ * 部门。<br/>
  * 表示部门的实现类。管理员可以操作其中的数据。
  *
  * @author UnscientficJsZhai

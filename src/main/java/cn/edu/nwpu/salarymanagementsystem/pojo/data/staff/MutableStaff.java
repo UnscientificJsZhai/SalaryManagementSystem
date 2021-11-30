@@ -3,7 +3,7 @@ package cn.edu.nwpu.salarymanagementsystem.pojo.data.staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
 
 /**
- * 员工。
+ * 员工。<br/>
  * 表示员工的数据类，可供管理员管理员工信息与设定薪水列表
  *
  * @author UnscientificJsZhai
@@ -13,6 +13,10 @@ final public class MutableStaff extends Staff {
 
     public void setDepartment(Department department) {
         this.department = department.getName();
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**

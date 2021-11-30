@@ -3,8 +3,9 @@ package cn.edu.nwpu.salarymanagementsystem.pojo.data.department;
 import java.util.Objects;
 
 /**
- * 部门。
- * 表示部门的数据类，用于在员工中查看部门信息。
+ * 部门。<br/>
+ * 表示部门的数据类，用于在员工中查看部门信息。<br/>
+ * 部门是不允许是重名的。
  *
  * @author UnscientificJsZhai
  * @version 2

@@ -1,7 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.salary;
 
 /**
- * 薪水。
+ * 薪水。<br/>
  * 表示薪水的数据类。可供一般用户访问。但是不允许进行修改操作。
  *
  * @author UnscientificJsZhai

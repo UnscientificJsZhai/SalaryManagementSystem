@@ -1,7 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator;
 
 /**
- * 管理员。
+ * 管理员。<br/>
  * 管理员数据类，用于显示管理员身份信息。
  *
  * @author UnscientificJsZhai

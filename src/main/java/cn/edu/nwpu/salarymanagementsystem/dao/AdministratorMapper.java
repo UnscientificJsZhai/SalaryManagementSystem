@@ -2,7 +2,7 @@ package cn.edu.nwpu.salarymanagementsystem.dao;
 
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator.Administrator;
 
-public interface ManagerMapper {
+public interface AdministratorMapper {
 
     /**
      * 根据姓名和密码检查登录

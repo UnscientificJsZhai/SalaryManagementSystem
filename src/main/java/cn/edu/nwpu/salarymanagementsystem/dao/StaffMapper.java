@@ -72,7 +72,7 @@ public interface StaffMapper {
     MutableStaff queryByDepartment(String name);
 
     /**
-     * 返回是否有此用户
+     * 返回是否有此用户。
      *
      * @param username 用户
      * @param password 密码
@@ -82,9 +82,29 @@ public interface StaffMapper {
 
     /**
      * 修改个人信息 <br/>
-     * 包括： 用户名（不能重复） 密码 真实姓名 电话（位数检验） 邮件（格式检验）<br/>
+     * 包括： 密码 真实姓名 电话（位数检验） 邮件（格式检验）<br/>
      *
      * @param profile 要更改的信息，以键值对进行体现
      */
     void alterProfile(Map<String, String> profile);
+
+    /**
+     * 修改个人信息的Map中，密码对应的Key。
+     */
+    String PASSWORD = "password";
+
+    /**
+     * 修改个人信息的Map中，真实姓名对应的Key。
+     */
+    String NAME = "name";
+
+    /**
+     * 修改个人信息的Map中，电话对应的Key。
+     */
+    String PHONE_NUMBER = "number";
+
+    /**
+     * 修改个人信息的Map中，邮件对应的Key。
+     */
+    String EMAIL = "email";
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 员工。
+ * 员工。<br/>
  * 表示员工的数据类，可供员工在个人信息界面中维护自己的个人信息。但是对于修改有一定的限制。
  *
  * @author UnscientificJsZhai
@@ -57,10 +57,6 @@ public abstract class Staff {
 
     public String getDepartment() {
         return department;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setName(String name) {
