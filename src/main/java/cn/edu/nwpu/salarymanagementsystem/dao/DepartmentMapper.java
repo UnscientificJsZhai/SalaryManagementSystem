@@ -3,6 +3,7 @@ package cn.edu.nwpu.salarymanagementsystem.dao;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -17,8 +18,9 @@ public interface DepartmentMapper {
      *
      * @param parent     父部门名。必须存在！
      * @param department 部门数据类。
+     * @throws SQLException 当部门名称重复的时候，会抛出此异常。
      */
-    void addDepartment(@Param("department") MutableDepartment department, @Param("parent") String parent);
+    void addDepartment(@Param("department") MutableDepartment department, @Param("parent") String parent) throws SQLException;
 
     /**
      * 删除指定部门。<br/>
@@ -49,4 +51,10 @@ public interface DepartmentMapper {
      * @return 查询到的部门信息。如果输入的部门名查询不到结果，则返回null。
      */
     MutableDepartment queryByName(String name);
+
+    /**
+     * 顶级部门的父部门。以此值代替null。<br/>
+     * 保留部门名，任何部门不能与它重名。
+     */
+    String ROOT_DEPARTMENT = "root";
 }
