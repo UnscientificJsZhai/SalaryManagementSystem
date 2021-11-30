@@ -1,8 +1,5 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.department;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 部门。<br/>
  * 表示部门的实现类。管理员可以操作其中的数据。
@@ -13,7 +10,10 @@ import java.util.List;
 public final class MutableDepartment extends Department {
 
     private final String parentDepartment;
-    private final ArrayList<String> childDepartments;
+
+    /**
+     * 表示层级。层级1时parentDepartment可为空。
+     */
     private final int level;
 
     /**
@@ -21,10 +21,9 @@ public final class MutableDepartment extends Department {
      *
      * @param name 部门名称。
      */
-    public MutableDepartment(String name, String parentDepartment, List<String> childDepartments, int level) {
+    public MutableDepartment(String name, String parentDepartment, int level) {
         super(name);
         this.parentDepartment = parentDepartment;
-        this.childDepartments = new ArrayList<>(childDepartments);
         this.level = level;
     }
 
@@ -32,11 +31,16 @@ public final class MutableDepartment extends Department {
         return parentDepartment;
     }
 
-    public List<String> getChildDepartments() {
-        return childDepartments;
-    }
-
     public int getLevel() {
         return level;
+    }
+
+    @Override
+    public String toString() {
+        return "MutableDepartment{" +
+                "name='" + name + '\'' +
+                ", parentDepartment='" + parentDepartment + '\'' +
+                ", level=" + level +
+                '}';
     }
 }

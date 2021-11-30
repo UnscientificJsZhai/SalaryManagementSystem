@@ -1,6 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.staff;
 
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,15 +60,15 @@ public abstract class Staff {
         return department;
     }
 
-    public void setName(String name) {
+    public void setName(@NotNull String name) {
         this.name = name;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(@NotNull String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NotNull String email) {
         this.email = email;
     }
 
@@ -78,9 +79,9 @@ public abstract class Staff {
      * @param name        真实姓名。
      * @param phoneNumber 手机号。
      * @param email       邮箱。
-     * @param department  部门名字。
+     * @param department  部门名字。可以为空。空表示当前员工没有所属部门，可能是由于所属部门刚被删除。
      */
-    public Staff(String username, String name, String phoneNumber, String email, String department) {
+    public Staff(@NotNull String username, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, @Nullable String department) {
         this.username = username;
         this.name = name;
         this.phoneNumber = phoneNumber;

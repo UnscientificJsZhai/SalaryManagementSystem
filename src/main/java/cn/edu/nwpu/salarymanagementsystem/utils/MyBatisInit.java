@@ -18,13 +18,14 @@ import java.io.InputStream;
 public enum MyBatisInit {
     INSTANCE;
     private SqlSessionFactory sqlSessionFactory;
+
     public SqlSession getSqlSession() throws IOException {
-        if (sqlSessionFactory == null){
+        if (sqlSessionFactory == null) {
             String resource = "mybatis-config.xml";
             InputStream inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             return sqlSessionFactory.openSession();
-        }else {
+        } else {
             return sqlSessionFactory.openSession();
         }
     }

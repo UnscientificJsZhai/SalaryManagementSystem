@@ -1,5 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * 管理员。<br/>
  * 管理员数据类，用于显示管理员身份信息。
@@ -27,11 +29,11 @@ final public class Administrator {
         return name;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(@NotNull String username) {
         this.username = username;
     }
 
-    public void setName(String name) {
+    public void setName(@NotNull String name) {
         this.name = name;
     }
 
@@ -41,7 +43,7 @@ final public class Administrator {
      * @param username 用户名。
      * @param name     真实姓名。
      */
-    public Administrator(String username, String name) {
+    public Administrator(@NotNull String username, @NotNull String name) {
         this.username = username;
         this.name = name;
     }

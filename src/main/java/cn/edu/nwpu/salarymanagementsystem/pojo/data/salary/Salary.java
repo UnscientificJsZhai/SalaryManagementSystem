@@ -81,4 +81,16 @@ public abstract class Salary {
         this.subsidy = subsidy;
         this.paid = paid;
     }
+
+    @Override
+    public String toString() {
+        return "Salary{" +
+                "month=" + month +
+                ", postWage=" + postWage +
+                ", meritPay=" + meritPay +
+                ", seniorityPay=" + seniorityPay +
+                ", subsidy=" + subsidy +
+                ", paid=" + paid +
+                '}';
+    }
 }

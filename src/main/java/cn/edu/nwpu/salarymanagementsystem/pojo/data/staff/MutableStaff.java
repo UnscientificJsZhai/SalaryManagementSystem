@@ -1,6 +1,8 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.staff;
 
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * 员工。<br/>
@@ -11,11 +13,11 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
  */
 final public class MutableStaff extends Staff {
 
-    public void setDepartment(Department department) {
+    public void setDepartment(@Nullable Department department) {
         this.department = department.getName();
     }
 
-    public void setUsername(String username) {
+    public void setUsername(@NotNull String username) {
         this.username = username;
     }
 
@@ -26,9 +28,9 @@ final public class MutableStaff extends Staff {
      * @param name        真实姓名
      * @param phoneNumber 手机号。
      * @param email       电子邮箱。
-     * @param department  部门。
+     * @param department  部门。可以为空，空表示所属部门刚被删除。
      */
-    public MutableStaff(String username, String name, String phoneNumber, String email, String department) {
+    public MutableStaff(@NotNull String username, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, @Nullable String department) {
         super(username, name, phoneNumber, email, department);
     }
 }

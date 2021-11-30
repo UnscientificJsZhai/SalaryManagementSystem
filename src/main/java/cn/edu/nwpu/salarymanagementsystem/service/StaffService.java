@@ -45,7 +45,6 @@ public class StaffService {
      * @return 是否登录成功。如果是，则返回true。
      */
     public boolean login(String username, String password) {
-        //TODO 测试登录失败时是否返回null
         return staffMapper.login(username, password) != null;
     }
 
