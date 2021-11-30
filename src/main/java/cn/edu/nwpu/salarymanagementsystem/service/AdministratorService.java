@@ -4,8 +4,11 @@ import cn.edu.nwpu.salarymanagementsystem.dao.AdministratorMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * 管理员进行各种操作的服务。
@@ -39,5 +42,19 @@ public class AdministratorService {
     @Autowired
     public void setStaffMapper(StaffMapper staffMapper) {
         this.staffMapper = staffMapper;
+    }
+
+    /**
+     * 添加员工。
+     *
+     * @param staff    新的员工信息。
+     * @param password 初始密码。
+     */
+    public void addStaff(MutableStaff staff, String password) {
+        try {
+            staffMapper.addStaff(staff, password);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+        }
     }
 }

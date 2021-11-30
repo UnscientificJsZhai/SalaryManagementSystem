@@ -1,5 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.department
 
+import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException
+
 /**
  * 显示部门间关系的树状结构。
  *
@@ -27,7 +29,10 @@ class DepartmentTreeNode private constructor(
 
         /**
          * 通过一个部门列表整理得到他们的树状结构。
+         *
+         * @param departments 所有部门
          */
+        @Throws(DepartmentTreeException::class)
         @JvmStatic
         fun getTree(departments: List<MutableDepartment>): List<DepartmentTreeNode> {
             val result = ArrayList<DepartmentTreeNode>()
@@ -39,7 +44,7 @@ class DepartmentTreeNode private constructor(
                 if (department.level == 1) {
                     result.add(newTreeNode)
                 } else {
-                    val parentNode = treeNodeMap[department.parentDepartment]!!
+                    val parentNode = treeNodeMap[department.parentDepartment] ?: throw DepartmentTreeException()
                     parentNode.add(newTreeNode)
                 }
                 treeNodeMap[department.getName()] = newTreeNode
