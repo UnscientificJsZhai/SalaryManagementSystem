@@ -90,6 +90,7 @@ public interface StaffMapper {
     /**
      * 修改个人信息 <br/>
      * 可选：密码 真实姓名 电话（位数检验） 邮件（格式检验） <br/>
+     * 需要传用户名来确认更改者是谁(username)
      *
      * @param profile 要更改的信息，以键值对进行体现
      */

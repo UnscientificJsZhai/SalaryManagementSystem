@@ -3,5 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper">
+    <insert id="addSalary">
+        insert into salarysystem.salary
+        values (#{username},#{salary.month},#{salary.postWage},#{salary.meritPay},#{salary.seniorityPay},#{salary.subsidy},#{salary.paid})
+    </insert>
+    <delete id="deleteSalaryAll">
+        delete from salarysystem.salary where username = #{username}
+    </delete>
+
+    <delete id="deleteSalaryByMonth">
+        delete from salarysystem.salary where username = #{username} and month = #{month}
+    </delete>
+
+    <update id="alterSalary">
+        update salarysystem.salary
+        set postwage = #{salary.postWage},
+            meritpay = #{salary.meritPay},
+            senioritypay = #{salary.seniorityPay},
+            subsidy = #{salary.subsidy},
+            paid = #{salary.paid}
+        where username = #{username} and month = #{salary.month}
+    </update>
 
 </mapper>
