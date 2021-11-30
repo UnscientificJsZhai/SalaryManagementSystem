@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -25,51 +26,14 @@ public class MapperTest {
 
     @Test
     public void test() throws SQLIntegrityConstraintViolationException {
-        StaffMapper staffMapper = (StaffMapper) context.getBean("staffMapper");
-        //登录测试
-        Staff staff = staffMapper.login("2019302919","123456");
-        System.out.println(staff);
-        staff =  staffMapper.login("2019302919","123");
-        System.out.println(staff);
-        staff = staffMapper.login("2020302919","123456");
-        System.out.println(staff);
-        staff = staffMapper.login("2020302919","3123");
-        System.out.println(staff);
-
-        //查
-        List<MutableStaff> list = staffMapper.queryAll();
-        for (MutableStaff staff1:list
-             ) {
-            System.out.println(staff1);
-        }
-        staff = staffMapper.queryByUserName("2019302919");
-        System.out.println(staff);
-        list = staffMapper.queryByDepartment("sea");
-        for (MutableStaff staff1:list
-        ) {
-            System.out.println(staff1);
-        }
-        staff = staffMapper.queryByTrueName("wqy");
-        System.out.println(staff);
-
-
-        //增加测试
-        staffMapper.addStaff(new MutableStaff("2020302919","xly","17390122291","134@qq.com","college"),"123456");
-        staffMapper.addStaff(new MutableStaff("2019302919","xly","17390122291","134@qq.com","college"),"123456");
-        staffMapper.addStaff(new MutableStaff("2020302919","xly","1739012229","134@qq.com","college"),"123456");
-        staffMapper.addStaff(new MutableStaff("2020302919","xly","17390122291","134@qq.com","root"),"123456");
-
-        //删除
-        staffMapper.deleteStaff("2019302919");
-        staffMapper.deleteStaff("2020302919");
-        staffMapper.deleteStaffByDepartment("sky");
-        staffMapper.deleteStaffByDepartment("root");
-
-        //更改
-        staffMapper.alterDepartment("space","2019302922");
-        staffMapper.alterDepartment("root","2019302922");
-        staffMapper.alterDepartment("space","2029302922");
-
+        StaffMapper  staffMapper = (StaffMapper) context.getBean("staffMapper");
+        HashMap<String,String> map = new HashMap<>();
+        map.put("username","2019302919");
+        map.put("password","123456");
+        //map.put("email","1365302167@qq.com");
+        //map.put("phone","17390122291");
+        //map.put("truename","wxy");
+        staffMapper.alterProfile(map);
 
     }
 }

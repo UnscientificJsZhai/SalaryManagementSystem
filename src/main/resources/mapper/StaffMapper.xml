@@ -52,16 +52,16 @@
         update salarysystem.staff
         <set>
             <if test="password != null">
-                title = #{password},
+                password = #{password},
             </if>
             <if test="truename != null">
-                author = #{truename}
+                truename = #{truename},
             </if>
             <if test="phone != null">
-                title = #{phone},
+                phone = #{phone},
             </if>
             <if test="email != null">
-                author = #{email}
+                email = #{email}
             </if>
         </set>
         where username = #{username}
