@@ -4,19 +4,24 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ */
 public interface StaffMapper {
 
     /**
      * 添加一个用户。<br/>
-     * 用户名不能重复！需判断
+     * 用户名不能重复！
      *
      * @param staff    员工
      * @param password 密码
+     * @throws SQLIntegrityConstraintViolationException 当主键重复时抛出此异常。
      */
-    void addStaff(Staff staff, String password);
+    void addStaff(@Param("staff") Staff staff, @Param("password") String password) throws SQLIntegrityConstraintViolationException;
 
     /**
      * 删除一个员工，并删除他的薪水记录。<br/>
@@ -37,8 +42,10 @@ public interface StaffMapper {
      * 修改一个员工的所属。<br/>
      * 应该是存在部门才行！<br/>
      *
+     *
      * @param name 新的部门的名字。
      */
+    //TODO 异常添加
     void alterDepartment(String name);
 
     /**
@@ -79,7 +86,7 @@ public interface StaffMapper {
      * @param password 密码
      * @return 若匹配返回该对象，若不匹配则返回null
      */
-    MutableStaff login(@Param("username")String username, @Param("password") String password);
+    MutableStaff login(@Param("username") String username, @Param("password") String password);
 
     /**
      * 修改个人信息 <br/>
@@ -102,7 +109,7 @@ public interface StaffMapper {
     /**
      * 修改个人信息的Map中，电话对应的Key。
      */
-    String PHONE_NUMBER = "number";
+    String PHONE_NUMBER = "phone";
 
     /**
      * 修改个人信息的Map中，邮件对应的Key。

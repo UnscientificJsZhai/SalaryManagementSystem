@@ -18,7 +18,7 @@
 
     <insert id="addStaff" parameterType="staff">
         insert into salarysystem.staff
-        VALUES (#{username},#{password},#{name},#{phoneNumber},#{email},#{department})
+        VALUES (#{staff.username},#{password},#{staff.name},#{staff.phoneNumber},#{staff.email},#{staff.department})
     </insert>
 
     <delete id="deleteStaff">
