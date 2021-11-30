@@ -8,7 +8,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment
  *
  * @author UnscientificJsZhai
  */
-class DepartmentLevelException(val parent: MutableDepartment, val child: MutableDepartment) :
+class ChildDepartmentLevelNotMatchException(val parent: MutableDepartment, val child: MutableDepartment) :
     Exception() {
 
     private val parentLevel: Int

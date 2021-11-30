@@ -1,6 +1,5 @@
 package cn.edu.nwpu.salarymanagementsystem.service;
 
-import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
@@ -22,19 +21,15 @@ public class StaffService {
 
     private StaffMapper staffMapper;
     private SalaryMapper salaryMapper;
-    private DepartmentMapper departmentMapper;
 
     @Autowired
     public void setStaffMapper(StaffMapper staffMapper) {
         this.staffMapper = staffMapper;
     }
 
+    @Autowired
     public void setSalaryMapper(SalaryMapper salaryMapper) {
         this.salaryMapper = salaryMapper;
-    }
-
-    public void setDepartmentMapper(DepartmentMapper departmentMapper) {
-        this.departmentMapper = departmentMapper;
     }
 
     /**
