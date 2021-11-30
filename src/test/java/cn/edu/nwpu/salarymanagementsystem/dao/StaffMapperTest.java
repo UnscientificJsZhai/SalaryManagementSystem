@@ -20,15 +20,14 @@ public class StaffMapperTest {
     ApplicationContext context;
     @Before
     public void setUp() throws Exception {
-        context = new ClassPathXmlApplicationContext("spring-service.xml");
+        context = new ClassPathXmlApplicationContext("spring-dao.xml");
 
     }
 
     @Test
     public void test(){
-
-        StaffService service = (StaffService) context.getBean("staffService");
-        Staff staff = service.getPersonalInformation("2019302919");
-        System.out.println(staff);
+      StaffMapper staffMapper = (StaffMapper)context.getBean("staffMapper");
+      Staff staff = staffMapper.login("2019302919","123");
+      System.out.println(staff);
     }
 }

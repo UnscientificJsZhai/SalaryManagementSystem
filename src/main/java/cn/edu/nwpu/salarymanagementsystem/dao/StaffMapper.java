@@ -2,6 +2,7 @@ package cn.edu.nwpu.salarymanagementsystem.dao;
 
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -76,9 +77,9 @@ public interface StaffMapper {
      *
      * @param username 用户
      * @param password 密码
-     * @return 对象的属性都是null或者对象为null
+     * @return 若匹配返回该对象，若不匹配则返回null
      */
-    MutableStaff login(String username, String password);
+    MutableStaff login(@Param("username")String username, @Param("password") String password);
 
     /**
      * 修改个人信息 <br/>
