@@ -11,5 +11,8 @@
 
     <mappers>
         <mapper resource="mapper/StaffMapper.xml"/>
+        <mapper resource="mapper/DepartmentMapper.xml"/>
+        <mapper resource="mapper/AdministratorMapper.xml"/>
+        <mapper resource="mapper/SalaryMapper.xml"/>
     </mappers>
 </configuration>

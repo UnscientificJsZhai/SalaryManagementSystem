@@ -40,28 +40,28 @@
 
     <select id="queryByTrueName" resultType="mutableStaff">
         select username, truename, phone, email, department from salarysystem.staff
-        where username = #{truename}
+        where truename = #{truename}
     </select>
 
     <select id="queryByDepartment" resultType="mutableStaff">
         select username, truename, phone, email, department from salarysystem.staff
-        where username = #{name}
+        where department = #{name}
     </select>
 
     <update id="alterProfile" parameterType="map">
         update salarysystem.staff
         <set>
             <if test="password != null">
-                title = #{password},
+                password = #{password},
             </if>
             <if test="truename != null">
-                author = #{truename}
+                truename = #{truename},
             </if>
             <if test="phone != null">
-                title = #{phone},
+                phone = #{phone},
             </if>
             <if test="email != null">
-                author = #{email}
+                email = #{email}
             </if>
         </set>
         where username = #{username}
