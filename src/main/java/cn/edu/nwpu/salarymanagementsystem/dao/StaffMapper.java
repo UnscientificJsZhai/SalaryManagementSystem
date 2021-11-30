@@ -47,7 +47,7 @@ public interface StaffMapper {
      * @param name 新的部门的名字。
      */
     //TODO 异常添加
-    void alterDepartment(String name);
+    void alterDepartment(@Param("name") String name,@Param("username") String username);
 
     /**
      * 查询所有员工。
@@ -78,7 +78,7 @@ public interface StaffMapper {
      * @param name 部门名字
      * @return 员工数据类。
      */
-    MutableStaff queryByDepartment(String name);
+    List<MutableStaff> queryByDepartment(String name);
 
     /**
      * 返回是否有此用户。
