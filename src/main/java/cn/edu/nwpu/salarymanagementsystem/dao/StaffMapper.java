@@ -131,5 +131,5 @@ public interface StaffMapper {
      * @param profile 要更改的信息，以键值对进行体现
      * @param staffId 需要传id来确认更改者是谁
      */
-    void alterProfile(Map<String, String> profile, long staffId);
+    void alterProfile(@Param("profile") Map<String, String> profile, @Param("staffId") long staffId);
 }

@@ -80,7 +80,7 @@ public interface SalaryMapper {
      * @param map 需要更改的信息： 包括：post_wage，merit_pay，seniority_pay，subsidy，paid。<br/>
      *            提示:上述的为可选项。
      */
-    void alterSalary(Map<String, Object> map);
+    void alterSalary(@Param("map") Map<String, Object> map,@Param("staffId") long staffId,@Param("month") int month);
 
     /**
      * 查询指定员工的所有薪水记录。
