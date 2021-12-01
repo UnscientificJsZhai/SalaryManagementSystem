@@ -65,7 +65,9 @@ public class AdministratorService {
      * @return 是否登录成功。如果是，则返回true。
      */
     public boolean login(@NotNull String username, @NotNull String password) {
-        return administratorMapper.login(username, password) != null;
+        //TODO 等待DAO
+        return false;
+        /*return administratorMapper.login(username, password) != null;*/
     }
 
     /**
@@ -76,11 +78,12 @@ public class AdministratorService {
      * @throws DuplicatedUserException 如果新员工用户名和已经存在的员工用户名重复则抛出此异常。
      */
     public void addStaff(@NotNull MutableStaff staff, @NotNull String password) throws DuplicatedUserException {
-        try {
+        //TODO 等待   DAO
+/*        try {
             staffMapper.addStaff(staff, password);
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new DuplicatedUserException(staff.getId(), e);
-        }
+        }*/
     }
 
     /**
@@ -127,7 +130,8 @@ public class AdministratorService {
      * @param department 要删除的部门。
      */
     public void deleteDepartments(@NotNull Department department) {
-        departmentMapper.deleteByName(department.getName());
+        //TODO 等待DAO
+        /*departmentMapper.deleteByName(department.getName());*/
     }
 
     /**
@@ -137,7 +141,9 @@ public class AdministratorService {
      * @return 是否成功添加。如果部门名称设置为{@link DepartmentMapper#ROOT_DEPARTMENT}则会添加失败。
      */
     public boolean addDepartment(@NotNull MutableDepartment department) {
-        if (!Objects.equals(department.getName(), DepartmentMapper.ROOT_DEPARTMENT)) {
+        //TODO 等待DAO
+        return false;
+       /* if (!Objects.equals(department.getName(), DepartmentMapper.ROOT_DEPARTMENT)) {
             try {
                 if (department.getLevel() == 1) {
                     departmentMapper.addDepartment(department);
@@ -152,7 +158,7 @@ public class AdministratorService {
 
         } else {
             return false;
-        }
+        }*/
     }
 
     /**
@@ -162,7 +168,8 @@ public class AdministratorService {
      * @param newName    新的名称。
      */
     public void updateSingleDepartment(@NotNull MutableDepartment department, @NotNull String newName) {
-        departmentMapper.alterName(newName, department.getName());
+        //TODO 等待DAO
+        /*departmentMapper.alterName(newName, department.getName());*/
     }
 
     /**

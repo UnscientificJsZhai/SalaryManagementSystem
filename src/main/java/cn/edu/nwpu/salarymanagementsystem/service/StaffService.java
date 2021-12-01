@@ -51,7 +51,9 @@ public class StaffService {
      * @return 用户个人信息。
      */
     public Staff getPersonalInformation(@NotNull String username) {
-        return staffMapper.queryByUserName(username);
+        //TODO 等待dao
+        return null;
+        /*return staffMapper.queryByUserName(username);*/
     }
 
     /**
@@ -60,11 +62,12 @@ public class StaffService {
      * @param information 修改后的用户个人信息的数据类。
      */
     public void updatePersonalInformation(@NotNull Staff information) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        //TODO
+/*        final HashMap<String, String> informationMap = new HashMap<>();
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
-        informationMap.put(StaffMapper.PHONE_NUMBER, information.getPhoneNumber());
+        informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-        staffMapper.alterProfile(informationMap);
+        staffMapper.alterProfile(informationMap);*/
     }
 
     /**
@@ -73,9 +76,10 @@ public class StaffService {
      * @param newPassword 新密码，要求已经经过验证确认两次输入的值相同。
      */
     public void updatePassword(@NotNull String newPassword) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        //TODO
+/*        final HashMap<String, String> informationMap = new HashMap<>();
         informationMap.put(StaffMapper.PASSWORD, newPassword);
-        staffMapper.alterProfile(informationMap);
+        staffMapper.alterProfile(informationMap);*/
     }
 
     /**
@@ -85,6 +89,8 @@ public class StaffService {
      * @return 工资信息。
      */
     public List<? extends Salary> getSalaryList(@NotNull String username) {
-        return salaryMapper.queryAll(username);
+        //TODO
+        return null;
+       /* return salaryMapper.queryById(username);*/
     }
 }

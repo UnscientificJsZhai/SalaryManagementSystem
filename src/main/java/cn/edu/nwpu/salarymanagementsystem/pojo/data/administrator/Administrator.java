@@ -41,11 +41,5 @@ final public class Administrator {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Administrator{" +
-                "administratorId='" + administratorId + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
+
 }
