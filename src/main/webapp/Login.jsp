@@ -12,7 +12,7 @@
 </head>
 <body style="background: url(background.jpg); background-size: cover">
 
-	<form action="login" method="post" align="center">
+	<form action="/login" method="post" align="center">
 		<div id="login">
 			<h1>账号登录</h1>
 			<div class="form">
