@@ -1,12 +1,11 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.department;
 
-import org.springframework.lang.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
+import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentLevelException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * 部门。
+ * 部门。<br/>
  * 表示部门的实现类。管理员可以操作其中的数据。
  *
  * @author UnscientficJsZhai
@@ -15,52 +14,41 @@ import java.util.List;
 public final class MutableDepartment extends Department {
 
     private final String parentDepartment;
-    private final ArrayList<String> childDepartments;
+
+    /**
+     * 表示层级。层级1时parentDepartment可为空。
+     */
+    private final int level;
 
     /**
      * 构造方法。
      *
      * @param name 部门名称。
      */
-    public MutableDepartment(String name, String parentDepartment, List<String> childDepartments) {
+    public MutableDepartment(@NotNull String name, @Nullable String parentDepartment, int level) {
         super(name);
+        if ((parentDepartment == null) == (level != 1)) {
+            throw new DepartmentLevelException(level);
+        }
         this.parentDepartment = parentDepartment;
-        this.childDepartments = new ArrayList<>(childDepartments);
+        this.level = level;
     }
 
     public String getParentDepartment() {
         return parentDepartment;
     }
 
-    public List<String> getChildDepartments() {
-        return childDepartments;
+    public int getLevel() {
+        return level;
     }
 
-//    /**
-//     * 设置上级部门。
-//     *
-//     * @param department 要设置的上级部门，如果为null，则清除上级部门信息。
-//     */
-//    public void setParentDepartment(@Nullable Department department) {
-//        //TODO 等待数据库实现
-//    }
-//
-//    /**
-//     * 设置部门名称。
-//     *
-//     * @param name 新的部门名称。
-//     */
-//    public synchronized void setDepartmentName(String name) {
-//        //TODO 数据库更新
-//    }
-//
-//    /**
-//     * 删除部门。
-//     *
-//     * @return 是否删除成功。
-//     */
-//    public synchronized boolean deleteDepartment() {
-//        //TODO 等待数据库实现。
-//        return false;
-//    }
+    @Override
+    public String toString() {
+        return "MutableDepartment{" +
+                "name='" + name + '\'' +
+                ", parentDepartment='" + parentDepartment + '\'' +
+                ", level=" + level +
+                '}';
+    }
+
 }

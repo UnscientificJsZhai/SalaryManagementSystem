@@ -1,7 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.salary;
 
 /**
- * 薪水。
+ * 薪水。<br/>
  * 表示薪水的数据类。可供一般用户访问。但是不允许进行修改操作。
  *
  * @author UnscientificJsZhai
@@ -80,5 +80,17 @@ public abstract class Salary {
         this.seniorityPay = seniorityPay;
         this.subsidy = subsidy;
         this.paid = paid;
+    }
+
+    @Override
+    public String toString() {
+        return "Salary{" +
+                "month=" + month +
+                ", postWage=" + postWage +
+                ", meritPay=" + meritPay +
+                ", seniorityPay=" + seniorityPay +
+                ", subsidy=" + subsidy +
+                ", paid=" + paid +
+                '}';
     }
 }

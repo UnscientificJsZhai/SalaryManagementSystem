@@ -3,5 +3,68 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper">
+    <select id="queryByUserName" resultType="mutableStaff">
+        select username, truename, phone, email, department
+        from salarysystem.staff
+        where username = #{username}
+    </select>
+
+    <select id="login" resultType="mutableStaff">
+        select username, truename, phone, email, department
+        from salarysystem.staff
+        where username = #{username}
+          and password = #{password}
+    </select>
+
+    <insert id="addStaff" parameterType="staff">
+        insert into salarysystem.staff
+        VALUES (#{staff.username},#{password},#{staff.name},#{staff.phoneNumber},#{staff.email},#{staff.department})
+    </insert>
+
+    <delete id="deleteStaff">
+        delete from salarysystem.staff where username = #{username}
+    </delete>
+
+    <delete id="deleteStaffByDepartment">
+        delete from salarysystem.staff where department = #{name}
+    </delete>
+
+    <update id="alterDepartment">
+        update salarysystem.staff set department = #{name} where username = #{username}
+    </update>
+
+    <select id="queryAll" resultType="mutableStaff">
+        select username, truename, phone, email, department
+        from salarysystem.staff
+    </select>
+
+    <select id="queryByTrueName" resultType="mutableStaff">
+        select username, truename, phone, email, department from salarysystem.staff
+        where truename = #{truename}
+    </select>
+
+    <select id="queryByDepartment" resultType="mutableStaff">
+        select username, truename, phone, email, department from salarysystem.staff
+        where department = #{name}
+    </select>
+
+    <update id="alterProfile" parameterType="map">
+        update salarysystem.staff
+        <set>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="truename != null">
+                truename = #{truename},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email}
+            </if>
+        </set>
+        where username = #{username}
+    </update>
 
 </mapper>

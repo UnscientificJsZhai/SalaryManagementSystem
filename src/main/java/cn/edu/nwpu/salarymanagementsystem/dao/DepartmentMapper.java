@@ -1,67 +1,61 @@
 package cn.edu.nwpu.salarymanagementsystem.dao;
 
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
+import org.apache.ibatis.annotations.Param;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+/**
+ * 查询部门信息的Dao接口。
+ *
+ * @author mikasa
+ */
 public interface DepartmentMapper {
 
     /**
-     * 添加一个新的部门
+     * 添加一个新的部门 <br/>
+     * 请注意几个逻辑问题，需要做判断后才能调用此方法：1.parent部门必须存在 2.保证前述条件下，level必须 = parent.level + 1
      *
-     * @param name     部门名。
-     * @param parentId 上级部门的ID，若没有则为null。
-     * @param floor    部门层级 0-无穷。
+     * @param department 部门数据类。要进入数据库的属性字段不能为空！
+     * @throws SQLIntegrityConstraintViolationException 当部门名称重复的时候，会抛出此异常。
      */
-    void addDepartment(String name, int parentId, int floor);
-
-    /**
-     * 删除这个部门的所有一级子部门。<br/>
-     * 条件： 子部门是叶子节点，且子部门没有员工的情况下。
-     *
-     * @param departmentId 部门Id。
-     */
-    void deleteAll(int departmentId);
+    void addDepartment(@Param("department") MutableDepartment department) throws SQLIntegrityConstraintViolationException;
 
     /**
      * 删除指定部门。<br/>
      * 条件：部门是叶子节点，且部门没有员工。
      *
-     * @param departmentId 部门id。
+     * @param name 部门名字。
      */
-    void deleteById(int departmentId);
+    void deleteByName(String name);
 
     /**
-     * 修改一个部门。<br/>
-     * 条件 上级部门的层级必须比此部门高。<br/>
-     * 例子： 层级1的上级部门只能为0了。
+     * 修改部门的名字。
      *
-     * @param name     新的名字
-     * @param parentId 上级部门
-     * @param floor    层级
+     * @param name 新的名字。
      */
-    void alterDepartment(String name, int parentId, int floor);
+    void alterName(@Param("newName") String newName, @Param("name") String name);
 
     /**
-     * 返回所有的部门。
+     * 查询所有部门。
      *
-     * @return 部门按照层级排序。
+     * @return 包含所有部门信息的列表。
      */
-    List<? extends Department> queryAll();
+    List<MutableDepartment> queryAll();
 
     /**
-     * 返回指定的部门。
+     * 通过部门名称查询部门信息。
      *
-     * @param departmentId 指定的部门id。
-     * @return 部门数据类。
+     * @param name 部门名称。
+     * @return 查询到的部门信息。如果输入的部门名查询不到结果，则返回null。
      */
-    Department queryById(int departmentId);
+    MutableDepartment queryByName(String name);
 
     /**
-     * 查询该部门的所有一级下属部门。
-     *
-     * @param parentId 上级部门。
-     * @return 子部门list。
+     * 顶级部门的父部门。以此值代替null。<br/>
+     * 保留部门名，任何部门不能与它重名。
      */
-    List<? extends Department> queryChildAll(int parentId);
+    String ROOT_DEPARTMENT = "root";
 }
