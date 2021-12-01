@@ -9,11 +9,12 @@ import org.jetbrains.annotations.Nullable;
  * 表示部门的实现类。管理员可以操作其中的数据。
  *
  * @author UnscientficJsZhai
- * @version 2
  */
 public final class MutableDepartment extends Department {
 
-    private final String parentDepartment;
+    private final long id;
+
+    private final long parentDepartment;
 
     /**
      * 表示层级。层级1时parentDepartment可为空。
@@ -23,18 +24,22 @@ public final class MutableDepartment extends Department {
     /**
      * 构造方法。
      *
-     * @param name 部门名称。
+     * @param id               部门id。这是它的主键。
+     * @param name             部门名称。
+     * @param parentDepartment 父部门名称。
+     * @param level            层级。如果层级为1则父部门名称可以为-1。
      */
-    public MutableDepartment(@NotNull String name, @Nullable String parentDepartment, int level) {
+    public MutableDepartment(long id, @NotNull String name, long parentDepartment, int level) {
         super(name);
-        if ((parentDepartment == null) == (level != 1)) {
+        if ((parentDepartment == -1) == (level != 1)) {
             throw new DepartmentLevelException(level);
         }
+        this.id = id;
         this.parentDepartment = parentDepartment;
         this.level = level;
     }
 
-    public String getParentDepartment() {
+    public long getParentDepartment() {
         return parentDepartment;
     }
 
@@ -42,13 +47,17 @@ public final class MutableDepartment extends Department {
         return level;
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "MutableDepartment{" +
                 "name='" + name + '\'' +
+                ", id=" + id +
                 ", parentDepartment='" + parentDepartment + '\'' +
                 ", level=" + level +
                 '}';
     }
-
 }

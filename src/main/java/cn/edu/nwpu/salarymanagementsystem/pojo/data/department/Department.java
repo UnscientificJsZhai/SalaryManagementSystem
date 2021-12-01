@@ -1,5 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.department;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 /**
@@ -8,7 +10,6 @@ import java.util.Objects;
  * 部门是不允许是重名的。
  *
  * @author UnscientificJsZhai
- * @version 2
  */
 public abstract class Department {
 
@@ -17,6 +18,7 @@ public abstract class Department {
      */
     protected String name;
 
+    @NotNull
     public String getName() {
         return name;
     }
@@ -39,7 +41,7 @@ public abstract class Department {
      *
      * @param name 部门名称。
      */
-    public Department(String name) {
+    public Department(@NotNull String name) {
         this.name = name;
     }
 }

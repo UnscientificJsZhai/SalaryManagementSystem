@@ -5,7 +5,6 @@ package cn.edu.nwpu.salarymanagementsystem.pojo.data.salary;
  * 表示薪水的数据类。可供一般用户访问。但是不允许进行修改操作。
  *
  * @author UnscientificJsZhai
- * @version 2
  */
 public abstract class Salary {
 

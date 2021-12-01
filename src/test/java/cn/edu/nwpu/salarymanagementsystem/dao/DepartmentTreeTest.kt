@@ -16,12 +16,12 @@ class DepartmentTreeTest {
     fun treeTest() {
         val list = ArrayList<MutableDepartment>()
 
-        val d1 = MutableDepartment("d1", null, 1)
-        val d2 = MutableDepartment("d2", null, 1)
-        val d3 = MutableDepartment("d3", "d1", 2)
-        val d4 = MutableDepartment("d4", "d1", 2)
-        val d5 = MutableDepartment("d5", "d2", 2)
-        val d6 = MutableDepartment("d6", "d4", 3)
+        val d1 = MutableDepartment(, "d1", null, 1)
+        val d2 = MutableDepartment(, "d2", null, 1)
+        val d3 = MutableDepartment(, "d3", "d1", 2)
+        val d4 = MutableDepartment(, "d4", "d1", 2)
+        val d5 = MutableDepartment(, "d5", "d2", 2)
+        val d6 = MutableDepartment(, "d6", "d4", 3)
         list.add(d1)
         list.add(d2)
         list.add(d3)
