@@ -49,8 +49,8 @@ public class StaffService {
      * @param password 密码。
      * @return 是否登录成功。如果是，则返回true。
      */
-    public boolean login(@NotNull String username, @NotNull String password) {
-        return staffMapper.login(username, password) != null;
+    public boolean login(@NotNull long staffId, @NotNull String password) {
+        return staffMapper.login(staffId, password) != null;
     }
 
     /**

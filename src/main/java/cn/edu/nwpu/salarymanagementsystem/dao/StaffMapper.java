@@ -122,7 +122,7 @@ public interface StaffMapper {
      * @param password 密码
      * @return 若匹配返回该对象，若不匹配则返回null
      */
-    MutableStaff login(@Param("staffId") String staffId, @Param("password") String password);
+    MutableStaff login(@Param("staffId") long staffId, @Param("password") String password);
 
     /**
      * 修改个人信息 <br/>
