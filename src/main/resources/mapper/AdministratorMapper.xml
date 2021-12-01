@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.AdministratorMapper">
     <select id="login" resultType="administrator">
-        select username, truename
-        from salarysystem.adminstrator
-        where username = #{username}
+        select administrator_id, truename
+        from salarysystem.administrator
+        where administrator_id = #{administratorId}
           and password = #{password}
     </select>
 </mapper>

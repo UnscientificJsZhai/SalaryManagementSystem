@@ -60,12 +60,12 @@ public class AdministratorService {
     /**
      * 登录，进行身份验证。
      *
-     * @param username 用户名。
+     * @param administratorId 用户名。
      * @param password 密码。
      * @return 是否登录成功。如果是，则返回true。
      */
-    public boolean login(@NotNull String username,@NotNull String password) {
-        return administratorMapper.login(username, password) != null;
+    public boolean login(@NotNull String administratorId,@NotNull String password) {
+        return administratorMapper.login(administratorId, password) != null;
     }
 
     /**
@@ -139,9 +139,9 @@ public class AdministratorService {
         if (!Objects.equals(department.getName(), DepartmentMapper.ROOT_DEPARTMENT)) {
             try {
                 if (department.getLevel() == 1) {
-                    departmentMapper.addDepartment(department, DepartmentMapper.ROOT_DEPARTMENT);
+                    departmentMapper.addDepartment(department);
                 } else {
-                    departmentMapper.addDepartment(department, department.getParentDepartment());
+                    departmentMapper.addDepartment(department);
                 }
                 return true;
             } catch (SQLException e) {
@@ -179,7 +179,7 @@ public class AdministratorService {
      * @param staff  要设置薪水信息的员工。
      * @param salary 要设置的薪水信息。
      */
-    public void setSalary(@NotNull Staff staff, @NotNull Salary salary) {
+    public void setSalary(@NotNull Staff staff, @NotNull Salary salary) throws SQLIntegrityConstraintViolationException {
         salaryMapper.addSalary(salary, staff.getUsername());
     }
 

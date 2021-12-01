@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper">
     <insert id="addDepartment">
-        insert into salarysystem.department values (#{department.name},#{parent},#{department.level})
+        insert into salarysystem.department values (#{department.name},#{department.parentDepartment},#{department.level})
     </insert>
     <delete id="deleteByName">
         delete from salarysystem.department where name = #{name}

@@ -12,25 +12,25 @@ import org.jetbrains.annotations.NotNull;
 final public class Administrator {
 
     /**
-     * 用户名。
+     * 工号
      */
-    private String username;
+    private String administratorId;
 
     /**
      * 真实姓名。
      */
     private String name;
 
-    public String getUsername() {
-        return username;
+    public String getAdministratorId() {
+        return administratorId;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setUsername(@NotNull String username) {
-        this.username = username;
+    public void setAdministratorId(@NotNull String administratorId) {
+        this.administratorId = administratorId;
     }
 
     public void setName(@NotNull String name) {
@@ -40,11 +40,19 @@ final public class Administrator {
     /**
      * 默认构造方法。
      *
-     * @param username 用户名。
+     * @param administratorId 工号
      * @param name     真实姓名。
      */
-    public Administrator(@NotNull String username, @NotNull String name) {
-        this.username = username;
+    public Administrator(@NotNull String administratorId, @NotNull String name) {
+        this.administratorId = administratorId;
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Administrator{" +
+                "administratorId='" + administratorId + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
