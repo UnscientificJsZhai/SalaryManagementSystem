@@ -1,8 +1,11 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.department;
 
+import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentLevelException;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 部门。<br/>
@@ -11,8 +14,6 @@ import org.jetbrains.annotations.Nullable;
  * @author UnscientficJsZhai
  */
 public final class MutableDepartment extends Department {
-
-    private final long id;
 
     private final long parentDepartment;
 
@@ -47,10 +48,6 @@ public final class MutableDepartment extends Department {
         return level;
     }
 
-    public long getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return "MutableDepartment{" +
@@ -59,5 +56,25 @@ public final class MutableDepartment extends Department {
                 ", parentDepartment='" + parentDepartment + '\'' +
                 ", level=" + level +
                 '}';
+    }
+
+    /**
+     * 生成用于操作数据库的Map。
+     *
+     * @return 包含了当前部门信息的Map对象。
+     */
+    public Map<String, Object> generateMap() {
+        final HashMap<String, Object> map = new HashMap<>();
+
+        map.put(DepartmentMapper.ID, this.id);
+        map.put(DepartmentMapper.NAME, this.name);
+        if (this.level == 1) {
+            map.put(DepartmentMapper.PARENT, null);
+        } else {
+            map.put(DepartmentMapper.PARENT, this.parentDepartment);
+        }
+        map.put(DepartmentMapper.LEVEL, this.level);
+
+        return map;
     }
 }

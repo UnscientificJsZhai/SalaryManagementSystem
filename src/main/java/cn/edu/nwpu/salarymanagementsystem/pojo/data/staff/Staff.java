@@ -1,5 +1,6 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.staff;
 
+import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,9 +36,9 @@ public abstract class Staff {
     protected String email;
 
     /**
-     * 单位。
+     * 部门。
      */
-    protected String department;
+    protected long department;
 
     public long getId() {
         return id;
@@ -55,7 +56,7 @@ public abstract class Staff {
         return email;
     }
 
-    public String getDepartment() {
+    public long getDepartment() {
         return department;
     }
 
@@ -74,13 +75,13 @@ public abstract class Staff {
     /**
      * 默认构造方法。
      *
-     * @param id    用户名。相当于表中的user_id列。
+     * @param id          用户名。相当于表中的user_id列。
      * @param name        真实姓名。相当于表中的username列。
      * @param phoneNumber 手机号。
      * @param email       邮箱。
      * @param department  部门名字。可以为空。空表示当前员工没有所属部门，可能是由于所属部门刚被删除。
      */
-    public Staff(long id, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, @Nullable String department) {
+    public Staff(long id, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, long department) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -89,19 +90,25 @@ public abstract class Staff {
     }
 
     /**
-     * 生成用于数据库操作的Map对象。
+     * 生成用于操作数据库的Map对象。
      *
-     * @return 一个HashMap。
+     * @param password 密码。可以为空，为空是不修改。
+     * @return 生成的Map。
      */
-    public Map<String, Object> generateMap() {
-        final HashMap<String, Object> map = new HashMap<>();
-        map.put("username", this.id);
-        map.put("truename", this.name);
-        map.put("phone", this.phoneNumber);
-        map.put("email", this.email);
-        map.put("department", this.department);
+    public Map<String, Object> generateMap(@Nullable String password) {
+        final HashMap<String, Object> map = new HashMap<>(6);
+
+        map.put(StaffMapper.ID, this.id);
+        map.put(StaffMapper.NAME, this.name);
+        map.put(StaffMapper.PHONE, this.phoneNumber);
+        map.put(StaffMapper.EMAIL, this.email);
+        map.put(StaffMapper.DEPARTMENT_ID, this.department);
+        if (password != null) {
+            map.put(StaffMapper.PASSWORD, password);
+        }
+
         return map;
-    }//TODO 检查映射关系，需要Dao接口处修改
+    }
 
     @Override
     public String toString() {

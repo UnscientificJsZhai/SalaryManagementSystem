@@ -21,7 +21,6 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 管理员进行各种操作的服务。
@@ -60,14 +59,12 @@ public class AdministratorService {
     /**
      * 登录，进行身份验证。
      *
-     * @param administratorId 用户名。
+     * @param id       用户名。
      * @param password 密码。
      * @return 是否登录成功。如果是，则返回true。
      */
-    public boolean login(@NotNull String username, @NotNull String password) {
-        //TODO 等待DAO
-        return false;
-        /*return administratorMapper.login(username, password) != null;*/
+    public boolean login(long id, @NotNull String password) {
+        return administratorMapper.login(id, password) != null;
     }
 
     /**
@@ -78,12 +75,11 @@ public class AdministratorService {
      * @throws DuplicatedUserException 如果新员工用户名和已经存在的员工用户名重复则抛出此异常。
      */
     public void addStaff(@NotNull MutableStaff staff, @NotNull String password) throws DuplicatedUserException {
-        //TODO 等待   DAO
-/*        try {
-            staffMapper.addStaff(staff, password);
+        try {
+            staffMapper.addStaff(staff.generateMap(password));
         } catch (SQLIntegrityConstraintViolationException e) {
             throw new DuplicatedUserException(staff.getId(), e);
-        }*/
+        }
     }
 
     /**
@@ -92,8 +88,7 @@ public class AdministratorService {
      * @param staff 要删除的员工。
      */
     public void removeStaff(@NotNull Staff staff) {
-//        staffMapper.deleteStaff(staff.getId());
-        //TODO 等待Dao更改
+        staffMapper.deleteById(staff.getId());
     }
 
     /**
@@ -130,35 +125,25 @@ public class AdministratorService {
      * @param department 要删除的部门。
      */
     public void deleteDepartments(@NotNull Department department) {
-        //TODO 等待DAO
-        /*departmentMapper.deleteByName(department.getName());*/
+        departmentMapper.deleteById(department.getId());
     }
 
     /**
      * 添加一个部门。
      *
      * @param department 要添加的部门。
-     * @return 是否成功添加。如果部门名称设置为{@link DepartmentMapper#ROOT_DEPARTMENT}则会添加失败。
+     * @return 是否成功添加。
      */
     public boolean addDepartment(@NotNull MutableDepartment department) {
-        //TODO 等待DAO
-        return false;
-       /* if (!Objects.equals(department.getName(), DepartmentMapper.ROOT_DEPARTMENT)) {
-            try {
-                if (department.getLevel() == 1) {
-                    departmentMapper.addDepartment(department);
-                } else {
-//                    departmentMapper.addDepartment(department, department.getParentDepartment());
-                    //TODO 等待Dao更改
-                }
+        try {
+            if ((department.getLevel() == 1) == (department.getParentDepartment() == -1)) {
+                departmentMapper.addDepartment(department.generateMap());
                 return true;
-            } catch (SQLException e) {
-                return false;
             }
-
-        } else {
+        } catch (SQLException e) {
             return false;
-        }*/
+        }
+        return false;
     }
 
     /**
@@ -168,8 +153,7 @@ public class AdministratorService {
      * @param newName    新的名称。
      */
     public void updateSingleDepartment(@NotNull MutableDepartment department, @NotNull String newName) {
-        //TODO 等待DAO
-        /*departmentMapper.alterName(newName, department.getName());*/
+        departmentMapper.alterName(newName, department.getId());
     }
 
     /**
@@ -179,9 +163,7 @@ public class AdministratorService {
      * @return 薪水信息。这里返回的是不可变列表。
      */
     public List<MutableSalary> getSalaryListByStaff(@NotNull Staff staff) {
-//        return salaryMapper.queryAll(staff.getId());
-        //TODO 等待Dao更改
-        return null;
+        return salaryMapper.queryById(staff.getId());
     }
 
     /**
@@ -189,10 +171,15 @@ public class AdministratorService {
      *
      * @param staff  要设置薪水信息的员工。
      * @param salary 要设置的薪水信息。
+     * @return 是否添加成功。
      */
-    public void setSalary(@NotNull Staff staff, @NotNull Salary salary) {
-//        salaryMapper.addSalary(salary, staff.getId());
-        //TODO 等待Dao更改
+    public boolean setSalary(@NotNull Staff staff, @NotNull Salary salary) {
+        try {
+            salaryMapper.addSalary(salary.generateMap(staff.getId()));
+            return true;
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return false;
+        }
     }
 
     /**
@@ -200,9 +187,14 @@ public class AdministratorService {
      *
      * @param staff  要更改薪水信息的员工。
      * @param salary 要更改的薪水信息。
+     * @return 是否修改成功。
      */
-    public void updateSalary(@NotNull Staff staff, @NotNull Salary salary) {
-//        salaryMapper.alterSalary(salary, staff.getId());
-        //TODO 等待Dao更改
+    public boolean updateSalary(@NotNull Staff staff, @NotNull Salary salary) {
+        try {
+            salaryMapper.addSalary(salary.generateMap(staff.getId()));
+            return true;
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return false;
+        }
     }
 }

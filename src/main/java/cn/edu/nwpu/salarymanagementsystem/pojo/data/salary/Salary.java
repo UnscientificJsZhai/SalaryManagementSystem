@@ -1,5 +1,10 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.salary;
 
+import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 薪水。<br/>
  * 表示薪水的数据类。可供一般用户访问。但是不允许进行修改操作。
@@ -91,5 +96,25 @@ public abstract class Salary {
                 ", subsidy=" + subsidy +
                 ", paid=" + paid +
                 '}';
+    }
+
+    /**
+     * 生成用于数据库操作的Map对象。
+     *
+     * @param staffId 要操作薪水信息的用户。
+     * @return 包含必须信息的Map。
+     */
+    public Map<String, Object> generateMap(long staffId) {
+        final HashMap<String, Object> map = new HashMap<>();
+
+        map.put(SalaryMapper.ID, staffId);
+        map.put(SalaryMapper.MONTH, this.month);
+        map.put(SalaryMapper.POST_WAGE, this.postWage);
+        map.put(SalaryMapper.MERIT_PAY, this.meritPay);
+        map.put(SalaryMapper.SENIORITY_PAY, this.seniorityPay);
+        map.put(SalaryMapper.SUBSIDY, this.subsidy);
+        map.put(SalaryMapper.PAID, this.paid);
+
+        return map;
     }
 }

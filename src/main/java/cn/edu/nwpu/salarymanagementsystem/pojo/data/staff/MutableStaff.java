@@ -1,8 +1,12 @@
 package cn.edu.nwpu.salarymanagementsystem.pojo.data.staff;
 
+import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 员工。<br/>
@@ -13,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 final public class MutableStaff extends Staff {
 
     public void setDepartment(@Nullable Department department) {
-        this.department = department.getName();
+        this.department = department.getId();
     }
 
     public void setUsername(long username) {
@@ -29,7 +33,7 @@ final public class MutableStaff extends Staff {
      * @param email       电子邮箱。
      * @param department  部门。可以为空，空表示所属部门刚被删除。
      */
-    public MutableStaff(long id, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, @Nullable String department) {
+    public MutableStaff(long id, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, long department) {
         super(id, name, phoneNumber, email, department);
     }
 }

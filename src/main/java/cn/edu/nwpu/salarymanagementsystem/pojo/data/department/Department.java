@@ -18,9 +18,16 @@ public abstract class Department {
      */
     protected String name;
 
+    protected long id;
+
     @NotNull
     public String getName() {
         return name;
+    }
+
+
+    public long getId() {
+        return id;
     }
 
     @Override
