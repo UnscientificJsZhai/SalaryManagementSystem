@@ -14,7 +14,7 @@ public final class MutableDepartment extends Department {
 
     private final long id;
 
-    private final String parentDepartment;
+    private final long parentDepartment;
 
     /**
      * 表示层级。层级1时parentDepartment可为空。
@@ -27,11 +27,11 @@ public final class MutableDepartment extends Department {
      * @param id               部门id。这是它的主键。
      * @param name             部门名称。
      * @param parentDepartment 父部门名称。
-     * @param level            层级。如果层级为1则父部门名称可以为null。
+     * @param level            层级。如果层级为1则父部门名称可以为-1。
      */
-    public MutableDepartment(long id, @NotNull String name, @Nullable String parentDepartment, int level) {
+    public MutableDepartment(long id, @NotNull String name, long parentDepartment, int level) {
         super(name);
-        if ((parentDepartment == null) == (level != 1)) {
+        if ((parentDepartment == -1) == (level != 1)) {
             throw new DepartmentLevelException(level);
         }
         this.id = id;
@@ -39,7 +39,7 @@ public final class MutableDepartment extends Department {
         this.level = level;
     }
 
-    public String getParentDepartment() {
+    public long getParentDepartment() {
         return parentDepartment;
     }
 

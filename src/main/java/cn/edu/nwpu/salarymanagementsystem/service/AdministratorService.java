@@ -64,7 +64,7 @@ public class AdministratorService {
      * @param password 密码。
      * @return 是否登录成功。如果是，则返回true。
      */
-    public boolean login(@NotNull String username,@NotNull String password) {
+    public boolean login(@NotNull String username, @NotNull String password) {
         return administratorMapper.login(username, password) != null;
     }
 
@@ -79,7 +79,7 @@ public class AdministratorService {
         try {
             staffMapper.addStaff(staff, password);
         } catch (SQLIntegrityConstraintViolationException e) {
-            throw new DuplicatedUserException(staff.getUsername(), e);
+            throw new DuplicatedUserException(staff.getId(), e);
         }
     }
 
@@ -89,7 +89,8 @@ public class AdministratorService {
      * @param staff 要删除的员工。
      */
     public void removeStaff(@NotNull Staff staff) {
-        staffMapper.deleteStaff(staff.getUsername());
+//        staffMapper.deleteStaff(staff.getId());
+        //TODO 等待Dao更改
     }
 
     /**
@@ -141,7 +142,8 @@ public class AdministratorService {
                 if (department.getLevel() == 1) {
                     departmentMapper.addDepartment(department, DepartmentMapper.ROOT_DEPARTMENT);
                 } else {
-                    departmentMapper.addDepartment(department, department.getParentDepartment());
+//                    departmentMapper.addDepartment(department, department.getParentDepartment());
+                    //TODO 等待Dao更改
                 }
                 return true;
             } catch (SQLException e) {
@@ -170,7 +172,9 @@ public class AdministratorService {
      * @return 薪水信息。这里返回的是不可变列表。
      */
     public List<MutableSalary> getSalaryListByStaff(@NotNull Staff staff) {
-        return salaryMapper.queryAll(staff.getUsername());
+//        return salaryMapper.queryAll(staff.getId());
+        //TODO 等待Dao更改
+        return null;
     }
 
     /**
@@ -180,7 +184,8 @@ public class AdministratorService {
      * @param salary 要设置的薪水信息。
      */
     public void setSalary(@NotNull Staff staff, @NotNull Salary salary) {
-        salaryMapper.addSalary(salary, staff.getUsername());
+//        salaryMapper.addSalary(salary, staff.getId());
+        //TODO 等待Dao更改
     }
 
     /**
@@ -190,6 +195,7 @@ public class AdministratorService {
      * @param salary 要更改的薪水信息。
      */
     public void updateSalary(@NotNull Staff staff, @NotNull Salary salary) {
-        salaryMapper.alterSalary(salary, staff.getUsername());
+//        salaryMapper.alterSalary(salary, staff.getId());
+        //TODO 等待Dao更改
     }
 }

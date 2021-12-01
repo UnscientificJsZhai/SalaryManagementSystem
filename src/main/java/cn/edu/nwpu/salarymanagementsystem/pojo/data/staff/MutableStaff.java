@@ -16,20 +16,20 @@ final public class MutableStaff extends Staff {
         this.department = department.getName();
     }
 
-    public void setUsername(@NotNull String username) {
-        this.username = username;
+    public void setUsername(long username) {
+        this.id = username;
     }
 
     /**
      * 默认构造函数，全部数据。
      *
-     * @param username    用户名。x
+     * @param id          用户名。
      * @param name        真实姓名
      * @param phoneNumber 手机号。
      * @param email       电子邮箱。
      * @param department  部门。可以为空，空表示所属部门刚被删除。
      */
-    public MutableStaff(@NotNull String username, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, @Nullable String department) {
-        super(username, name, phoneNumber, email, department);
+    public MutableStaff(long id, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, @Nullable String department) {
+        super(id, name, phoneNumber, email, department);
     }
 }
