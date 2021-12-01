@@ -13,9 +13,9 @@ public interface AdministratorMapper {
     /**
      * 根据姓名和密码检查登录
      *
-     * @param username 管理员用户名
+     * @param administratorId 管理员工号
      * @param password 密码
      * @return 若查询成功返回数据类
      */
-    Administrator login(@Param("username") String username, @Param("password") String password);
+    Administrator login(@Param("administratorId") String administratorId, @Param("password") String password);
 }

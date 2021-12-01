@@ -4,6 +4,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 /**
@@ -14,13 +15,13 @@ import java.util.List;
 public interface DepartmentMapper {
 
     /**
-     * 添加一个新的部门
+     * 添加一个新的部门 <br/>
+     * 请注意几个逻辑问题，需要做判断后才能调用此方法：1.parent部门必须存在 2.保证前述条件下，level必须 = parent.level + 1
      *
-     * @param parent     父部门名。必须存在！
-     * @param department 部门数据类。
-     * @throws SQLException 当部门名称重复的时候，会抛出此异常。
+     * @param department 部门数据类。要进入数据库的属性字段不能为空！
+     * @throws SQLIntegrityConstraintViolationException 当部门名称重复的时候，会抛出此异常。
      */
-    void addDepartment(@Param("department") MutableDepartment department, @Param("parent") String parent) throws SQLException;
+    void addDepartment(@Param("department") MutableDepartment department) throws SQLIntegrityConstraintViolationException;
 
     /**
      * 删除指定部门。<br/>

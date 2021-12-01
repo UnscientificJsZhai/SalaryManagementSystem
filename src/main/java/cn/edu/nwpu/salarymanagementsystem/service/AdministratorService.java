@@ -60,7 +60,7 @@ public class AdministratorService {
     /**
      * 登录，进行身份验证。
      *
-     * @param username 用户名。
+     * @param administratorId 用户名。
      * @param password 密码。
      * @return 是否登录成功。如果是，则返回true。
      */
@@ -140,7 +140,7 @@ public class AdministratorService {
         if (!Objects.equals(department.getName(), DepartmentMapper.ROOT_DEPARTMENT)) {
             try {
                 if (department.getLevel() == 1) {
-                    departmentMapper.addDepartment(department, DepartmentMapper.ROOT_DEPARTMENT);
+                    departmentMapper.addDepartment(department);
                 } else {
 //                    departmentMapper.addDepartment(department, department.getParentDepartment());
                     //TODO 等待Dao更改

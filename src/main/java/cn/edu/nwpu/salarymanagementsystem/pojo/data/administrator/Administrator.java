@@ -19,6 +19,7 @@ final public class Administrator {
 
     public long getId() {
         return id;
+
     }
 
     public String getName() {
@@ -38,5 +39,13 @@ final public class Administrator {
     public Administrator(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Administrator{" +
+                "administratorId='" + administratorId + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
