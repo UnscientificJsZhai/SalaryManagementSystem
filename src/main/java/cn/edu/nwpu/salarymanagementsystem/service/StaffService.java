@@ -1,10 +1,13 @@
 package cn.edu.nwpu.salarymanagementsystem.service;
 
+import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,7 @@ public class StaffService {
 
     private StaffMapper staffMapper;
     private SalaryMapper salaryMapper;
+    private DepartmentMapper departmentMapper;
 
     @Autowired
     public void setStaffMapper(StaffMapper staffMapper) {
@@ -31,6 +35,11 @@ public class StaffService {
     @Autowired
     public void setSalaryMapper(SalaryMapper salaryMapper) {
         this.salaryMapper = salaryMapper;
+    }
+
+    @Autowired
+    public void setDepartmentMapper(DepartmentMapper departmentMapper) {
+        this.departmentMapper = departmentMapper;
     }
 
     /**
@@ -47,11 +56,11 @@ public class StaffService {
     /**
      * 获取用户个人信息。
      *
-     * @param username 用户名。
+     * @param id 用户名。
      * @return 用户个人信息。
      */
-    public Staff getPersonalInformation(@NotNull String username) {
-        return staffMapper.queryByUserName(username);
+    public Staff getPersonalInformation(long id) {
+        return staffMapper.queryById(id);
     }
 
     /**
@@ -62,29 +71,46 @@ public class StaffService {
     public void updatePersonalInformation(@NotNull Staff information) {
         final HashMap<String, String> informationMap = new HashMap<>();
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
-        informationMap.put(StaffMapper.PHONE_NUMBER, information.getPhoneNumber());
+        informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-        staffMapper.alterProfile(informationMap);
+        staffMapper.alterProfile(informationMap, information.getId());
     }
 
     /**
      * 更新密码。
      *
+     * @param staffId     要更新的用户的ID。
      * @param newPassword 新密码，要求已经经过验证确认两次输入的值相同。
      */
-    public void updatePassword(@NotNull String newPassword) {
+    public void updatePassword(long staffId, @NotNull String newPassword) {
         final HashMap<String, String> informationMap = new HashMap<>();
         informationMap.put(StaffMapper.PASSWORD, newPassword);
-        staffMapper.alterProfile(informationMap);
+        staffMapper.alterProfile(informationMap, staffId);
     }
 
     /**
      * 查询所有工资信息。
      *
-     * @param username 用户名。
+     * @param id 用户名。
      * @return 工资信息。
      */
-    public List<? extends Salary> getSalaryList(@NotNull String username) {
-        return salaryMapper.queryAll(username);
+    public List<? extends Salary> getSalaryList(long id) {
+        return salaryMapper.queryById(id);
+    }
+
+    /**
+     * 通过部门编号查询获得部门名称。
+     *
+     * @param departmentId 部门编号。
+     * @return 部门名称
+     */
+    @Nullable
+    public String getDepartmentName(long departmentId) {
+        final Department department = departmentMapper.queryById(departmentId);
+        if (department == null) {
+            return null;
+        } else {
+            return department.getName();
+        }
     }
 }
