@@ -11,8 +11,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException
  * @version 1
  */
 class DepartmentTreeNode private constructor(
-    val data: MutableDepartment,
-    private val childDepartment: ArrayList<DepartmentTreeNode> = ArrayList()
+    val data: MutableDepartment, private val childDepartment: ArrayList<DepartmentTreeNode> = ArrayList()
 ) : List<DepartmentTreeNode> by childDepartment {
 
     /**
@@ -40,7 +39,7 @@ class DepartmentTreeNode private constructor(
         @JvmStatic
         fun getTree(departments: List<MutableDepartment>): ArrayList<DepartmentTreeNode> {
             val result = ArrayList<DepartmentTreeNode>()
-            val treeNodeMap = HashMap<String, DepartmentTreeNode>()
+            val treeNodeMap = HashMap<Long, DepartmentTreeNode>()
             departments.sortedWith(DepartmentLevelComparator())
 
             for (department in departments) {
@@ -51,7 +50,7 @@ class DepartmentTreeNode private constructor(
                     val parentNode = treeNodeMap[department.parentDepartment] ?: throw DepartmentTreeException()
                     parentNode.add(newTreeNode)
                 }
-                treeNodeMap[department.getName()] = newTreeNode
+                treeNodeMap[department.id] = newTreeNode
             }
             return result
         }
@@ -86,10 +85,11 @@ class DepartmentTreeNode private constructor(
     /**
      * 添加一个子部门。
      *
+     * @param id 编号。
      * @param child 新部门名。
      */
-    fun add(child: String) {
-        val newDepartment = MutableDepartment(child, this.data.name, this.data.level + 1)
+    fun add(id: Long, child: String) {
+        val newDepartment = MutableDepartment(id, child, this.data.id, this.data.level + 1)
         this.add(DepartmentTreeNode(newDepartment))
     }
 

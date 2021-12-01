@@ -3,26 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper">
-    <insert id="addDepartment">
-        insert into salarysystem.department values (#{department.name},#{department.parentDepartment},#{department.level})
+    <insert id="addDepartment" parameterType="map">
+        insert into salarysystem.department values (#{departmentId},#{departmentName},#{parentId},#{level})
     </insert>
-    <delete id="deleteByName">
-        delete from salarysystem.department where name = #{name}
+
+    <delete id="deleteById">
+        delete from salarysystem.department where department_id = #{departmentId}
     </delete>
+
+    <delete id="deleteByParent">
+        delete from salarysystem.department where parent_id = #{parentId}
+    </delete>
+
     <update id="alterName" >
-        update salarysystem.department set name = #{newName} where name = #{name}
+        update salarysystem.department set department_name = #{newName} where department_id = #{departmentId}
     </update>
     
     <select id="queryAll" resultType="mutableDepartment">
         select * from salarysystem.department
     </select>
 
-    <select id="queryByName" resultType="mutableDepartment">
-        select * from salarysystem.department where name = #{name}
+    <select id="queryById" resultType="mutableDepartment">
+        select * from salarysystem.department where department_id = #{departmentId}
     </select>
 
-    <select id="queryChild" resultType="mutableDepartment">
-        select * from  salarysystem.department where parent = #{parentName}
+    <select id="queryByName">
+        select * from salarysystem.department where department_name = #{departmentName}
+    </select>
+
+    <select id="queryByParent" resultType="mutableDepartment">
+        select * from  salarysystem.department where parent_id = #{departmentId}
+    </select>
+
+    <select id="queryByLevel" resultType="mutableDepartment">
+        select * from  salarysystem.department where level = #{level}
     </select>
 
 

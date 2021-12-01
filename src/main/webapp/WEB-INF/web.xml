@@ -11,7 +11,7 @@
         <!--关联一个springmvc的配置文件:【servlet-name】-servlet.xml-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc.xml</param-value>
+            <param-value>classpath:applicationContext.xml</param-value>
         </init-param>
         <!--启动级别-1-->
         <load-on-startup>1</load-on-startup>
@@ -24,4 +24,13 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <display-name>xinSystem</display-name>
+    <welcome-file-list>
+        <welcome-file>Login.jsp</welcome-file>
+    </welcome-file-list>
+
+<!--    <taglib>
+        <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+        <taglib-location>/WEB-INF/c.tld</taglib-location>
+    </taglib>-->
 </web-app>

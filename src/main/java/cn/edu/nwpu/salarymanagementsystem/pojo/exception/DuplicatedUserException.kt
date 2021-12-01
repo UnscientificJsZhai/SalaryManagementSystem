@@ -9,7 +9,7 @@ import java.sql.SQLException
  * @param username 重复的用户名。
  * @param cause 数据库抛出的[SQLException]。
  */
-class DuplicatedUserException(private val username: String, cause: Throwable) : Exception(cause) {
+class DuplicatedUserException(private val username: Long, cause: Throwable) : Exception(cause) {
 
     override fun toString() = "Duplicated username: \"$username\""
 }
