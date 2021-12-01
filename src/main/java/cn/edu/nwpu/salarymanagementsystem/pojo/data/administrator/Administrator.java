@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
  * 管理员数据类，用于显示管理员身份信息。
  *
  * @author UnscientificJsZhai
- * @version 2
  */
 final public class Administrator {
 

@@ -11,7 +11,6 @@ import java.util.Map;
  * 表示员工的数据类，可供员工在个人信息界面中维护自己的个人信息。但是对于修改有一定的限制。
  *
  * @author UnscientificJsZhai
- * @version 3
  */
 public abstract class Staff {
 
@@ -75,8 +74,8 @@ public abstract class Staff {
     /**
      * 默认构造方法。
      *
-     * @param username    用户名。
-     * @param name        真实姓名。
+     * @param username    用户名。相当于表中的user_id列。
+     * @param name        真实姓名。相当于表中的username列。
      * @param phoneNumber 手机号。
      * @param email       邮箱。
      * @param department  部门名字。可以为空。空表示当前员工没有所属部门，可能是由于所属部门刚被删除。
@@ -102,7 +101,7 @@ public abstract class Staff {
         map.put("email", this.email);
         map.put("department", this.department);
         return map;
-    }
+    }//TODO 检查映射关系，需要Dao接口处修改
 
     @Override
     public String toString() {

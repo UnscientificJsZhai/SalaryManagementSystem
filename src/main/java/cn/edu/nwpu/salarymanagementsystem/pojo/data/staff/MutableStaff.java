@@ -9,7 +9,6 @@ import org.jetbrains.annotations.Nullable;
  * 表示员工的数据类，可供管理员管理员工信息与设定薪水列表
  *
  * @author UnscientificJsZhai
- * @version 3
  */
 final public class MutableStaff extends Staff {
 
@@ -24,7 +23,7 @@ final public class MutableStaff extends Staff {
     /**
      * 默认构造函数，全部数据。
      *
-     * @param username    用户名。
+     * @param username    用户名。x
      * @param name        真实姓名
      * @param phoneNumber 手机号。
      * @param email       电子邮箱。

@@ -89,7 +89,7 @@ class DepartmentTreeNode private constructor(
      * @param child 新部门名。
      */
     fun add(child: String) {
-        val newDepartment = MutableDepartment(child, this.data.name, this.data.level + 1)
+        val newDepartment = MutableDepartment(, child, this.data.name, this.data.level + 1)
         this.add(DepartmentTreeNode(newDepartment))
     }
 
