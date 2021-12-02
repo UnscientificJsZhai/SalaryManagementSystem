@@ -45,11 +45,11 @@ public class StaffService {
     /**
      * 登录，进行身份验证。
      *
-     * @param username 用户名。
+     * @param staffId  用户名。
      * @param password 密码。
      * @return 是否登录成功。如果是，则返回true。
      */
-    public boolean login(@NotNull long staffId, @NotNull String password) {
+    public boolean login(long staffId, @NotNull String password) {
         return staffMapper.login(staffId, password) != null;
     }
 

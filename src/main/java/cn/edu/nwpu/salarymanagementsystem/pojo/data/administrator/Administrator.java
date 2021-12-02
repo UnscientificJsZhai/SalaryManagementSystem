@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author UnscientificJsZhai
  */
-final public class Administrator {
+public final class Administrator {
 
-    private long id;
+    private final long id;
 
     /**
      * 真实姓名。

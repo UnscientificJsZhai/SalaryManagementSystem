@@ -92,6 +92,17 @@ public class AdministratorService {
     }
 
     /**
+     * 更改一个员工的部门。
+     *
+     * @param staff      要更改的员工。
+     * @param department 所属的新部门。
+     * @throws SQLIntegrityConstraintViolationException 如果新部门不存在则抛出此异常。
+     */
+    public void updateStaffDepartment(@NotNull MutableStaff staff, @NotNull Department department) throws SQLIntegrityConstraintViolationException {
+        staffMapper.alterDepartment(department.getId(), staff.getId());
+    }
+
+    /**
      * 获取所有员工列表。
      *
      * @return 包含所有员工信息的列表。
@@ -105,6 +116,7 @@ public class AdministratorService {
      *
      * @return 包含所有部门信息的列表。
      */
+    @NotNull
     public List<MutableDepartment> getDepartmentList() {
         return departmentMapper.queryAll();
     }
@@ -136,9 +148,19 @@ public class AdministratorService {
      */
     public boolean addDepartment(@NotNull MutableDepartment department) {
         try {
-            if ((department.getLevel() == 1) == (department.getParentDepartment() == -1)) {
-                departmentMapper.addDepartment(department.generateMap());
-                return true;
+            if ((department.getLevel() == MutableDepartment.TOP_LEVEL) == (department.getParentDepartment() == null)) {
+                if (department.getLevel() == MutableDepartment.TOP_LEVEL) {
+                    departmentMapper.addDepartment(department.generateMap());
+                    return true;
+                } else {
+                    MutableDepartment parent = departmentMapper.queryById(department.getParentDepartment());
+                    if (parent == null) {
+                        return false;
+                    } else if (parent.getId() + 1 == department.getId()) {
+                        departmentMapper.addDepartment(department.generateMap());
+                        return true;
+                    }
+                }
             }
         } catch (SQLException e) {
             return false;

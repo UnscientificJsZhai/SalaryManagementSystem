@@ -12,8 +12,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
-import java.util.List;
-
 
 public class MapperTest {
 
@@ -22,7 +20,6 @@ public class MapperTest {
     @Before
     public void setUp() throws Exception {
         context = new ClassPathXmlApplicationContext("spring-dao.xml");
-
     }
 
     /**
