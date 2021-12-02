@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -57,7 +58,7 @@ public class AdministratorController {
     @RequestMapping(value = "/showStaff", method = GET)
     public String showAllStaff(Model model) {
         model.addAllAttributes(administratorService.getStaffList());
-        return "showStaff";
+        return "/admin/showStaff";
     }
 
     /**
@@ -65,9 +66,9 @@ public class AdministratorController {
      *
      * @return addStaff.jsp
      */
-    @RequestMapping(value = "/addstaff", method = GET)
+    @RequestMapping(value = "/addStaff", method = GET)
     public String showStaffForm() {
-        return "addStaff";
+        return "/admin/addStaff";
     }
 
     /**
@@ -77,19 +78,23 @@ public class AdministratorController {
      * @param password 初始密码
      * @return 返回管理员主页
      */
-    @RequestMapping(value = "/addstaff", method = POST)
+    @RequestMapping(value = "/addStaff", method = POST)
     public String addStaff(MutableStaff staff, String password) {
         try {
             administratorService.addStaff(staff, password);
         } catch (DuplicatedUserException e) {
             e.printStackTrace();
         }
-        return "redirect:/showstaff";
+        return "redirect:/admin/showStaff";
     }
 
-    public String changeDepartment(){
-        //TODO
-        return null;
+    /**
+     * 更改一个员工的部门。
+     */
+    @RequestMapping("/changeStaffDepartment")
+    public String changeDepartment(long staff, long department) throws SQLIntegrityConstraintViolationException {
+        administratorService.updateStaffDepartment(staff,department);
+        return "redirect:/admin/showStaff";
     }
 
     /**
@@ -98,10 +103,10 @@ public class AdministratorController {
      * @param id
      * @return showstaff 返回管理员主页
      */
-    @RequestMapping("/staffDel")
+    @RequestMapping("/deleteStaff")
     public String removeStaff(long id) {
         administratorService.deleteStaff(id);
-        return "redirect:/showstaff";
+        return "redirect:/admin/showStaff";
     }
 
     /**
@@ -110,10 +115,10 @@ public class AdministratorController {
      * @param model
      * @return
      */
-    @RequestMapping("/showdepartment")
+    @RequestMapping("/showDepartment")
     public String getDepartmentList(Model model) {
         model.addAllAttributes(administratorService.getDepartmentList());
-        return "redirect:/showdepartment";
+        return "redirect:/admin/showDepartment";
     }
 
     /**
@@ -135,7 +140,7 @@ public class AdministratorController {
     @RequestMapping("/deleteDepartment")
     public String deleteDepartments(long department) {
         administratorService.deleteDepartments(department);
-        return "redirect:/showdepartment";
+        return "redirect:/admin/showDepartment";
     }
 
     /**
@@ -145,7 +150,7 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/addDepartment", method = GET)
     public String showDepartmentForm() {
-        return "addDepartment";
+        return "/admin/addDepartment";
     }
 
     /**
@@ -157,7 +162,7 @@ public class AdministratorController {
     @RequestMapping(value = "/addDepartment", method = POST)
     public String addDepartment(MutableDepartment department) {
         administratorService.addDepartment(department);
-        return "redirect:/showdepartment";
+        return "redirect:/admin/showDepartment";
     }
 
     /**
@@ -167,7 +172,7 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/editDepartment", method = GET)
     public String showEditDepartmentForm() {
-        return "editDepartment";
+        return "/admin/editDepartment";
     }
 
     /**
@@ -179,7 +184,7 @@ public class AdministratorController {
     @RequestMapping(value = "/editDepartment", method = POST)
     public String updateDepartment(MutableDepartment department) {
         administratorService.addDepartment(department);
-        return "redirect:/showdepartment";
+        return "redirect:/admin/showDepartment";
     }
 
     /**
@@ -188,7 +193,7 @@ public class AdministratorController {
      * @param id 要查询的员工信息。
      * @return 薪水信息。这里返回的是不可变列表。
      */
-    @RequestMapping("/getSalaryListByStaff")
+    @RequestMapping("/searchSalary")
     public List<MutableSalary> getSalaryListByStaff(long id) {
         return administratorService.getSalaryListByStaff(id);
     }
@@ -198,9 +203,9 @@ public class AdministratorController {
      *
      * @return
      */
-    @RequestMapping(value = "/setSalary", method = GET)
+    @RequestMapping(value = "/editSalary", method = GET)
     public String showSetSalaryForm() {
-        return "editSalary";
+        return "/admin/editSalary";
     }
 
     /**
@@ -210,10 +215,10 @@ public class AdministratorController {
      * @param salary
      * @return
      */
-    @RequestMapping(value = "/setSalary", method = POST)
+    @RequestMapping(value = "/editSalary", method = POST)
     public String setSalary(long staff, Salary salary) {
         administratorService.setSalary(staff, salary);
-        return "redirect:/showStaff";
+        return "redirect:/admin/showStaff";
     }
 
     /**
@@ -223,7 +228,7 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/editSalary", method = GET)
     public String showEditSalaryForm() {
-        return "editSalary";
+        return "/admin/editSalary";
     }
 
     /**
@@ -236,6 +241,6 @@ public class AdministratorController {
     @RequestMapping(value = "/editSalary", method = POST)
     public String updateSalary(long staff, Salary salary) {
         administratorService.updateSalary(staff, salary);
-        return "redirect:/showStaff";
+        return "redirect:/admin/showStaff";
     }
 }

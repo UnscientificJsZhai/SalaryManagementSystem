@@ -45,11 +45,11 @@ public class StaffController {
      * @param session
      * @return
      */
-    @RequestMapping("/showinfo")
+    @RequestMapping("/ShowInfo")
     public String getPersonalInformation(Model model, HttpSession session) {
         long Id = (long) session.getAttribute("staff");
         model.addAttribute(staffService.getPersonalInformation(Id));
-        return "showinfo";
+        return "/Staff/ShowInfo";
     }
 
     /**
@@ -57,7 +57,7 @@ public class StaffController {
      *
      * @return
      */
-    @RequestMapping(value = "/exitStaff", method = GET)
+    @RequestMapping(value = "/editStaff", method = GET)
     public String showStaffForm(){
         return "staff_edit";
     }
