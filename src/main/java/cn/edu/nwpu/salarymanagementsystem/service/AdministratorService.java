@@ -171,7 +171,7 @@ public class AdministratorService {
      *
      * @param staff  要设置薪水信息的员工。
      * @param salary 要设置的薪水信息。
-     * @return 是否添加成功。
+     * @return 是否添加成功。执行过程中如果抛出数据库异常则返回false。
      */
     public boolean setSalary(@NotNull Staff staff, @NotNull Salary salary) {
         try {
@@ -187,7 +187,7 @@ public class AdministratorService {
      *
      * @param staff  要更改薪水信息的员工。
      * @param salary 要更改的薪水信息。
-     * @return 是否修改成功。
+     * @return 是否修改成功。执行过程中如果抛出数据库异常则返回false。
      */
     public boolean updateSalary(@NotNull Staff staff, @NotNull Salary salary) {
         try {
