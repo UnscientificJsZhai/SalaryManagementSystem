@@ -27,7 +27,7 @@
         select * from salarysystem.department where department_id = #{departmentId}
     </select>
 
-    <select id="queryByName">
+    <select id="queryByName" resultType="mutableDepartment">
         select * from salarysystem.department where department_name = #{departmentName}
     </select>
 
