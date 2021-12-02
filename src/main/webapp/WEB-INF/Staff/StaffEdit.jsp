@@ -35,7 +35,7 @@
         <tr>
             
             <td>
-                <input name="name" type="text" value="${staff.getUsername()}">
+                <input name="name" type="text" value="${staffInfo.name}">
             </td>
             <td>
                 <input name="password1" type="text">
@@ -44,10 +44,10 @@
                 <input name="password2" type="text">
             </td>
             <td>
-                <input name="phoneNumber" type="text" value="${staff.getPhoneNumber()}">
+                <input name="phoneNumber" type="text" value="${staffInfo.phoneNumber}">
             </td>
             <td>
-                <input name="email" type="text" value="${staff.getEmail()}">
+                <input name="email" type="text" value="${staffInfo.email}">
             </td>
             <td>
                 <input name="edit" type="submit" value="修改">

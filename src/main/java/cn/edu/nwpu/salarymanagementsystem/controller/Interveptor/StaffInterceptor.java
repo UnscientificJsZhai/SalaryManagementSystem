@@ -1,6 +1,5 @@
-package cn.edu.nwpu.salarymanagementsystem.controller;
+package cn.edu.nwpu.salarymanagementsystem.controller.Interveptor;
 
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator.Administrator;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,26 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * @ClassName AdministratorInterceptor
- * @Description 管理员访问拦截器
+ * @ClassName StaffInterceptor
+ * @Description 员工访问拦截器
  * @Author xuLyi
+ * @Date 2021/12/1
  * @Version 1.0
  */
-public class AdministratorInterceptor implements HandlerInterceptor {
-
+public class StaffInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
-        HttpSession session = request.getSession();
-        long administrator = (long) session.getAttribute("administrator");
-        //如果session中没有管理员信息，或者信息不对，则跳转到登录界面
-        if (request.getRequestURI().contains("login")) {
-            return true;
-        }
-        if (session.getAttribute("administrator") != null) {
-            return true;
-        }
-        response.sendRedirect(request.getContextPath() + "/login");
-        return false;
+        return true;
+//                HttpSession session = request.getSession();
+//        Long staff = (Long) session.getAttribute("staff");
+//        //如果session中没有管理员信息，或者信息不对，则跳转到登录界面
+//        if (request.getRequestURI().contains("login")) {
+//            return true;
+//        }
+//        if (session.getAttribute("staff") != null) {
+//            return true;
+//        }
+//        request.getRequestDispatcher("/Login.jsp").forward(request, response);
+//        return false;
     }
 
     @Override

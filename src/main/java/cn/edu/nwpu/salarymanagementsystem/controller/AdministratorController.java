@@ -1,20 +1,15 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
-import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -47,7 +42,7 @@ public class AdministratorController {
     public String logout(HttpSession session) {
         session.removeAttribute("administrator");
         session.invalidate();
-        return "redirect:/Login";
+        return "/Login.jsp";
     }
 
     /**
@@ -203,7 +198,7 @@ public class AdministratorController {
      *
      * @return
      */
-    @RequestMapping(value = "/editSalary", method = GET)
+    @RequestMapping(value = "/addSalary", method = GET)
     public String showSetSalaryForm() {
         return "/admin/editSalary";
     }
@@ -215,7 +210,7 @@ public class AdministratorController {
      * @param salary
      * @return
      */
-    @RequestMapping(value = "/editSalary", method = POST)
+    @RequestMapping(value = "/addSalary", method = POST)
     public String setSalary(long staff, Salary salary) {
         administratorService.setSalary(staff, salary);
         return "redirect:/admin/showStaff";

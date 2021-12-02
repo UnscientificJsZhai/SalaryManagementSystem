@@ -90,6 +90,7 @@ img {
 					<td>${staff.getEmail()}</td>
 					<td><a name="del" href="#?sid=${staff.getId()}">删除</a></td>
 					<td><a href="/administrator/changeStaffDepartment?sid=${staff.getId()}">修改</a></td>
+					<td><a href="/administrator/addSalary?sid=${staff.getId()}">添加薪酬</a></td>
 					<td><a href="/administrator/editSalary?sid=${staff.getId()}">修改薪酬</a></td>
 					<td><a href="/administrator/searchSalary?sid=${staff.getId()}">查看薪酬</a></td>
 				</tr>

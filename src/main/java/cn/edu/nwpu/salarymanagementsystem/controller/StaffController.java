@@ -35,7 +35,7 @@ public class StaffController {
     public String logout(HttpSession session) {
         session.removeAttribute("staff");
         session.invalidate();
-        return "Login";
+        return "../Login";
     }
 
     /**
@@ -47,8 +47,9 @@ public class StaffController {
      */
     @RequestMapping("/ShowInfo")
     public String getPersonalInformation(Model model, HttpSession session) {
-        long Id = (long) session.getAttribute("staff");
-        model.addAttribute(staffService.getPersonalInformation(Id));
+        Long Id = (Long) session.getAttribute("staff");
+        model.addAttribute("staffInfo",staffService.getPersonalInformation(Id));
+        //model.addAttribute(staffService.getPersonalInformation(Id));
         return "/Staff/ShowInfo";
     }
 
@@ -59,7 +60,7 @@ public class StaffController {
      */
     @RequestMapping(value = "/editStaff", method = GET)
     public String showStaffForm(){
-        return "staff_edit";
+        return "/Staff/StaffEdit";
     }
     /**
      * 更新用户个人信息
@@ -70,7 +71,7 @@ public class StaffController {
     @RequestMapping(value = "/editStaff", method = POST)
     public String updatePersonalInformation(Staff staff) {
         staffService.updatePersonalInformation(staff);
-        return "redirect:/showinfo";
+        return "redirect:/Staff/ShowInfo";
     }
 
     /**
@@ -87,7 +88,7 @@ public class StaffController {
             staffService.updatePassword(staff.getId(), password1);
         } else
             return "error";
-        return "redirect:/showinfo";
+        return "redirect:/Staff/ShowInfo";
     }
 
     /**
@@ -97,9 +98,10 @@ public class StaffController {
      */
     @RequestMapping("/showSalary")
     public String getSalaryList(Model model, HttpSession session) {
-        Staff staff = (Staff) session.getAttribute("staff");
-        model.addAllAttributes(staffService.getSalaryList(staff.getId()));
-        return "showSalary";
+        long id = (long) session.getAttribute("staff");
+        model.addAttribute("staffName",staffService.getPersonalInformation(id).getName());
+        model.addAttribute("salaryList",staffService.getSalaryList(id));
+        return "/Staff/ShowSalary";
     }
 
     /**

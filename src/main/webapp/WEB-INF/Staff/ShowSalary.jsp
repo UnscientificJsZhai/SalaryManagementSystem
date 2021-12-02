@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -23,23 +24,30 @@
 <div style="width: 1000px;margin: 0 auto;text-align: center">
     <a href="/staff/ShowInfo">返回个人信息界面</a>
 </div>
-<form action="/staff/showSalary" method="post">
-    <table>
+<h3>
+    name: ${staffName} <br/>
+</h3>
+<table>
+    <tr>
+        <th>月份。</th>
+        <th>岗位工资。</th>
+        <th>绩效工资。</th>
+        <th>工龄工资。</th>
+        <th>补贴。</th>
+        <th>是否已发放工资。</th>
+    </tr>
+    <c:forEach items="${salaryList}" var="salary" >
         <tr>
-            <th>员工id</th>
-            <th>员工姓名</th>
-            <th>绩效工资</th>
-            <th>工龄工资</th>
-            <th>津贴补助</th>
+<%--            把月份显示做成自定义tag--%>
+            <td>${salary.month}</td>
+            <td>${salary.postWage}</td>
+            <td>${salary.meritPay}</td>
+            <td>${salary.seniorityPay}</td>
+            <td>${salary.subsidy}</td>
+            <td>${salary.paid}</td>
         </tr>
-        <tr>
-            <td>${staff.getId()}</td>
-            <td>${staff.getName()}></td>
-            <td>${salary.getMeritpay()}></td>
-            <td>${salary.getSenioritypay()}></td>
-            <td>${salary.getsubsidy()}></td>    
-        </tr>
-    </table>
-</form>
+    </c:forEach>
+</table>
+
 </body>
 </html>

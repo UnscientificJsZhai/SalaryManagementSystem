@@ -18,7 +18,7 @@
 			<div class="form">
 				<p>用户ID</p>
 				<div class="item">
-					<input type="text" name="username" placeholder="请输入ID"
+					<input type="text" name="Id" placeholder="请输入ID"
 						class="initem" />
 				</div>
 			</div>
@@ -31,14 +31,13 @@
 			</div>
 			<br>
 			<button type="submit">登录</button>
-
 		</div>
 	</form>
 	<br>
 	<br>
 	<%@include file="Footer.jsp"%>
     <c:choose>
-       <c:when> test="&{empty sessionScope.spitter}><a herf="#">重新登录</a></c:when>
+       <c:when test="#{sessionScope.administrator == null && sessionScope.staff == null}"><a herf="#">重新登录</a></c:when>
     </c:choose>
 
 <!-- <script> 

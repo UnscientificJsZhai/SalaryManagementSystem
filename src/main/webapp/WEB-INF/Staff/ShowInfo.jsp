@@ -67,13 +67,13 @@ img {
 				<th colspan="2">操作</th>
 			</tr>
 			<tr>
-				<td>${staff.getId()}</td>
-				<td>${staff.getName()}</td>
-				<td>${staff.getDepartment().getDepartmentNname()}</td>
-				<td>${staff.getPhoneNumber()}</td>
-				<td>${staff.getEmail()}</td>
-				<td><a href="/staff/showSalary?sid=${staff.getId()}">查看薪酬</a></td>
-				<td><a href="/staff/editStaff?sid=${staff.getId()}">修改</a></td>
+				<td>${staff.id}</td>
+				<td>${staff.name}</td>
+				<td>${staff.department}</td>
+				<td>${staff.phoneNumber}</td>
+				<td>${staff.email}</td>
+				<td><a href="/staff/showSalary?sid=${staff.id}">查看薪酬</a></td>
+				<td><a href="/staff/editStaff?sid=${staff.id}">修改</a></td>
 			</tr>
 		</table>
 	</form>

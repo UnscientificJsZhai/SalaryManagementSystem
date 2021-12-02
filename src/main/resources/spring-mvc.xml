@@ -39,18 +39,20 @@
 <!--        <bean class="net.biancheng.interceptor.TestInterceptor" />-->
         <mvc:interceptor>
             <!-- 配置拦截器作用的路径 -->
-            <mvc:mapping path="/staff" />
+            <mvc:mapping path="/staff/**" />
             <!-- 配置不需要拦截作用的路径 -->
-            <mvc:exclude-mapping path="adminstrator" />
+            <mvc:exclude-mapping path="/adminstrator/**" />
+            <mvc:exclude-mapping path="/login" />
             <!-- 定义<mvc:interceptor>元素中，表示匹配指定路径的请求才进行拦截 -->
-            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.AdministratorInterceptor" />
+            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.Interveptor.AdministratorInterceptor" />
         </mvc:interceptor>
         <mvc:interceptor>
             <!-- 配置拦截器作用的路径 -->
-            <mvc:mapping path="/administrator" />
-            <mvc:exclude-mapping path="/staff" />
+            <mvc:mapping path="/administrator/**" />
+            <mvc:exclude-mapping path="/staff/**" />
+            <mvc:exclude-mapping path="/login" />
             <!-- 定义在<mvc:interceptor>元素中，表示匹配指定路径的请求才进行拦截 -->
-            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.StaffInterceptor" />
+            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.Interveptor.StaffInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>
