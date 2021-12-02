@@ -25,26 +25,94 @@ public class MapperTest {
 
     }
 
+    /**
+     * 部门dao接口测试
+     */
     @Test
-    public void test() throws SQLIntegrityConstraintViolationException {
-        //DepartmentMapper departmentMapper = (DepartmentMapper)context.getBean("departmentMapper");
-        //AdministratorMapper administratorMapper = (AdministratorMapper)context.getBean("administratorMapper");
-        StaffMapper staffMapper = (StaffMapper)context.getBean("staffMapper");
-/*        HashMap<String,Object> map = new HashMap<>();
-        map.put(staffMapper.ID,2);
-        map.put(staffMapper.PASSWORD,"123456");
-        map.put(staffMapper.NAME,"staff1");
-        map.put(staffMapper.PHONE,null);
-        map.put(staffMapper.EMAIL,null);
-        map.put(staffMapper.DEPARTMENT_ID,-1);*/
-/*        List<MutableStaff> list = staffMapper.queryByDepartmentName("saads");
+    public void testDepartment() throws SQLIntegrityConstraintViolationException {
+        DepartmentMapper departmentMapper = (DepartmentMapper)context.getBean("departmentMapper");
+//        HashMap<String,Object> map = new HashMap<>();
+//        map.put(departmentMapper.ID,10);
+//        map.put(departmentMapper.NAME,"sea");
+//        map.put(departmentMapper.PARENT,1313);
+//        map.put(departmentMapper.LEVEL,1);
+//        departmentMapper.addDepartment(map);
+
+//        departmentMapper.deleteById(11);
+//        departmentMapper.deleteById(3123);
+//        departmentMapper.deleteByParent(11);
+//        departmentMapper.alterName("newName",11);
+//        departmentMapper.alterName("newName",111231);
+        List<MutableDepartment> list = departmentMapper.queryAll();
         System.out.println(list.size());
-        for (MutableStaff staff:list
+        for (MutableDepartment temp:list
              ) {
-            System.out.println(staff);
-        }*/
-        Staff staff = staffMapper.login(1,"12312");
-        System.out.println(staff);
+            System.out.println(temp);
+        }
+
+
 
     }
+
+    /**
+     * 薪酬dao接口测试
+     */
+    @Test
+    public void testSalary() throws SQLIntegrityConstraintViolationException {
+        SalaryMapper salaryMapper = (SalaryMapper)context.getBean("salaryMapper");
+//        HashMap<String,Object> map = new HashMap<>();
+//        map.put(salaryMapper.ID,13123);
+//        map.put(salaryMapper.MONTH,1);
+//        map.put(salaryMapper.POST_WAGE,123);
+//        map.put(salaryMapper.MERIT_PAY,123);
+//        map.put(salaryMapper.SENIORITY_PAY,123);
+//        map.put(salaryMapper.SUBSIDY,123);
+//        map.put(salaryMapper.PAID,true);
+//        salaryMapper.addSalary(map);
+//        salaryMapper.deleteById(21313);
+//        salaryMapper.deleteByMonth(1,1);
+//        salaryMapper.deleteByMonth(113123,1);
+//        HashMap<String,Object> map = new HashMap<>();
+//        map.put(salaryMapper.POST_WAGE,777);
+//        map.put(salaryMapper.MERIT_PAY,777);
+//        map.put(salaryMapper.SENIORITY_PAY,777);
+//        map.put(salaryMapper.SUBSIDY,777);
+//        map.put(salaryMapper.PAID,false);
+//        salaryMapper.alterSalary(map,1,2);
+//        HashMap<String,Object> map = new HashMap<>();
+//        //map.put(salaryMapper.POST_WAGE,777);
+//        //map.put(salaryMapper.MERIT_PAY,777);
+//        //map.put(salaryMapper.SENIORITY_PAY,777);
+//        //map.put(salaryMapper.SUBSIDY,777);
+//        //map.put(salaryMapper.PAID,false);
+//        map.put("21312",123);
+//        salaryMapper.alterSalary(map,1,2);
+//        HashMap<String,Object> map = new HashMap<>();
+//        map.put(salaryMapper.POST_WAGE,888);
+//        //map.put(salaryMapper.MERIT_PAY,777);
+//        //map.put(salaryMapper.SENIORITY_PAY,777);
+//        //map.put(salaryMapper.SUBSIDY,777);
+//        //map.put(salaryMapper.PAID,false);
+//        salaryMapper.alterSalary(map,1,2);
+            List<MutableSalary> list = salaryMapper.queryById(1);
+        System.out.println(list.size());
+        for (MutableSalary salary:list
+             ) {
+            System.out.println(salary);
+        }
+        list = salaryMapper.queryById(123123);
+        System.out.println(list.size());
+        MutableSalary salary  = salaryMapper.queryByMonth(1,2);
+        System.out.println(salary);
+        salary = salaryMapper.queryByMonth(1,12321);
+        System.out.println(salary);
+        salary =  salaryMapper.queryByMonth(123123,2);
+        System.out.println(salary);
+
+
+
+
+
+    }
+
 }

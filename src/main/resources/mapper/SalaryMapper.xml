@@ -24,19 +24,19 @@
     <update id="alterSalary">
         update salarysystem.salary
         <set>
-            <if test="postWage != null">
+            <if test="map.postWage != null">
                 post_wage = #{map.postWage},
             </if>
-            <if test="meritPay != null">
+            <if test="map.meritPay != null">
                 merit_pay = #{map.meritPay},
             </if>
-            <if test="seniorityPay != null">
+            <if test="map.seniorityPay != null">
                 seniority_pay = #{map.seniorityPay},
             </if>
-            <if test="subsidy != null">
-                subsidy = #{map.subsidy}
+            <if test="map.subsidy != null">
+                subsidy = #{map.subsidy},
             </if>
-            <if test="paid != null">
+            <if test="map.paid != null">
                 paid = #{map.paid}
             </if>
         </set>
