@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/* Login模块的居中显示 */
+#login {
+	border: 1px solid white;
+	width: 20%;
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 5%; /* 高度调整 */
+	background: url(login.jpg);
+	background-size: cover;
+	padding: 5px 30px;
+	/* 将按钮的左右边框设置为圆弧 */
+	border-radius: 30px;
+	/* 圆角弧度24px */
+	transition: 0.2s;
+	background-size: cover;
+	background: url(loginbackground.jpg);
+	margin: 0 auto;
+}
+
+/* Login标题的颜色控制 */
+#login h1 {
+	color: white;
+}
+
+/* 对输入窗口进行修改 */
+#login .form .item p {
+	font-size: 18px; /* 修改按钮文字的大小 */
+	color: white;
+}
+
+#login .form .item {
+	background-image: linear-gradient(to right, #e8198b, #0eb4dd);
+	/*login模块的背景*/
+	width: 100%;
+	height: 30px;
+	margin-bottom: 20px;
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center; /* 居中排列 */
+}
+/*对输入框进行修改*/
+#login .form .item .initem {
+	height: calc(100% - 4px);
+	width: calc(100% - 4px);
+	border-radius: 30px;
+}
+
+/* 对button进行美化 */
+#login button {
+	/* 设置合适的按钮的长和宽 */
+	width: 150px;
+	/* height: 30px; */
+	text-transform: uppercase;
+	border: 3px solid #FFFFFF; /* 设置按钮的边界粗细和颜色 */
+	margin-top: 18px; /* 设置合适的上部外框的宽度，增加与上面的password框的距离 */
+	text-align: center;
+	font-size: 18px; /* 修改按钮文字的大小 */
+	/* 设置按钮里面字体颜色 */
+	color: #FFFFFF;
+	line-height: 50px;
+	border-radius: 30px; /* 将按钮的左右边框设置为圆弧 */
+	cursor: pointer;
+	/* 圆角弧度24px */
+	transition: 0.2s;
+	/* 设置按钮背景为透明 */
+	background: rgba(0, 0, 0, 0);
+}

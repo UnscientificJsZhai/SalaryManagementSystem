@@ -3,68 +3,91 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper">
-    <select id="queryByUserName" resultType="mutableStaff">
-        select username, truename, phone, email, department
-        from salarysystem.staff
-        where username = #{username}
-    </select>
 
-    <select id="login" resultType="mutableStaff">
-        select username, truename, phone, email, department
-        from salarysystem.staff
-        where username = #{username}
-          and password = #{password}
-    </select>
-
-    <insert id="addStaff" parameterType="staff">
+    <insert id="addStaff" parameterType="map">
         insert into salarysystem.staff
-        VALUES (#{staff.username},#{password},#{staff.name},#{staff.phoneNumber},#{staff.email},#{staff.department})
+        VALUES (#{staffId}, #{password}, #{staffName}, #{phone}, #{email}, #{departmentId})
     </insert>
 
-    <delete id="deleteStaff">
-        delete from salarysystem.staff where username = #{username}
+    <delete id="deleteById">
+        delete
+        from salarysystem.staff
+        where staff_id = #{staffId}
     </delete>
 
-    <delete id="deleteStaffByDepartment">
-        delete from salarysystem.staff where department = #{name}
+    <delete id="deleteByDepartment">
+        delete
+        from salarysystem.staff
+        where department_id = #{departmentId}
     </delete>
+
 
     <update id="alterDepartment">
-        update salarysystem.staff set department = #{name} where username = #{username}
+        update salarysystem.staff
+        set department_id = #{departmentId}
+        where staff_id = #{staffId}
     </update>
 
     <select id="queryAll" resultType="mutableStaff">
-        select username, truename, phone, email, department
+        select staff_id, staff_name, phone, email, department_id
         from salarysystem.staff
     </select>
 
-    <select id="queryByTrueName" resultType="mutableStaff">
-        select username, truename, phone, email, department from salarysystem.staff
-        where truename = #{truename}
+    <select id="queryById" resultType="mutableStaff">
+        select staff_id, staff_name, phone, email, department_id
+        from salarysystem.staff
+        where staff_id = #{staffId}
     </select>
 
-    <select id="queryByDepartment" resultType="mutableStaff">
-        select username, truename, phone, email, department from salarysystem.staff
-        where department = #{name}
+    <select id="queryByName" resultType="mutableStaff">
+        select staff_id, staff_name, phone, email, department_id
+        from salarysystem.staff
+        where staff_name = #{staffName}
     </select>
 
-    <update id="alterProfile" parameterType="map">
+
+    <select id="queryByDepartmentName" resultType="mutableStaff">
+        select staff_id, password, staff_name, phone, email, t1.department_id
+        from salarysystem.staff
+                 inner join (
+            select *
+            from salarysystem.department
+            where department_name = #{departmentName}
+        ) as t1
+                            on staff.department_id = t1.department_id
+    </select>
+
+    <select id="queryByDepartmentId" resultType="mutableStaff">
+        select staff_id, staff_name, phone, email, department_id
+        from salarysystem.staff
+        where department_id = #{departmentId}
+    </select>
+
+
+    <select id="login" resultType="mutableStaff">
+        select staff_id, staff_name, phone, email, department_id
+        from salarysystem.staff
+        where staff_id = #{staffId}
+          and password = #{password}
+    </select>
+
+    <update id="alterProfile">
         update salarysystem.staff
         <set>
             <if test="password != null">
-                password = #{password},
+                password = #{profile.password},
             </if>
             <if test="truename != null">
-                truename = #{truename},
+                truename = #{profile.truename},
             </if>
             <if test="phone != null">
-                phone = #{phone},
+                phone = #{profile.phone},
             </if>
             <if test="email != null">
-                email = #{email}
+                email = #{profile.email}
             </if>
         </set>
-        where username = #{username}
+        where staff_id = #{staffId}
     </update>
 
 </mapper>

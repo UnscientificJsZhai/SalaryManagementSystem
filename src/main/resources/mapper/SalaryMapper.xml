@@ -5,43 +5,54 @@
 <mapper namespace="cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper">
     <insert id="addSalary">
         insert into salarysystem.salary
-        values (#{username}, #{salary.month}, #{salary.postWage}, #{salary.meritPay}, #{salary.seniorityPay},
-                #{salary.subsidy}, #{salary.paid})
+        values (#{staffId}, #{month}, #{postWage}, #{meritPay}, #{seniorityPay},
+                #{subsidy}, #{paid})
     </insert>
-    <delete id="deleteSalaryAll">
+    <delete id="deleteById">
         delete
         from salarysystem.salary
-        where username = #{username}
+        where staff_id = #{staffId}
     </delete>
 
-    <delete id="deleteSalaryByMonth">
+    <delete id="deleteByMonth">
         delete
         from salarysystem.salary
-        where username = #{username}
+        where staff_id = #{staffId}
           and month = #{month}
     </delete>
 
     <update id="alterSalary">
         update salarysystem.salary
-        set postwage     = #{salary.postWage},
-            meritpay     = #{salary.meritPay},
-            senioritypay = #{salary.seniorityPay},
-            subsidy      = #{salary.subsidy},
-            paid         = #{salary.paid}
-        where username = #{username}
-          and month = #{salary.month}
+        <set>
+            <if test="postWage != null">
+                post_wage = #{map.postWage},
+            </if>
+            <if test="meritPay != null">
+                merit_pay = #{map.meritPay},
+            </if>
+            <if test="seniorityPay != null">
+                seniority_pay = #{map.seniorityPay},
+            </if>
+            <if test="subsidy != null">
+                subsidy = #{map.subsidy}
+            </if>
+            <if test="paid != null">
+                paid = #{map.paid}
+            </if>
+        </set>
+        where staff_id = #{staffId} and month = #{month}
     </update>
 
-    <select id="queryAll" resultType="mutableSalary">
-        select month, postwage, meritpay, senioritypay, subsidy, paid
+    <select id="queryById" resultType="mutableSalary">
+        select month, post_wage, merit_pay, seniority_pay, subsidy, paid
         from salarysystem.salary
-        where username = #{username}
+        where staff_id = #{staffId}
     </select>
 
     <select id="queryByMonth" resultType="mutableSalary">
-        select month, postwage, meritpay, senioritypay, subsidy, paid
+        select month, post_wage, merit_pay, seniority_pay, subsidy, paid
         from salarysystem.salary
-        where username = #{username}
+        where staff_id = #{staffId}
           and month = #{month}
     </select>
 
