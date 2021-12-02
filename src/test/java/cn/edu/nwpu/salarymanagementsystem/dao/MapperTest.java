@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
+import java.util.List;
 
 public class MapperTest {
 
@@ -46,6 +47,36 @@ public class MapperTest {
              ) {
             System.out.println(temp);
         }
+        MutableDepartment department = departmentMapper.queryById(0);
+        System.out.println(department);
+        department = departmentMapper.queryById(1312313);
+        System.out.println(department);
+        list = departmentMapper.queryByName("test1");
+        System.out.println(list.size());
+        for (MutableDepartment temp:list
+        ) {
+            System.out.println(temp);
+        }
+        list = departmentMapper.queryByName("13123");
+        System.out.println(list.size());
+        list = departmentMapper.queryByParent(1);
+        System.out.println(list.size());
+        for (MutableDepartment temp:list
+        ) {
+            System.out.println(temp);
+        }
+        list = departmentMapper.queryByParent(-1);
+        System.out.println(list.size());
+        list = departmentMapper.queryByLevel(1);
+        System.out.println(list.size());
+        for (MutableDepartment temp:list
+        ) {
+            System.out.println(temp);
+        }
+        list = departmentMapper.queryByLevel(-1);
+        System.out.println(list.size());
+
+
 
 
 
