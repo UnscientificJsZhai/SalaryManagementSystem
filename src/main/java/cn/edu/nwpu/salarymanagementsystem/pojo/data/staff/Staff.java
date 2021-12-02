@@ -38,7 +38,7 @@ public abstract class Staff {
     /**
      * 部门。
      */
-    protected long department;
+    protected Long department;
 
     public long getId() {
         return id;
@@ -81,7 +81,7 @@ public abstract class Staff {
      * @param email       邮箱。
      * @param department  部门名字。可以为空。空表示当前员工没有所属部门，可能是由于所属部门刚被删除。
      */
-    public Staff(long id, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, long department) {
+    public Staff(long id, @NotNull String name, @NotNull String phoneNumber, @NotNull String email, @Nullable Long department) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;

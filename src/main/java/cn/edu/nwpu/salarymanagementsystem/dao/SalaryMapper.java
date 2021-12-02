@@ -3,6 +3,7 @@ package cn.edu.nwpu.salarymanagementsystem.dao;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
@@ -76,11 +77,12 @@ public interface SalaryMapper {
      * 更改指定用户指定月份的薪水记录。 <br/>
      * 不能更改用户名和月份信息，要更改请删除新增。<br/>
      * 若不存在指定行则不会有任何改变
+     * 需要加上要更改的员工的ID 和 月份
      *
      * @param map 需要更改的信息： 包括：post_wage，merit_pay，seniority_pay，subsidy，paid。<br/>
      *            提示:上述的为可选项。
      */
-    void alterSalary(@Param("map") Map<String, Object> map,@Param("staffId") long staffId,@Param("month") int month);
+    void alterSalary(@Param("map") Map<String, Object> map);
 
     /**
      * 查询指定员工的所有薪水记录。
