@@ -40,7 +40,7 @@
                 paid = #{map.paid}
             </if>
         </set>
-        where staff_id = #{staffId} and month = #{month}
+        where staff_id = #{map.staffId} and month = #{map.month}
     </update>
 
     <select id="queryById" resultType="mutableSalary">

@@ -88,8 +88,7 @@
             </if>
 
         </set>
-
-        where staff_id = #{staffId}
+        where staff_id = #{profile.staffId}
     </update>
 
 </mapper>

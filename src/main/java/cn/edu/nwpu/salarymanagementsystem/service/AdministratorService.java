@@ -4,13 +4,11 @@ import cn.edu.nwpu.salarymanagementsystem.dao.AdministratorMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.DepartmentTreeNode;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import org.jetbrains.annotations.NotNull;
@@ -87,7 +85,7 @@ public class AdministratorService {
      *
      * @param staff 要删除的员工的id。
      */
-    public void removeStaff(long staff) {
+    public void deleteStaff(long staff) {
         staffMapper.deleteById(staff);
     }
 
@@ -156,7 +154,7 @@ public class AdministratorService {
                     MutableDepartment parent = departmentMapper.queryById(department.getParentDepartment());
                     if (parent == null) {
                         return false;
-                    } else if (parent.getId() + 1 == department.getId()) {
+                    } else if (parent.getLevel() + 1 == department.getLevel()) {
                         departmentMapper.addDepartment(department.generateMap());
                         return true;
                     }
@@ -212,15 +210,15 @@ public class AdministratorService {
     /**
      * 为一名员工更改一个薪水信息。
      *
-     * @param staff  要更改薪水信息的员工。
+     * @param staff  要更改薪水信息的员工的id。
      * @param salary 要更改的薪水信息。
      * @return 是否修改成功。执行过程中如果抛出数据库异常则返回false。
      */
-    public boolean updateSalary(@NotNull Staff staff, @NotNull Salary salary) {
+    public boolean updateSalary(long staff, @NotNull Salary salary) {
         try {
-            salaryMapper.addSalary(salary.generateMap(staff.getId()));
+            salaryMapper.alterSalary(salary.generateMap(staff));
             return true;
-        } catch (SQLIntegrityConstraintViolationException e) {
+        } catch (Exception e) {
             return false;
         }
     }

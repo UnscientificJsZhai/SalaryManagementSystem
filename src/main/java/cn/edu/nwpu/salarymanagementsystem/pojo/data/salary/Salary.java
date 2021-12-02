@@ -104,7 +104,7 @@ public abstract class Salary {
      * @param staffId 要操作薪水信息的用户。
      * @return 包含必须信息的Map。
      */
-    public Map<String, Object> generateMap(long staffId) {
+    public Map<String, Object>  generateMap(long staffId) {
         final HashMap<String, Object> map = new HashMap<>();
 
         map.put(SalaryMapper.ID, staffId);

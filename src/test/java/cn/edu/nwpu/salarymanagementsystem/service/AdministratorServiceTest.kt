@@ -20,10 +20,13 @@ class AdministratorServiceTest {
     fun initialService() {
         val context = ClassPathXmlApplicationContext("spring-service.xml")
         this.administratorService = context.getBean("administratorService") as AdministratorService
+
+        administratorService.clearDepartment()
     }
 
     @Test
     fun departmentTest() {
+        administratorService.clearDepartment()
         val d1 = MutableDepartment(1, "d1", null, TOP_LEVEL)
         val d2 = MutableDepartment(2, "d2", null, TOP_LEVEL)
         val d3 = MutableDepartment(3, "d3", 1, TOP_LEVEL + 1)
@@ -31,15 +34,15 @@ class AdministratorServiceTest {
         val d5 = MutableDepartment(5, "d5", 2, TOP_LEVEL + 1)
         val d6 = MutableDepartment(6, "d6", 4, TOP_LEVEL + 2)
 
-        administratorService.addDepartment(d1)
-        administratorService.addDepartment(d2)
-        administratorService.addDepartment(d3)
-        administratorService.addDepartment(d4)
-        administratorService.addDepartment(d5)
-        administratorService.addDepartment(d6)
+        assertEquals(true, administratorService.addDepartment(d1))
+        assertEquals(true, administratorService.addDepartment(d2))
+        assertEquals(true, administratorService.addDepartment(d3))
+        assertEquals(true, administratorService.addDepartment(d4))
+        assertEquals(true, administratorService.addDepartment(d5))
+        assertEquals(true, administratorService.addDepartment(d6))
 
         assertEquals(6, administratorService.departmentList.size)
-        assertEquals(2, administratorService.departmentTree)
+        assertEquals(2, administratorService.departmentTree.size)
 
         administratorService.updateSingleDepartment(d1.id, "d111")
         val departments = administratorService.departmentList

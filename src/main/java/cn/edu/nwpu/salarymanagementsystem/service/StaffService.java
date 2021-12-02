@@ -69,12 +69,14 @@ public class StaffService {
      * @param information 修改后的用户个人信息的数据类。
      */
     public void updatePersonalInformation(@NotNull Staff information) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        final HashMap<String, Object> informationMap = new HashMap<>();
+
+        informationMap.put(StaffMapper.ID, information.getId());
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
         informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-        //TODO
-//        staffMapper.alterProfile(informationMap, information.getId());
+
+        staffMapper.alterProfile(informationMap);
     }
 
     /**
@@ -84,10 +86,12 @@ public class StaffService {
      * @param newPassword 新密码，要求已经经过验证确认两次输入的值相同。
      */
     public void updatePassword(long staffId, @NotNull String newPassword) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        final HashMap<String, Object> informationMap = new HashMap<>();
+
+        informationMap.put(StaffMapper.ID, staffId);
         informationMap.put(StaffMapper.PASSWORD, newPassword);
-        //TODO
-//        staffMapper.alterProfile(informationMap, staffId);
+
+        staffMapper.alterProfile(informationMap);
     }
 
     /**

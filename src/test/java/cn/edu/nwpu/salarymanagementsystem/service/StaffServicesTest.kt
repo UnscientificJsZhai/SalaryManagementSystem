@@ -144,7 +144,7 @@ class StaffServicesTest {
         }
 
         salary2.isPaid = true
-        administratorService.updateSalary(staff, salary2)
+        assertEquals(true, administratorService.updateSalary(staff.id, salary2))
         val newList = administratorService.getSalaryListByStaff(staff.id)
         for (salary in newList) {
             if (salary.month == 2) {
@@ -160,7 +160,7 @@ class StaffServicesTest {
     fun delete() {
         val staffList = administratorService.staffList
         for (staff in staffList) {
-            administratorService.removeStaff(staff.id)
+            administratorService.deleteStaff(staff.id)
         }
 
         val departments = administratorService.departmentList
