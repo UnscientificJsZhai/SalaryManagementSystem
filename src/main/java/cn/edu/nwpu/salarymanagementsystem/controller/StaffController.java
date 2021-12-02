@@ -1,21 +1,16 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
-import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
-import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * @ClassName StaffController {@link StaffService}
@@ -34,7 +29,6 @@ public class StaffController {
     /**
      * 员工注销
      *
-     * @param session
      * @return Login
      */
     @RequestMapping(value = "/logout", method = GET)

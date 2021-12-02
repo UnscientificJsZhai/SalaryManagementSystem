@@ -95,12 +95,12 @@ public class AdministratorController {
     /**
      * 删除员工
      *
-     * @param staff
+     * @param id
      * @return showstaff 返回管理员主页
      */
     @RequestMapping("/staffDel")
-    public String removeStaff(Staff staff) {
-        administratorService.removeStaff(staff);
+    public String removeStaff(long id) {
+        administratorService.deleteStaff(id);
         return "redirect:/showstaff";
     }
 
@@ -133,7 +133,7 @@ public class AdministratorController {
      * @return
      */
     @RequestMapping("/deleteDepartment")
-    public String deleteDepartments(Department department) {
+    public String deleteDepartments(long department) {
         administratorService.deleteDepartments(department);
         return "redirect:/showdepartment";
     }
@@ -174,24 +174,23 @@ public class AdministratorController {
      * 提交更新部门名称
      *
      * @param department
-     * @param newname
      * @return
      */
     @RequestMapping(value = "/editDepartment", method = POST)
-    public String updateDepartment(MutableDepartment department, String newname) {
-        administratorService.updateSingleDepartment(department, newname);
+    public String updateDepartment(MutableDepartment department) {
+        administratorService.addDepartment(department);
         return "redirect:/showdepartment";
     }
 
     /**
      * 查询一个员工的所有薪水信息。
      *
-     * @param staff 要查询的员工信息。
+     * @param id 要查询的员工信息。
      * @return 薪水信息。这里返回的是不可变列表。
      */
     @RequestMapping("/getSalaryListByStaff")
-    public List<MutableSalary> getSalaryListByStaff(Staff staff) {
-        return administratorService.getSalaryListByStaff(staff);
+    public List<MutableSalary> getSalaryListByStaff(long id) {
+        return administratorService.getSalaryListByStaff(id);
     }
 
     /**
@@ -212,7 +211,7 @@ public class AdministratorController {
      * @return
      */
     @RequestMapping(value = "/setSalary", method = POST)
-    public String setSalary(Staff staff, Salary salary) {
+    public String setSalary(long staff, Salary salary) {
         administratorService.setSalary(staff, salary);
         return "redirect:/showStaff";
     }
@@ -235,7 +234,7 @@ public class AdministratorController {
      * @return
      */
     @RequestMapping(value = "/editSalary", method = POST)
-    public String updateSalary(Staff staff, Salary salary) {
+    public String updateSalary(long staff, Salary salary) {
         administratorService.updateSalary(staff, salary);
         return "redirect:/showStaff";
     }

@@ -15,9 +15,20 @@ import javax.servlet.http.HttpSession;
  * @Version 1.0
  */
 public class AdministratorInterceptor implements HandlerInterceptor {
+
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object obj,
-                                Exception exception) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+        HttpSession session = request.getSession();
+        long administrator = (long) session.getAttribute("administrator");
+        //如果session中没有管理员信息，或者信息不对，则跳转到登录界面
+        if (request.getRequestURI().contains("login")) {
+            return true;
+        }
+        if (session.getAttribute("administrator") != null) {
+            return true;
+        }
+        response.sendRedirect(request.getContextPath() + "/login");
+        return false;
     }
 
     @Override
@@ -26,14 +37,7 @@ public class AdministratorInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
-        HttpSession session = request.getSession();
-        Administrator administrator = (Administrator) session.getAttribute("administrator");
-        //如果session中没有管理员信息，或者信息不对，则跳转到登录界面
-        if (administrator != null) {
-            return true;
-        }
-        response.sendRedirect(request.getContextPath() + "/login");
-        return false;
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object obj,
+                                Exception exception) throws Exception {
     }
 }
