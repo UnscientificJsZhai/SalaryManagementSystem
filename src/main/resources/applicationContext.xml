@@ -6,6 +6,6 @@
 
     <import resource="spring-dao.xml"/>
     <import resource="spring-service.xml"/>
-    <import resource="../webapp/WEB-INF/spring-mvc.xml"/>
+    <import resource="spring-mvc.xml"/>
 
 </beans>

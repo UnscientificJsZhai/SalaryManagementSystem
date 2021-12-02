@@ -3,7 +3,6 @@ package cn.edu.nwpu.salarymanagementsystem.controller;
 import cn.edu.nwpu.salarymanagementsystem.dao.AdministratorMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator.Administrator;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class SalarySystem {
     /**
      * 登录请求
      *
-     * @param Id
+     * @param Id 用户ID
      * @param password
      * @param session
      */
@@ -42,11 +41,10 @@ public class SalarySystem {
                                @RequestParam(value = "password", defaultValue = "") String password, HttpSession session) {
 
         if (administratorService.login(Id, password)) {
-            session.setAttribute("administrator", administratorService);
+            session.setAttribute("administrator", Id);
             return "redirect:/shoustaff";
         } else if (staffService.login(Id, password)) {
-            Staff staff = staffService.getPersonalInformation(Id);
-            session.setAttribute("staff", staff);
+            session.setAttribute("staff", Id);
             return "redirect:/showinfo";
         } else {
             return "redirect:/Login";

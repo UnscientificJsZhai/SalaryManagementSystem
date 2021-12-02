@@ -8,13 +8,14 @@ import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 /**
  * @ClassName StaffController {@link StaffService}
@@ -23,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @Version 1.0
  */
 @Controller
-//@RequestMapping("/staff")
+@RequestMapping("/staff")
 public class StaffController {
 
     @Autowired
@@ -52,24 +53,30 @@ public class StaffController {
      */
     @RequestMapping("/showinfo")
     public String getPersonalInformation(Model model, HttpSession session) {
-        Staff staff = (Staff) session.getAttribute("staff");
-        if (staff != null) {
-//        model.addAttribute(staffService.getPersonalInformation(staff.getId()));
-            model.addAttribute(staff);
-        }
+        long Id = (long) session.getAttribute("staff");
+        model.addAttribute(staffService.getPersonalInformation(Id));
         return "showinfo";
     }
 
+    /**
+     * 进入员工信息修改页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/exitStaff", method = GET)
+    public String showStaffForm(){
+        return "staff_edit";
+    }
     /**
      * 更新用户个人信息
      *
      * @param staff
      * @return
      */
-    @RequestMapping("/staff_edit")
+    @RequestMapping(value = "/editStaff", method = POST)
     public String updatePersonalInformation(Staff staff) {
         staffService.updatePersonalInformation(staff);
-        return "showinfo";
+        return "redirect:/showinfo";
     }
 
     /**
@@ -79,14 +86,14 @@ public class StaffController {
      * @param password2
      * @param session
      */
-    @RequestMapping("/staff_edit")
+    @RequestMapping("/changePassword")
     public String updatePassword(String password1, String password2, HttpSession session) {
         if (password1.equals(password2)) {
             Staff staff = (Staff) session.getAttribute("staff");
             staffService.updatePassword(staff.getId(), password1);
         } else
             return "error";
-        return "showinfo";
+        return "redirect:/showinfo";
     }
 
     /**
@@ -94,10 +101,22 @@ public class StaffController {
      *
      * @return 工资信息。
      */
-    @RequestMapping("/showsalary")
-    public List<? extends Salary> getSalaryList(HttpSession session) {
+    @RequestMapping("/showSalary")
+    public String getSalaryList(Model model, HttpSession session) {
         Staff staff = (Staff) session.getAttribute("staff");
-        return staffService.getSalaryList(staff.getId());
+        model.addAllAttributes(staffService.getSalaryList(staff.getId()));
+        return "showSalary";
+    }
+
+    /**
+     * 计算所得税
+     *
+     * @return
+     */
+    @RequestMapping("/tax")
+    public String tax(){
+        //TODO
+        return null;
     }
 
 }
