@@ -4,6 +4,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 import java.util.Map;
 
@@ -113,7 +114,7 @@ public interface StaffMapper {
      * @param departmentId 部门id
      * @return 员工数据类。若没有返回size = 0
      */
-    List<MutableStaff> queryByDepartmentId(String departmentId);
+    List<MutableStaff> queryByDepartmentId(long departmentId);
 
     /**
      * 返回是否有此用户。
@@ -130,6 +131,7 @@ public interface StaffMapper {
      *
      * @param profile 要更改的信息，以键值对进行体现
      * @param staffId 需要传id来确认更改者是谁
+     * @throws SQLSyntaxErrorException 如果map中没有一个满足的修改项目
      */
-    void alterProfile(@Param("profile") Map<String, String> profile, @Param("staffId") long staffId);
+    void alterProfile(@Param("profile") Map<String, String> profile, @Param("staffId") long staffId) throws SQLSyntaxErrorException;
 }

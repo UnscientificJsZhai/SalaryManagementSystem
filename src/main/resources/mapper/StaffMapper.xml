@@ -47,7 +47,7 @@
 
 
     <select id="queryByDepartmentName" resultType="mutableStaff">
-        select staff_id, password, staff_name, phone, email, t1.department_id
+        select staff_id, staff_name, phone, email, t1.department_id
         from salarysystem.staff
                  inner join (
             select *
@@ -74,19 +74,21 @@
     <update id="alterProfile">
         update salarysystem.staff
         <set>
-            <if test="password != null">
+            <if test="profile.password != null">
                 password = #{profile.password},
             </if>
-            <if test="truename != null">
-                truename = #{profile.truename},
+            <if test="profile.staffName != null">
+                staff_name = #{profile.staffName},
             </if>
-            <if test="phone != null">
+            <if test="profile.phone != null">
                 phone = #{profile.phone},
             </if>
-            <if test="email != null">
+            <if test="profile.email != null">
                 email = #{profile.email}
             </if>
+
         </set>
+
         where staff_id = #{staffId}
     </update>
 
