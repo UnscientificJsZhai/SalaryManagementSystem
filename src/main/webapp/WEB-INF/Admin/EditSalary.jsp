@@ -19,11 +19,11 @@
         }
     </style>
 </head>
-<body>
-<div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/salary_conditionSelect">返回薪酬列表</a>
+<body style="background: url(editsalary.jpg);background-size: cover">
+<div style="width: 1000px;margin: 0 auto;text-align: center;background-color:gray">
+    <a href="/administrator/showStaff" style="color:red">返回员工列表</a>
 </div>
-<form action="/salary_edit" method="post">
+<form action="/administrator/editSalary" method="post">
     <table>
         <tr>
             <th>员工id</th>

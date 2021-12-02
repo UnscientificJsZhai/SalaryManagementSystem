@@ -18,15 +18,16 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color:gray">
 <div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/Staff/show.jsp">返回个人信息</a>
+    <a href="/staff/ShowInfo">返回个人信息</a>
 </div>
-<form action="/staff_alter" method="post">
+<form action="/staff/editStaff" method="post">
     <table>
         <tr>
-            <th>用户名</th>
-            <th>真实姓名</th>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>再次输入密码</th>
             <th>电话</th>
             <th>邮件</th>
             <th>操作</th>
@@ -34,16 +35,19 @@
         <tr>
             
             <td>
-                <input name="username" type="text" value="${staff.getUsername()}">
+                <input name="name" type="text" value="${staffInfo.name}">
             </td>
             <td>
-                <input name="name" type="text" value="${staff.getName()}">
+                <input name="password1" type="text">
             </td>
             <td>
-                <input name="phoneNumber" type="text" value="${staff.getPhoneNumber()}">
+                <input name="password2" type="text">
             </td>
             <td>
-                <input name="email" type="text" value="${staff.getEmail()}">
+                <input name="phoneNumber" type="text" value="${staffInfo.phoneNumber}">
+            </td>
+            <td>
+                <input name="email" type="text" value="${staffInfo.email}">
             </td>
             <td>
                 <input name="edit" type="submit" value="修改">

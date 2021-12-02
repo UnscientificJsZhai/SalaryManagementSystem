@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>修改用户信息</title>
+    <title>修改员工信息</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         table {
@@ -19,11 +19,15 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color:gray">
 <div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/staff_conditionSelect">返回员工列表</a>
+    <a href="/administrator/showStaff">返回员工列表</a>
+    <br/>
+    <br/>
+    <br/>
+    <p>修改当前员工信息:</p>
 </div>
-<form action="/editstaff" method="post">
+<form action="/administrator/changeStaffDepartment" method="post">
     <table>
         <tr>
             <th>id</th>
@@ -33,9 +37,6 @@
         </tr>
         <tr>
             <td>${staff.getId()}</td>
-            <td>
-                <input name="username" type="text" value="${staff.getUserName()}">
-            </td>    
             <td>
                 <input name="name" type="text" value="${staff.getName()}">
             </td>

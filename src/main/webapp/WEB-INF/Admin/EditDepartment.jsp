@@ -19,9 +19,9 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color:gray">
 <div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/department_conditionSelect">返回部门列表</a>
+    <a href="/administrator/showDepartment">返回部门列表</a>
 </div>
 <form action="/department_edit" method="post">
     <table>
@@ -32,7 +32,7 @@
             <th>操作</th>
         </tr>
         <tr>
-            <td>${department.getId()}</td>
+            <td><input name="departmentid" type="text" value="${department.getId()}"></td>
             <td>
                 <input name="departmentname" type="text" value="${department.getDepartmentName()}">
             </td>    

@@ -56,7 +56,7 @@ public abstract class Staff {
         return email;
     }
 
-    public long getDepartment() {
+    public Long getDepartment() {
         return department;
     }
 

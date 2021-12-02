@@ -1,8 +1,5 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
-import cn.edu.nwpu.salarymanagementsystem.dao.AdministratorMapper;
-import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator.Administrator;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +26,7 @@ public class SalarySystem {
     @Autowired
     private StaffService staffService;
 
+
     /**
      * 登录请求
      *
@@ -37,17 +35,17 @@ public class SalarySystem {
      * @param session
      */
     @RequestMapping("/login")
-    public String processLogin(@RequestParam(value = "Id", defaultValue = "") long Id,
+    public String processLogin(@RequestParam(value = "Id", defaultValue = "") Long Id,
                                @RequestParam(value = "password", defaultValue = "") String password, HttpSession session) {
 
         if (administratorService.login(Id, password)) {
             session.setAttribute("administrator", Id);
-            return "redirect:/shoustaff";
+            return "redirect:/Admin/ShowStaff";
         } else if (staffService.login(Id, password)) {
             session.setAttribute("staff", Id);
-            return "redirect:/showinfo";
+            return "redirect:/staff/ShowInfo";
         } else {
-            return "redirect:/Login";
+            return "/Login.jsp";
         }
 
     }
