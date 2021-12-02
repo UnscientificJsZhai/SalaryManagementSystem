@@ -3,6 +3,7 @@ package cn.edu.nwpu.salarymanagementsystem.pojo.data.department;
 import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentLevelException;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,10 @@ import java.util.Map;
  */
 public final class MutableDepartment extends Department {
 
-    private final long parentDepartment;
+    /**
+     * 父部门。可能为空。
+     */
+    private final Long parentDepartment;
 
     /**
      * 表示层级。层级1时parentDepartment可为空。
@@ -30,9 +34,9 @@ public final class MutableDepartment extends Department {
      * @param parentDepartment 父部门名称。
      * @param level            层级。如果层级为1则父部门名称可以为-1。
      */
-    public MutableDepartment(long id, @NotNull String name, long parentDepartment, int level) {
+    public MutableDepartment(long id, @NotNull String name, @Nullable Long parentDepartment, int level) {
         super(name);
-        if ((parentDepartment == -1) == (level != 1)) {
+        if ((parentDepartment == null) == (level != 1)) {
             throw new DepartmentLevelException(level);
         }
         this.id = id;
@@ -40,7 +44,8 @@ public final class MutableDepartment extends Department {
         this.level = level;
     }
 
-    public long getParentDepartment() {
+    @Nullable
+    public Long getParentDepartment() {
         return parentDepartment;
     }
 
