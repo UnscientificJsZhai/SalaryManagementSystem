@@ -41,7 +41,7 @@ class AdministratorServiceTest {
         assertEquals(6, administratorService.departmentList.size)
         assertEquals(2, administratorService.departmentTree)
 
-        administratorService.updateSingleDepartment(d1, "d111")
+        administratorService.updateSingleDepartment(d1.id, "d111")
         val departments = administratorService.departmentList
         for (department in departments) {
             if (department.id == 1.toLong()) {
