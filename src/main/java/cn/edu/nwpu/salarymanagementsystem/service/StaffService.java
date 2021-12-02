@@ -73,7 +73,8 @@ public class StaffService {
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
         informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-        staffMapper.alterProfile(informationMap, information.getId());
+        //TODO
+//        staffMapper.alterProfile(informationMap, information.getId());
     }
 
     /**
@@ -85,7 +86,8 @@ public class StaffService {
     public void updatePassword(long staffId, @NotNull String newPassword) {
         final HashMap<String, String> informationMap = new HashMap<>();
         informationMap.put(StaffMapper.PASSWORD, newPassword);
-        staffMapper.alterProfile(informationMap, staffId);
+        //TODO
+//        staffMapper.alterProfile(informationMap, staffId);
     }
 
     /**
