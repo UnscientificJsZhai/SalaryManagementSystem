@@ -17,6 +17,11 @@ import java.util.Map;
 public final class MutableDepartment extends Department {
 
     /**
+     * 最上层层次的等级。
+     */
+    public static final int TOP_LEVEL = 1;
+
+    /**
      * 父部门。可能为空。
      */
     private final Long parentDepartment;
@@ -32,11 +37,11 @@ public final class MutableDepartment extends Department {
      * @param id               部门id。这是它的主键。
      * @param name             部门名称。
      * @param parentDepartment 父部门名称。
-     * @param level            层级。如果层级为1则父部门名称可以为-1。
+     * @param level            层级。如果层级为1则父部门可以为null。
      */
     public MutableDepartment(long id, @NotNull String name, @Nullable Long parentDepartment, int level) {
         super(name);
-        if ((parentDepartment == null) == (level != 1)) {
+        if ((parentDepartment == null) == (level != TOP_LEVEL)) {
             throw new DepartmentLevelException(level);
         }
         this.id = id;
@@ -73,7 +78,7 @@ public final class MutableDepartment extends Department {
 
         map.put(DepartmentMapper.ID, this.id);
         map.put(DepartmentMapper.NAME, this.name);
-        if (this.level == 1) {
+        if (this.level == TOP_LEVEL) {
             map.put(DepartmentMapper.PARENT, null);
         } else {
             map.put(DepartmentMapper.PARENT, this.parentDepartment);

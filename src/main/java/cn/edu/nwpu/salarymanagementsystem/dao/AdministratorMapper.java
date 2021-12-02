@@ -11,11 +11,11 @@ import org.apache.ibatis.annotations.Param;
 public interface AdministratorMapper {
 
     /**
-     * 根据id和密码检查登录
+     * 根据id和密码检查登录。
      *
-     * @param administratorId 管理员工号
-     * @param password        密码
-     * @return 若查询成功返回数据类, 若失败返回null
+     * @param administratorId 管理员工号。
+     * @param password        密码。
+     * @return 若查询成功返回数据类, 若失败返回null。
      */
     Administrator login(@Param("administratorId") long administratorId, @Param("password") String password);
 }
