@@ -4,13 +4,11 @@ import cn.edu.nwpu.salarymanagementsystem.dao.AdministratorMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.DepartmentTreeNode;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import org.jetbrains.annotations.NotNull;
@@ -85,10 +83,21 @@ public class AdministratorService {
     /**
      * 删除员工。
      *
-     * @param staff 要删除的员工。
+     * @param staff 要删除的员工的id。
      */
-    public void removeStaff(@NotNull Staff staff) {
-        staffMapper.deleteById(staff.getId());
+    public void deleteStaff(long staff) {
+        staffMapper.deleteById(staff);
+    }
+
+    /**
+     * 更改一个员工的部门。
+     *
+     * @param staff      要更改的员工的id。
+     * @param department 所属的新部门的id。
+     * @throws SQLIntegrityConstraintViolationException 如果新部门不存在则抛出此异常。
+     */
+    public void updateStaffDepartment(long staff, long department) throws SQLIntegrityConstraintViolationException {
+        staffMapper.alterDepartment(department, staff);
     }
 
     /**
@@ -105,6 +114,7 @@ public class AdministratorService {
      *
      * @return 包含所有部门信息的列表。
      */
+    @NotNull
     public List<MutableDepartment> getDepartmentList() {
         return departmentMapper.queryAll();
     }
@@ -122,10 +132,10 @@ public class AdministratorService {
      * 删除一个部门。删除后，该部门下的员工的部门将暂时变为空。<br/>
      * 同时，这个部门的子部门都会被删除。
      *
-     * @param department 要删除的部门。
+     * @param department 要删除的部门的id。
      */
-    public void deleteDepartments(@NotNull Department department) {
-        departmentMapper.deleteById(department.getId());
+    public void deleteDepartments(long department) {
+        departmentMapper.deleteById(department);
     }
 
     /**
@@ -136,9 +146,19 @@ public class AdministratorService {
      */
     public boolean addDepartment(@NotNull MutableDepartment department) {
         try {
-            if ((department.getLevel() == 1) == (department.getParentDepartment() == -1)) {
-                departmentMapper.addDepartment(department.generateMap());
-                return true;
+            if ((department.getLevel() == MutableDepartment.TOP_LEVEL) == (department.getParentDepartment() == null)) {
+                if (department.getLevel() == MutableDepartment.TOP_LEVEL) {
+                    departmentMapper.addDepartment(department.generateMap());
+                    return true;
+                } else {
+                    MutableDepartment parent = departmentMapper.queryById(department.getParentDepartment());
+                    if (parent == null) {
+                        return false;
+                    } else if (parent.getLevel() + 1 == department.getLevel()) {
+                        departmentMapper.addDepartment(department.generateMap());
+                        return true;
+                    }
+                }
             }
         } catch (SQLException e) {
             return false;
@@ -149,34 +169,39 @@ public class AdministratorService {
     /**
      * 更新一个特定的部门的名称。
      *
-     * @param department 要修改的部门。
+     * @param department 要修改的部门的id。
      * @param newName    新的名称。
      */
-    public void updateSingleDepartment(@NotNull MutableDepartment department, @NotNull String newName) {
-        departmentMapper.alterName(newName, department.getId());
+    public void updateSingleDepartment(long department, @NotNull String newName) {
+        departmentMapper.alterName(newName, department);
     }
 
     /**
      * 查询一个员工的所有薪水信息。
      *
-     * @param staff 要查询的员工信息。
+     * @param staff 要查询的员工的id。
      * @return 薪水信息。这里返回的是不可变列表。
      */
-    public List<MutableSalary> getSalaryListByStaff(@NotNull Staff staff) {
-        return salaryMapper.queryById(staff.getId());
+    public List<MutableSalary> getSalaryListByStaff(long staff) {
+        return salaryMapper.queryById(staff);
     }
 
     /**
      * 为一名员工设置薪水信息。
      *
-     * @param staff  要设置薪水信息的员工。
+     * @param staff  要设置薪水信息的员工的id。
      * @param salary 要设置的薪水信息。
-     * @return 是否添加成功。
+     * @return 是否添加成功。执行过程中如果抛出数据库异常则返回false。如果数据不合法则不会添加，并返回false。
+     * @see Salary#isLegal()
      */
-    public boolean setSalary(@NotNull Staff staff, @NotNull Salary salary) {
+    public boolean setSalary(long staff, @NotNull Salary salary) {
         try {
-            salaryMapper.addSalary(salary.generateMap(staff.getId()));
-            return true;
+            if (salary.isLegal()) {
+                salaryMapper.addSalary(salary.generateMap(staff));
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLIntegrityConstraintViolationException e) {
             return false;
         }
@@ -185,15 +210,15 @@ public class AdministratorService {
     /**
      * 为一名员工更改一个薪水信息。
      *
-     * @param staff  要更改薪水信息的员工。
+     * @param staff  要更改薪水信息的员工的id。
      * @param salary 要更改的薪水信息。
-     * @return 是否修改成功。
+     * @return 是否修改成功。执行过程中如果抛出数据库异常则返回false。
      */
-    public boolean updateSalary(@NotNull Staff staff, @NotNull Salary salary) {
+    public boolean updateSalary(long staff, @NotNull Salary salary) {
         try {
-            salaryMapper.addSalary(salary.generateMap(staff.getId()));
+            salaryMapper.alterSalary(salary.generateMap(staff));
             return true;
-        } catch (SQLIntegrityConstraintViolationException e) {
+        } catch (Exception e) {
             return false;
         }
     }

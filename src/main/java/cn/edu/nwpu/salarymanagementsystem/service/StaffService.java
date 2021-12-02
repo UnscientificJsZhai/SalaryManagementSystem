@@ -45,11 +45,11 @@ public class StaffService {
     /**
      * 登录，进行身份验证。
      *
-     * @param username 用户名。
+     * @param staffId  用户名。
      * @param password 密码。
      * @return 是否登录成功。如果是，则返回true。
      */
-    public boolean login(@NotNull long staffId, @NotNull String password) {
+    public boolean login(long staffId, @NotNull String password) {
         return staffMapper.login(staffId, password) != null;
     }
 
@@ -69,11 +69,14 @@ public class StaffService {
      * @param information 修改后的用户个人信息的数据类。
      */
     public void updatePersonalInformation(@NotNull Staff information) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        final HashMap<String, Object> informationMap = new HashMap<>();
+
+        informationMap.put(StaffMapper.ID, information.getId());
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
         informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-        staffMapper.alterProfile(informationMap, information.getId());
+
+        staffMapper.alterProfile(informationMap);
     }
 
     /**
@@ -83,9 +86,12 @@ public class StaffService {
      * @param newPassword 新密码，要求已经经过验证确认两次输入的值相同。
      */
     public void updatePassword(long staffId, @NotNull String newPassword) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        final HashMap<String, Object> informationMap = new HashMap<>();
+
+        informationMap.put(StaffMapper.ID, staffId);
         informationMap.put(StaffMapper.PASSWORD, newPassword);
-        staffMapper.alterProfile(informationMap, staffId);
+
+        staffMapper.alterProfile(informationMap);
     }
 
     /**

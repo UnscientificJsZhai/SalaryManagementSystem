@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author UnscientificJsZhai
  */
-final public class Administrator {
+public final class Administrator {
 
-    private long id;
+    private final long id;
 
     /**
      * 真实姓名。
@@ -41,5 +41,11 @@ final public class Administrator {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Administrator{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
