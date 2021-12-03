@@ -81,7 +81,7 @@ img {
 				<th colspan="2">信息操作</th>
 				<th colspan="3">薪酬操作</th>
 			</tr>
-			<c:forEach items="${sessionScope.staffList}" var="staff">
+			<c:forEach items="${staffList}" var="staff">
 				<tr>
 					<!-- <td><input type="checkbox" name="sid" value="${staff.id}"></td> -->
 					<td>${staff.id}</td>
@@ -99,10 +99,10 @@ img {
 		</table>
 	</form>
 	</div>
-	<div class="bottom">	
+	<div class="bottom">
 		<span>${sessionScope.pageIndex}/${sessionScope.totalPage}</span>
 		<c:choose>
-			<c:when test="${department.pid == null}">		
+			<c:when test="${department.pid == null}">
 				<a href="<c:url value="/Admin/searchStaff?pageIndex=1"/>">首页</a>
 				<%--        所有员工--%>
 				<c:if test="${sessionScope.pageIndex != 1}">
@@ -123,11 +123,11 @@ img {
 					<a href="<c:url value="/Admin/searchStaff?pageIndex=${sessionScope.pageIndex+1}"/>">下一页</a>
 				</c:if>
 				<a href="<c:url value="/Admin/searchStaff?pageIndex=${sessionScope.totalPage}"/>">末页</a>
-				
+
 			</c:otherwise>
 		</c:choose>
 
 	</div>
-	
+
 </body>
 </html>

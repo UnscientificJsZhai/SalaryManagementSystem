@@ -40,7 +40,7 @@ public class SalarySystem {
 
         if (administratorService.login(Id, password)) {
             session.setAttribute("administrator", Id);
-            return "redirect:/Admin/ShowStaff";
+            return "redirect:/Admin/AdminView";
         } else if (staffService.login(Id, password)) {
             session.setAttribute("staff", Id);
             return "redirect:/Staff/ShowInfo";
