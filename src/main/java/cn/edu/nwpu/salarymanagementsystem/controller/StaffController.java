@@ -77,11 +77,11 @@ public class StaffController {
 //        return "redirect:/Staff/ShowInfo";
 //    }
     @RequestMapping(value = "/editStaff", method = POST)
-    public String updatePersonalInformation(long id,
-                                            String name,
-                                            String phoneNumber,
-                                            String email,
-                                            long department) {
+    public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "")long id,
+                                            @RequestParam(value = "name", defaultValue = "")String name,
+                                            @RequestParam(value = "phoneNumber", defaultValue = "")String phoneNumber,
+                                            @RequestParam(value = "email", defaultValue = "")String email,
+                                            @RequestParam(value = "department", defaultValue = "")long department) {
         if (name == null) {
             name = "";
         }
