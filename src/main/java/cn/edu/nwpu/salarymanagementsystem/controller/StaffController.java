@@ -19,7 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * @Version 1.0
  */
 @Controller
-@RequestMapping("/staff")
+@RequestMapping("/Staff")
 public class StaffController {
 
     @Autowired
@@ -35,15 +35,15 @@ public class StaffController {
     public String logout(HttpSession session) {
         session.removeAttribute("staff");
         session.invalidate();
-        return "../Login";
+        return "redirect:../Login";
     }
 
     /**
      * 获取用户信息
      *
-     * @param model
-     * @param session
-     * @return
+     * @param model model
+     * @param session session
+     * @return ShowInfo页面
      */
     @RequestMapping("/ShowInfo")
     public String getPersonalInformation(Model model, HttpSession session) {
@@ -56,7 +56,7 @@ public class StaffController {
     /**
      * 进入员工信息修改页面
      *
-     * @return
+     * @return StaffEdit页面
      */
     @RequestMapping(value = "/editStaff", method = GET)
     public String showStaffForm(){
@@ -65,8 +65,8 @@ public class StaffController {
     /**
      * 更新用户个人信息
      *
-     * @param staff
-     * @return
+     * @param staff 当前用户
+     * @return 返回ShowInfo页面
      */
     @RequestMapping(value = "/editStaff", method = POST)
     public String updatePersonalInformation(Staff staff) {
@@ -77,29 +77,33 @@ public class StaffController {
     /**
      * 更新密码
      *
-     * @param password1
-     * @param password2
-     * @param session
+     * @param password1 第一次输入的密码
+     * @param password2 第二次输入的密码
+     * @param session session
      */
     @RequestMapping("/changePassword")
-    public String updatePassword(String password1, String password2, HttpSession session) {
+    public String updatePassword(String password1, String password2, HttpSession session, Model model) {
         if (password1.equals(password2)) {
-            Staff staff = (Staff) session.getAttribute("staff");
-            staffService.updatePassword(staff.getId(), password1);
-        } else
-            return "error";
+            Long staff = (Long) session.getAttribute("staff");
+            staffService.updatePassword(staff, password1);
+        } else {
+            String error = "Change Failed";
+            model.addAttribute("ERROR",error);
+            return "/Staff/StaffEdit";
+        }
         return "redirect:/Staff/ShowInfo";
     }
 
     /**
      * 查询所有工资信息。
      *
-     * @return 工资信息。
+     * @return ShowSalary页面。
      */
     @RequestMapping("/showSalary")
     public String getSalaryList(Model model, HttpSession session) {
         long id = (long) session.getAttribute("staff");
         model.addAttribute("staffName",staffService.getPersonalInformation(id).getName());
+        model.addAttribute("staffId",staffService.getPersonalInformation(id).getId());
         model.addAttribute("salaryList",staffService.getSalaryList(id));
         return "/Staff/ShowSalary";
     }
@@ -107,12 +111,13 @@ public class StaffController {
     /**
      * 计算所得税
      *
-     * @return
+     * @return 某年的个人所得税
      */
     @RequestMapping("/tax")
-    public String tax(){
-        //TODO
-        return null;
+    public String calculateTax(Model model, int year, HttpSession session) {
+        long id = (long) session.getAttribute("staff");
+        model.addAttribute("tax",staffService.calculateTax(id,year));
+        return "/Staff/ShowInfo";
     }
 
 }

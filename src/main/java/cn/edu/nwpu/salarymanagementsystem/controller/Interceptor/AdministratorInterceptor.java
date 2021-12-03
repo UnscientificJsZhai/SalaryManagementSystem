@@ -1,6 +1,5 @@
-package cn.edu.nwpu.salarymanagementsystem.controller.Interveptor;
+package cn.edu.nwpu.salarymanagementsystem.controller.Interceptor;
 
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator.Administrator;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,18 +17,15 @@ public class AdministratorInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
+        HttpSession session = request.getSession();
+        Long administrator = (Long) session.getAttribute("administrator");
+        //如果session中没有管理员信息，或者信息不对，则跳转到登录界面
+        if (administrator == null) {
+            request.setAttribute("message", "You don't have permission.");
+            request.getRequestDispatcher("/Login.jsp").forward(request, response);
+            return false;
+        }
         return true;
-//                HttpSession session = request.getSession();
-//        Long administrator = (Long) session.getAttribute("administrator");
-//        //如果session中没有管理员信息，或者信息不对，则跳转到登录界面
-//        if (request.getRequestURI().contains("login")) {
-//            return true;
-//        }
-//        if (session.getAttribute("administrator") != null) {
-//            return true;
-//        }
-//        request.getRequestDispatcher("/Login.jsp").forward(request, response);
-//        return false;
     }
 
     @Override
