@@ -8,7 +8,6 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException
  * 没有统一的根节点
  *
  * @author UnscientificJsZhai
- * @version 1
  */
 class DepartmentTreeNode private constructor(
     val data: MutableDepartment, private val childDepartment: ArrayList<DepartmentTreeNode> = ArrayList()
