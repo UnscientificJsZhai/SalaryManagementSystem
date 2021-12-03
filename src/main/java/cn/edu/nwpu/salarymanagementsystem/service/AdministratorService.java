@@ -110,6 +110,16 @@ public class AdministratorService {
     }
 
     /**
+     * 通过id查找特定的员工信息。
+     *
+     * @param id 员工的ID。
+     * @return 员工信息类。
+     */
+    public MutableStaff getStaffById(long id) {
+        return staffMapper.queryById(id);
+    }
+
+    /**
      * 获取所有部门信息。
      *
      * @return 包含所有部门信息的列表。
