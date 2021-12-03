@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,9 +21,9 @@
 </head>
 <body style="background-color:gray">
 <div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/staff/ShowInfo">返回个人信息</a>
+    <a href="<c:url value="/Staff/ShowInfo"/>">返回个人信息</a>
 </div>
-<form action="/staff/editStaff" method="post">
+<form action="<c:url value="/Staff/editStaff"/>" method="post">
     <table>
         <tr>
             <th>姓名</th>
@@ -55,5 +56,7 @@
         </tr>
     </table>
 </form>
+<script>
+</script>
 </body>
 </html>

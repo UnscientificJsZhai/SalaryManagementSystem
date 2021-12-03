@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -76,11 +77,11 @@ background-color:gray;
 	当前时间：<%=time %>
 </div>
     <div class="logout">
-		<a href="/Login">退出登录</a>
+		<a href="<c:url value="/Admin/logout"/>">退出登录</a>
 	</div>
 <div class="btn">
-    <a href="/administrator/showStaff">员工信息></a>
-	<a href="/administrator/showDepartment">部门信息</a>
+    <a href="<c:url value="/Admin/showStaff"/>">员工信息></a>
+	<a href="<c:url value="/Admin/showDepartment"/>">部门信息</a>
 </div>
 
 <div class="log">
