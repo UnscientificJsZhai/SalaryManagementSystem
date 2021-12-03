@@ -14,15 +14,15 @@ private val PHONE_PATTERN = Regex(
  * 检测字符串是否是电子邮箱。
  *
  * @param input 输入的字符串。
- * @return 是否为电子邮箱。
+ * @return 是否为电子邮箱。如果是空字符串也返回true。
  */
-fun isEmail(input: String) = EMAIL_PATTERN.matches(input)
+fun isEmail(input: String) = EMAIL_PATTERN.matches(input) || input.isEmpty()
 
 /**
  * 检测字符串是否是电话号码。
  *
  * @param input 输入的字符串。
- * @return 是否为电话号码。
+ * @return 是否为电话号码。如果是空字符串也返回true。
  */
-fun isPhone(input: String) = PHONE_PATTERN.matches(input)
+fun isPhone(input: String) = PHONE_PATTERN.matches(input) || input.isEmpty()
 
