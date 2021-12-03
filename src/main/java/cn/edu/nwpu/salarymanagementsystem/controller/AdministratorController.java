@@ -58,6 +58,18 @@ public class AdministratorController {
     }
 
     /**
+     * 通过ID查找员工
+     *
+     * @param Id 待查找的员工ID
+     * @return ShowStaff页面
+     */
+    @RequestMapping("/searchStaff")
+    public String searchStaff(long Id, Model model) {
+        model.addAttribute("staffResult", administratorService.getStaffById(Id));
+        return "/Admin/ShowStaff";
+    }
+
+    /**
      * 进入添加员工页面
      *
      * @return addStaff页面
@@ -82,6 +94,19 @@ public class AdministratorController {
             e.printStackTrace();
         }
         return "redirect:/Admin/ShowStaff";
+    }
+
+    /**
+     * 进入修改员工部门界面
+     * @param model model
+     * @param staff 需要修改部门的员工
+     * @return editStaff
+     */
+    @RequestMapping("/changeStaffDepartment")
+    public String showStaffDepartmentForm(Model model,long staff){
+        model.addAttribute("staffInfo",administratorService.getStaffById(staff));
+        model.addAttribute("departmentList",administratorService.getDepartmentList());
+        return "/Admin/EditStaff";
     }
 
     /**
@@ -133,6 +158,18 @@ public class AdministratorController {
     }
 
     /**
+     * 通过ID查找部门
+     *
+     * @param Id 待查找的部门ID
+     * @return ShowStaff页面
+     */
+    @RequestMapping("/searchDepartment")
+    public String searchDepartment(long Id, Model model) {
+        model.addAttribute("departmentResult",administratorService.getStaffById(Id));
+        return "/Admin/ShowStaff";
+    }
+
+    /**
      * 删除部门
      *
      * @param department 要删除的部门
@@ -172,7 +209,8 @@ public class AdministratorController {
      * @return EditDepartment页面
      */
     @RequestMapping(value = "/editDepartment", method = GET)
-    public String showEditDepartmentForm() {
+    public String showEditDepartmentForm(Model model, long department) {
+        model.addAttribute("departmentInfo", administratorService.getDepartmentById(department));
         return "/Admin/EditDepartment";
     }
 
@@ -205,7 +243,9 @@ public class AdministratorController {
      * @return EditSalary
      */
     @RequestMapping(value = "/addSalary", method = GET)
-    public String showSetSalaryForm() {
+    public String showSetSalaryForm(Model model, long staff) {
+        model.addAttribute("staffInfo", administratorService.getStaffById(staff));
+        model.addAttribute("salaryList", administratorService.getSalaryListByStaff(staff));
         return "/Admin/EditSalary";
     }
 
@@ -216,7 +256,7 @@ public class AdministratorController {
      * @param salary 设置的薪水
      * @return ShowStaff
      */
-    @RequestMapping(value = "/addSalary", method = POST)
+    @RequestMapping(value = "/addSalary")
     public String setSalary(long staff, Salary salary) {
         administratorService.setSalary(staff, salary);
         return "redirect:/Admin/ShowStaff";
@@ -228,7 +268,9 @@ public class AdministratorController {
      * @return EditSalary页面
      */
     @RequestMapping(value = "/editSalary", method = GET)
-    public String showEditSalaryForm() {
+    public String showEditSalaryForm(Model model, long staff) {
+        model.addAttribute("salaryList", administratorService.getSalaryListByStaff(staff));
+        model.addAttribute("staffInfo", administratorService.getStaffById(staff));
         return "/Admin/EditSalary";
     }
 
@@ -239,7 +281,7 @@ public class AdministratorController {
      * @param salary 薪水信息
      * @return ShowStaff
      */
-    @RequestMapping(value = "/editSalary", method = POST)
+    @RequestMapping(value = "/editSalary")
     public String updateSalary(long staff, Salary salary) {
         administratorService.updateSalary(staff, salary);
         return "redirect:/Admin/ShowStaff";

@@ -130,6 +130,16 @@ public class AdministratorService {
     }
 
     /**
+     * 通过id查找特定的部门信息。
+     *
+     * @param id 部门的ID。
+     * @return 部门信息类。
+     */
+    public MutableDepartment getDepartmentById(long id) {
+        return departmentMapper.queryById(id);
+    }
+
+    /**
      * 获取部门信息的层级关系。
      *
      * @return 一个列表，列表中是所有最上级部门。

@@ -59,7 +59,9 @@ public class StaffController {
      * @return StaffEdit页面
      */
     @RequestMapping(value = "/editStaff", method = GET)
-    public String showStaffForm(){
+    public String showStaffForm(HttpSession session, Model model){
+        Long Id = (Long) session.getAttribute("staff");
+        model.addAttribute("staffInfo",staffService.getPersonalInformation(Id));
         return "/Staff/StaffEdit";
     }
     /**

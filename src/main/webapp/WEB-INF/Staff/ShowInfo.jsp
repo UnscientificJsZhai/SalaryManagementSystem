@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
@@ -54,7 +55,7 @@ img {
 	</div>
 	<div class="logout">
 
-		<a href="/staff/logout">退出登录</a>
+		<a href="<c:url value="/Staff/logout"/>">退出登录</a>
 	</div>
 	<form>
 		<table border="1" cellpadding="10px">
@@ -67,13 +68,13 @@ img {
 				<th colspan="2">操作</th>
 			</tr>
 			<tr>
-				<td>${staff.id}</td>
-				<td>${staff.name}</td>
-				<td>${staff.department}</td>
-				<td>${staff.phoneNumber}</td>
-				<td>${staff.email}</td>
-				<td><a href="/staff/showSalary?sid=${staff.id}">查看薪酬</a></td>
-				<td><a href="/staff/editStaff?sid=${staff.id}">修改</a></td>
+				<td>${staffInfo.id}</td>
+				<td>${staffInfo.name}</td>
+				<td>${staffInfo.department}</td>
+				<td>${staffInfo.phoneNumber}</td>
+				<td>${staffInfo.email}</td>
+				<td><a href="<c:url value="/Staff/showSalary?sid=${staffInfo.id}"/>">查看薪酬</a></td>
+				<td><a href="<c:url value="/Staff/editStaff?sid=${staffInfo.id}"/>">修改</a></td>
 			</tr>
 		</table>
 	</form>

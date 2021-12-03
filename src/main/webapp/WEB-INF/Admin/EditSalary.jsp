@@ -21,32 +21,41 @@
 </head>
 <body style="background: url(editsalary.jpg);background-size: cover">
 <div style="width: 1000px;margin: 0 auto;text-align: center;background-color:gray">
-    <a href="/administrator/showStaff" style="color:red">返回员工列表</a>
+    <a href="<c:url value="/Admin/showStaff"/>" style="color:red">返回员工列表</a>
 </div>
-<form action="/administrator/editSalary" method="post">
+<form action="<c:url value="/Admin/editSalary"/>" method="post">
+    <tr>
+        <p>员工ID：${staffInfo.id}</p>
+        <p>员工姓名：${staffInfo.name}</p>
+    </tr>
     <table>
         <tr>
-            <th>员工id</th>
-            <th>员工姓名</th>
+            <th>月份</th>
+            <th>岗位工资</th>
             <th>绩效工资</th>
             <th>工龄工资</th>
-            <th>津贴补助</th>
+            <th>补贴</th>
+            <th>操作</th>
         </tr>
         <tr>
-            <td>${staff.getId()}</td>
-            <td>${staff.getName()}></td>    
-            <td>
-                <input name="meritpay" type="text" value="${staff.getSalary().getMeritpay()}">
-            </td>
-            <td>
-                <input name="senioritypay" type="text" value="${staff.getSalary().getSenioritypay()}">
-            </td>
-            <td>
-                <input name="subsidy" type="text" value="${staff.getSalary().getsubsidy()}">
-            </td>
-            <td>
-                <input name="edit" type="submit" value="修改">
-            </td>
+            <c:forEach items="${salaryList}" var="salary">
+                <td>${salary.month}</td>
+                <td>
+                    <input name="postWage" type="text" value="${salary.postWage}">
+                </td>
+                <td>
+                    <input name="meritPay" type="text" value="${salary.meritPay}">
+                </td>
+                <td>
+                    <input name="seniorityPay" type="text" value="${salary.seniorityPay}">
+                </td>
+                <td>
+                    <input name="subsidy" type="text" value="${salary.subsidy}">
+                </td>
+                <td>
+                    <input name="edit" type="submit" value="修改">
+                </td>
+            </c:forEach>
         </tr>
     </table>
 </form>
