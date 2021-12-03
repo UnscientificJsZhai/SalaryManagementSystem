@@ -2,6 +2,7 @@
 <%@ page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="departmentTag" uri="departmentTag"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,19 +63,9 @@ img {
 		</p>
 		<div class="search">
 			<form action="/administrator/showDepartment" method="post">
-				<select name="pidSelect">
-					<option value="-1">所有部门</option>
-					<c:forEach items="${sessionScope.departmentList}" var="department">
-						<c:choose>
-							<c:when test="${department.getPid() == pid}">
-								<option value="${department.getPid()}" selected>${department.getDepartmentNname()}</option>
-							</c:when>
-							<c:otherwise>
-								<option value="${department.getPid()}">${department.getDepartmentName()}</option>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</select> <input type="submit" value="查询">
+				<p>id查询：</p>
+				<input type="text" name="departmentId" placeholder="请输入id查询">
+				<input type="submit" value="查询">
 			</form>
 		</div>
 	</div>
@@ -84,27 +75,18 @@ img {
 				<tr>
 					<th>部门id</th>
 					<th>部门名称</th>
-					<th>等级</th>
-					<th colspan="2">操作</th>
+					<th>上级部门</th>
+					<th>级别</th>
+					<th>操作</th>
 				</tr>
-				<c:forEach items="${sessionScope.departmentList}" var="department">
-					<tr>
-						<td><input type="checkbox" name="pid"
-							value="${department.getId()}"></td>
-						<td>${department.getId()}</td>
-						<td>${department.getDepartmentNname()}</td>
-						<td>${department.getGrade()}</td>
-						<td><a name="del" href="#?pid=${department.getId()}">删除</a></td>
-						<td><a href="/administrator/editDepartment?pid=${department.getId()}">修改</a></td>
-					</tr>
-				</c:forEach>
 			</table>
+			<departmentTag:showDepartment/>
 		</form>
 	</div>
 	<div class="bottom">
 		<span>${sessionScope.pageIndex}/${sessionScope.totalPage}</span>
 		<c:choose>
-			<c:when test="${Department.pid == null}">
+			<c:when test="${department.id == null}">
 				<a href="/administrator/showDepartment?pageIndex=1">首页</a>
 				<%--        所有部门--%>
 				<c:if test="${sessionScope.pageIndex != 1}">

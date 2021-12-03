@@ -36,21 +36,19 @@
             <th>操作</th>
         </tr>
         <tr>
-            <td>${staff.getId()}</td>
+            <td>${staff.id}</td>
+            <td>${staff.name}></td>
             <td>
-                <input name="name" type="text" value="${staff.getName()}">
-            </td>
-            <td>
-                <select name="departname">
+                <select name="departmentName">
                     <%--                    部门列表--%>
                     <c:forEach items="${sessionScope.departmentList}" var="department">
                         <c:choose>
                             <%--                            当前员工的部门--%>
-                            <c:when test="${department.getDepartmentName() == staff.getDepartment().getDepartmentName()}">
-                                <option value="${department.getDepartmentName()}" selected>${department.getDepartmentName()}</option>
+                            <c:when test="${department.name == staff.department.name}">
+                                <option value="${department.name}" selected>${department.name}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${department.getDepartmentName()}">${department.getDepartmentName()}</option>
+                                <option value="${department.name}">${department.name}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>

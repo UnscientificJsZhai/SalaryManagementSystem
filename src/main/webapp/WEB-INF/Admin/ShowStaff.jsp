@@ -57,14 +57,14 @@ img {
 		<p style="text-align: center"><a href="/administrator/addStaff" style="color:red">添加员工</a></p>
 		<br/>
 		<div class="search">
-		<form action="/staff_conditionSelect" method="post" style="float:left;">
-			<p>姓名查询：</p>
-			<input type="text" name="username" placeholder="请输入姓名查询"> 
-			<input type="submit" value="查询">
-		</form>
+<%--		<form action="/staff_conditionSelect" method="post" style="float:left;">--%>
+<%--			<p>姓名查询：</p>--%>
+<%--			<input type="text" name="username" placeholder="请输入姓名查询"> --%>
+<%--			<input type="submit" value="查询">--%>
+<%--		</form>--%>
 		<form action="/administrator/searchStaff" method="post" style="float:left;">
 			<p>id查询：</p>
-			<input type="text" name="username" placeholder="请输入id查询"> 
+			<input type="text" name="staffId" placeholder="请输入id查询">
 			<input type="submit" value="查询">
 		</form>
 		</div>
@@ -73,26 +73,27 @@ img {
 	<form action="/administrator/deleteStaff" method="post">
 		<table border="1" cellpadding="10px">
 			<tr>
-				<th>id</th>
+				<th>ID</th>
 				<th>姓名</th>
 				<th>部门</th>
 				<th>电话</th>
 				<th>邮件</th>
-				<th colspan="3">操作</th>
+				<th colspan="2">信息操作</th>
+				<th colspan="3">薪酬操作</th>
 			</tr>
 			<c:forEach items="${sessionScope.staffList}" var="staff">
 				<tr>
-					<!-- <td><input type="checkbox" name="sid" value="${staff.getId()}"></td> -->
-					<td>${staff.getId()}</td>
-					<td>${staff.getName()}</td>
-					<td>${staff.getDepartment().getDepartmentNname()}</td>
-					<td>${staff.getPhoneNumber()}</td>
-					<td>${staff.getEmail()}</td>
-					<td><a name="del" href="#?sid=${staff.getId()}">删除</a></td>
-					<td><a href="/administrator/changeStaffDepartment?sid=${staff.getId()}">修改</a></td>
-					<td><a href="/administrator/addSalary?sid=${staff.getId()}">添加薪酬</a></td>
-					<td><a href="/administrator/editSalary?sid=${staff.getId()}">修改薪酬</a></td>
-					<td><a href="/administrator/searchSalary?sid=${staff.getId()}">查看薪酬</a></td>
+					<!-- <td><input type="checkbox" name="sid" value="${staff.id}"></td> -->
+					<td>${staff.id}</td>
+					<td>${staff.name}</td>
+					<td>${staff.department}</td>
+					<td>${staff.phoneNumber}</td>
+					<td>${staff.email}</td>
+					<td><a name="del" href="#?sid=${staff.id}">删除</a></td>
+					<td><a href="/administrator/changeStaffDepartment?sid=${staff.id}">修改</a></td>
+					<td><a href="/administrator/addSalary?sid=${staff.id}">添加薪酬</a></td>
+					<td><a href="/administrator/editSalary?sid=${staff.id}">修改薪酬</a></td>
+					<td><a href="/administrator/searchSalary?sid=${staff.id}">查看薪酬</a></td>
 				</tr>
 			</c:forEach>
 		</table>

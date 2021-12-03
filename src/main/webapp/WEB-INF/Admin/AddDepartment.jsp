@@ -29,16 +29,16 @@
 	<div class="content">
 		<form name="frm1" action="/administrator/addDepartment">
 			<p>
-				部门&nbsp;&nbsp;&nbsp;ID： <input type="text" name="did" id="textfield" />
+				部门&nbsp;&nbsp;&nbsp;ID： <input type="text" name="id" id="textfield" />
 			</p>
 			<p>
-				部门名称： <input type="text" name="dname" id="textfield1" />
+				部门名称： <input type="text" name="name" id="textfield1" />
 			</p>
 			<p>
-				部门父级： <input type="text" name="dparent" id="textfield2" />
+				上级部门： <input type="text" name="parentDepartment" id="textfield2" />
 			</p>
 			<p>
-				部门等级： <input type="text" name="grade" id="textfield3" />
+				级别： <input type="text" name="level" id="textfield3" />
 			</p>
 			<p>&nbsp;</p>
 			<input type="submit" value="确定" />

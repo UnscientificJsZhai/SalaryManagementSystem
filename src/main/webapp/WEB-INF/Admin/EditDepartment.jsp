@@ -28,17 +28,17 @@
         <tr>
             <th>部门id</th>
             <th>部门名称</th>
-            <th>等级</th>
+            <th>上级部门</th>
+            <th>级别</th>
             <th>操作</th>
         </tr>
         <tr>
-            <td><input name="departmentid" type="text" value="${department.getId()}"></td>
+            <td>${department.id}</td>
             <td>
-                <input name="departmentname" type="text" value="${department.getDepartmentName()}">
-            </td>    
-            <td>
-                <input name="grade" type="text" value="${department.getGrade()}">
+                <input name="departmentName" type="text" value="${department.name}">
             </td>
+            <td>${department.parentDepartment}</td>
+            <td>${department.level}</td>
             <td>
                 <input name="edit" type="submit" value="修改">
             </td>
