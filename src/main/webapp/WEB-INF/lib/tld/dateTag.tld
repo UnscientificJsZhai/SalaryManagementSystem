@@ -12,9 +12,10 @@
     <tag>
         <name>showDate</name>
         <tag-class>cn.edu.nwpu.salarymanagementsystem.tag.DateTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>scriptless</body-content>
         <attribute>
-            <name>id</name>
+            <name>salaryList</name>
+            <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 </taglib>

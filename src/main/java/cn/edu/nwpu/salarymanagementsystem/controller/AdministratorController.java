@@ -102,7 +102,7 @@ public class AdministratorController {
      * @param staff 需要修改部门的员工
      * @return editStaff
      */
-    @RequestMapping("/changeStaffDepartment")
+    @RequestMapping(value = "/changeStaffDepartment", method = GET)
     public String showStaffDepartmentForm(Model model,long staff){
         model.addAttribute("staffInfo",administratorService.getStaffById(staff));
         model.addAttribute("departmentList",administratorService.getDepartmentList());
@@ -112,7 +112,7 @@ public class AdministratorController {
     /**
      * 更改一个员工的部门。
      */
-    @RequestMapping("/changeStaffDepartment")
+    @RequestMapping(value = "/changeStaffDepartment", method = POST)
     public String changeDepartment(long staff, long department) throws SQLIntegrityConstraintViolationException {
         administratorService.updateStaffDepartment(staff,department);
         return "redirect:/Admin/ShowStaff";
@@ -256,7 +256,7 @@ public class AdministratorController {
      * @param salary 设置的薪水
      * @return ShowStaff
      */
-    @RequestMapping(value = "/addSalary")
+    @RequestMapping(value = "/addSalary", method = POST)
     public String setSalary(long staff, Salary salary) {
         administratorService.setSalary(staff, salary);
         return "redirect:/Admin/ShowStaff";
@@ -281,7 +281,7 @@ public class AdministratorController {
      * @param salary 薪水信息
      * @return ShowStaff
      */
-    @RequestMapping(value = "/editSalary")
+    @RequestMapping(value = "/editSalary", method = POST)
     public String updateSalary(long staff, Salary salary) {
         administratorService.updateSalary(staff, salary);
         return "redirect:/Admin/ShowStaff";

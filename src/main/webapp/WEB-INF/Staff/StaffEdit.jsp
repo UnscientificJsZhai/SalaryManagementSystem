@@ -26,29 +26,47 @@
 <form action="<c:url value="/Staff/editStaff"/>" method="post">
     <table>
         <tr>
+            <th>ID</th>
             <th>姓名</th>
-            <th>密码</th>
-            <th>再次输入密码</th>
             <th>电话</th>
             <th>邮件</th>
+            <th>部门</th>
             <th>操作</th>
         </tr>
         <tr>
-            
+            <td>
+                <input name="id" type="number" value="${staffInfo.id}" readonly="readonly">
+            </td>
             <td>
                 <input name="name" type="text" value="${staffInfo.name}">
-            </td>
-            <td>
-                <input name="password1" type="text">
-            </td>
-            <td>
-                <input name="password2" type="text">
             </td>
             <td>
                 <input name="phoneNumber" type="text" value="${staffInfo.phoneNumber}">
             </td>
             <td>
                 <input name="email" type="text" value="${staffInfo.email}">
+            </td>
+            <td>
+                <input name="department" type="number" value="${staffInfo.department}" readonly="readonly">
+            </td>
+            <td>
+                <input name="edit" type="submit" value="修改">
+            </td>
+        </tr>
+    </table>
+</form>
+<form action=<c:url value="/Staff/changePassword"/> method="post">
+    <table>
+        <tr>
+            <th>密码</th>
+            <th>再次输入密码</th>
+        </tr>
+        <tr>
+            <td>
+                <input name="password1" type="text">
+            </td>
+            <td>
+                <input name="password2" type="text">
             </td>
             <td>
                 <input name="edit" type="submit" value="修改">

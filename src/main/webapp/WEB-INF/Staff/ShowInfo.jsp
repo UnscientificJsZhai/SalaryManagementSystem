@@ -74,7 +74,7 @@ img {
 				<td>${staffInfo.phoneNumber}</td>
 				<td>${staffInfo.email}</td>
 				<td><a href="<c:url value="/Staff/showSalary?sid=${staffInfo.id}"/>">查看薪酬</a></td>
-				<td><a href="<c:url value="/Staff/editStaff?sid=${staffInfo.id}"/>">修改</a></td>
+				<td><a href="<c:url value="/Staff/editStaffForm?sid=${staffInfo.id}"/>">修改</a></td>
 			</tr>
 		</table>
 	</form>
