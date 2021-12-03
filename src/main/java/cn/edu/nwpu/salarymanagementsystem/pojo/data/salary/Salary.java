@@ -104,7 +104,7 @@ public abstract class Salary {
      * @param staffId 要操作薪水信息的用户。
      * @return 包含必须信息的Map。
      */
-    public Map<String, Object>  generateMap(long staffId) {
+    public Map<String, Object> generateMap(long staffId) {
         final HashMap<String, Object> map = new HashMap<>();
 
         map.put(SalaryMapper.ID, staffId);
@@ -119,13 +119,12 @@ public abstract class Salary {
     }
 
     /**
-     * 计算个人所得税。
+     * 总计。
      *
-     * @return 计算得到得到的个人所得税。
+     * @return 计算该月工资总计。
      */
-    public double tex() {
-        //TODO
-        return 0.0;
+    public double total() {
+        return postWage + meritPay + seniorityPay + subsidy;
     }
 
     /**
