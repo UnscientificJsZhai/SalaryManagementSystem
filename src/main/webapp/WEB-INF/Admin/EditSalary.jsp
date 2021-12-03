@@ -21,12 +21,12 @@
 </head>
 <body style="background: url(editsalary.jpg);background-size: cover">
 <div style="width: 1000px;margin: 0 auto;text-align: center;background-color:gray">
-    <a href="/administrator/showStaff" style="color:red">返回员工列表</a>
+    <a href="<c:url value="/Admin/showStaff"/>" style="color:red">返回员工列表</a>
 </div>
-<form action="/administrator/editSalary" method="post">
+<form action="<c:url value="/Admin/editSalary"/>" method="post">
     <tr>
-        <p>员工ID：${staff.id}</p>
-        <p>员工姓名：${staff.name}</p>
+        <p>员工ID：${staffInfo.id}</p>
+        <p>员工姓名：${staffInfo.name}</p>
     </tr>
     <table>
         <tr>

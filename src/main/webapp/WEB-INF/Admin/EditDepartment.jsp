@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -21,9 +22,9 @@
 </head>
 <body style="background-color:gray">
 <div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/administrator/showDepartment">返回部门列表</a>
+    <a href="<c:url value="/Admin/showDepartment"/>">返回部门列表</a>
 </div>
-<form action="/department_edit" method="post">
+<form action="<c:url value="/Admin/editDepartment"/>" method="post">
     <table>
         <tr>
             <th>部门id</th>
@@ -33,12 +34,12 @@
             <th>操作</th>
         </tr>
         <tr>
-            <td>${department.id}</td>
+            <td>${departmentInfo.id}</td>
             <td>
-                <input name="departmentName" type="text" value="${department.name}">
+                <input name="departmentName" type="text" value="${departmentInfo.name}">
             </td>
-            <td>${department.parentDepartment}</td>
-            <td>${department.level}</td>
+            <td>${departmentInfo.parentDepartment}</td>
+            <td>${departmentInfo.level}</td>
             <td>
                 <input name="edit" type="submit" value="修改">
             </td>

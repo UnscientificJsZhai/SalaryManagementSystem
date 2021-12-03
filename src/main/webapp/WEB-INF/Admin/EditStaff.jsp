@@ -21,13 +21,13 @@
 </head>
 <body style="background-color:gray">
 <div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/administrator/showStaff">返回员工列表</a>
+    <a href="<c:url value="/Admin/showStaff"/>">返回员工列表</a>
     <br/>
     <br/>
     <br/>
     <p>修改当前员工信息:</p>
 </div>
-<form action="/administrator/changeStaffDepartment" method="post">
+<form action="<c:url value="/Admin/changeStaffDepartment"/>" method="post">
     <table>
         <tr>
             <th>id</th>
@@ -36,15 +36,15 @@
             <th>操作</th>
         </tr>
         <tr>
-            <td>${staff.id}</td>
-            <td>${staff.name}></td>
+            <td>${staffInfo.id}</td>
+            <td>${staffInfo.name}></td>
             <td>
                 <select name="departmentName">
                     <%--                    部门列表--%>
                     <c:forEach items="${sessionScope.departmentList}" var="department">
                         <c:choose>
                             <%--                            当前员工的部门--%>
-                            <c:when test="${department.name == staff.department.name}">
+                            <c:when test="${department.name == staffInfo.department.name}">
                                 <option value="${department.name}" selected>${department.name}</option>
                             </c:when>
                             <c:otherwise>

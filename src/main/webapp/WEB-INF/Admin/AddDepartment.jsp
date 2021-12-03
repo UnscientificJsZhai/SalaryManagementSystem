@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,7 +28,7 @@
 		<p style="color: blue">添加部门</p>
 	</div>
 	<div class="content">
-		<form name="frm1" action="/administrator/addDepartment">
+		<form name="frm1" action="<c:url value="/Admin/addDepartment"/>">
 			<p>
 				部门&nbsp;&nbsp;&nbsp;ID： <input type="text" name="id" id="textfield" />
 			</p>

@@ -22,7 +22,7 @@
 </head>
 <body style="background: url(showsalary.jpg); background-size: cover">
 <div style="width: 1000px;margin: 0 auto;text-align: center">
-    <a href="/staff/ShowInfo">返回个人信息界面</a>
+    <a href="<c:url value="/Staff/ShowInfo"/>">返回个人信息界面</a>
 </div>
 <h3>
     name: ${staffName} <br/>
