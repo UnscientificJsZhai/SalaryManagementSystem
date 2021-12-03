@@ -23,35 +23,25 @@
 <div style="width: 1000px;margin: 0 auto;text-align: center">
     <a href="<c:url value="/Staff/ShowInfo"/>">返回个人信息</a>
 </div>
-<form action="<c:url value="/Staff/editStaff"/>" method="post">
-    <table>
+<form action=<c:url value="/Staff/editStaff"/> method="post">
+    <table border="6">
         <tr>
             <th>ID</th>
             <th>姓名</th>
             <th>电话</th>
-            <th>邮件</th>
+            <th>邮箱</th>
             <th>部门</th>
-            <th>操作</th>
+            <th>修改</th>
         </tr>
         <tr>
-            <td>
-                <input name="id" type="number" value="${staffInfo.id}" readonly="readonly">
-            </td>
-            <td>
-                <input name="name" type="text" value="${staffInfo.name}">
-            </td>
-            <td>
-                <input name="phoneNumber" type="text" value="${staffInfo.phoneNumber}">
-            </td>
-            <td>
-                <input name="email" type="text" value="${staffInfo.email}">
-            </td>
-            <td>
-                <input name="department" type="number" value="${staffInfo.department}" readonly="readonly">
-            </td>
-            <td>
-                <input name="edit" type="submit" value="修改">
-            </td>
+            <td><input name="id" type="number" value="${staffInfo.id}" readonly="readonly"></td>
+            <td><input name="name" type="text" value="${staffInfo.name}"></td>
+            <td><input name="phoneNumber" type="text" value="${staffInfo.phoneNumber}"></td>
+            <td><input name="email" type="text" value="${staffInfo.email}"></td>
+            <td><label>
+                <input name="department" type="text" value="${staffInfo.department}" readonly="readonly">
+            </label></td>
+            <td><input name="edit" type="submit" value="修改"></td>
         </tr>
     </table>
 </form>
