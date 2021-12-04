@@ -244,13 +244,13 @@ public class AdministratorController {
     /**
      * 删除部门。
      *
-     * @param department 要删除的部门。
+     * @param id 要删除的部门。
      * @return ShowDepartment页面。
      */
-    @RequestMapping("/deleteDepartment")
-    public String deleteDepartments(Long department) {
-        administratorService.deleteDepartments(department);
-        return "redirect:/Admin/ShowDepartment";
+    @RequestMapping("/deleteDepartment/{id}")
+    public String deleteDepartments(@PathVariable long id) {
+        administratorService.deleteDepartments(id);
+        return "redirect:/Admin/showDepartment";
     }
 
     /**
