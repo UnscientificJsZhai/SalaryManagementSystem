@@ -30,5 +30,9 @@
             <taglib-uri>dateTag</taglib-uri>
             <taglib-location>/WEB-INF/lib/tld/dateTag.tld</taglib-location>
         </taglib>
+        <taglib>
+            <taglib-uri>showStaffTag</taglib-uri>
+            <taglib-location>/WEB-INF/lib/tld/showStaffTag.tld</taglib-location>
+        </taglib>
     </jsp-config>
 </web-app>
