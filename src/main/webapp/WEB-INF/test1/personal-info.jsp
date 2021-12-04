@@ -107,15 +107,7 @@
                     </form>
                 </c:if>
             </div>
-        </div>
-    </div>
-
-    <div class="b-example-divider"></div>
-
-    <div class="container px-4 py-5" id="hanging-icons">
-        <h2 class="pb-2 border-bottom">Hanging icons</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-            <div class="col d-flex align-items-start">
+            <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"></svg>
                 </div>
@@ -142,7 +134,7 @@
                     </c:if>
                 </div>
             </div>
-            <div class="col d-flex align-items-start">
+            <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"></svg>
                 </div>
@@ -168,7 +160,7 @@
                     </c:if>
                 </div>
             </div>
-            <div class="col d-flex align-items-start">
+            <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <svg class="bi" width="1em" height="1em"></svg>
                 </div>
@@ -180,6 +172,30 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="b-example-divider"></div>
+    
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Custom cards</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">department</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>staff1</td>
+                    <td>1</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <div class="b-example-divider"></div>
