@@ -49,24 +49,27 @@ public class AdministratorController {
     }
 
     @RequestMapping(value = "/editStaff", method = POST)
-    public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "")long id,
-                                            @RequestParam(value = "name", defaultValue = "")String name,
-                                            @RequestParam(value = "phoneNumber", defaultValue = "")String phoneNumber,
-                                            @RequestParam(value = "email", defaultValue = "")String email,
-                                            @RequestParam(value = "department", defaultValue = "")Long department,
+    public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "") long id,
+                                            @RequestParam(value = "name", defaultValue = "") String name,
+                                            @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
+                                            @RequestParam(value = "email", defaultValue = "") String email,
+                                            @RequestParam(value = "department", defaultValue = "") Long department,
                                             HttpSession session) {
         if (name == null) {
             name = "";
         }
-        if(phoneNumber == null) {
+        if (phoneNumber == null) {
             phoneNumber = "";
         }
-        if(email == null) {
+        if (email == null) {
             email = "";
         }
-        Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
-        staffService.updatePersonalInformation(staff);
-        return "redirect:/Admin/ShowInfo?id="+id;
+        try {
+            administratorService.updateStaffDepartment(id, department);
+        } catch (SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/Admin/ShowInfo?id=" + id;
     }
 
 
@@ -78,8 +81,8 @@ public class AdministratorController {
      */
     @RequestMapping("/ShowInfo")
     public String getPersonalInformation(Model model, long id) {
-        model.addAttribute("staffInfo",staffService.getPersonalInformation(id));
-        model.addAttribute("salaryList",staffService.getSalaryList(id));
+        model.addAttribute("staffInfo", staffService.getPersonalInformation(id));
+        model.addAttribute("salaryList", staffService.getSalaryList(id));
         return "personal-info";
     }
 
@@ -102,7 +105,7 @@ public class AdministratorController {
             }
 
         }
-        model.addAttribute("staffList",staffPairList);
+        model.addAttribute("staffList", staffPairList);
         return "allStaff-info";
     }
 
@@ -131,21 +134,29 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/addStaff", method = GET)
     public String showStaffForm() {
-        return "/test1/add-staff";
+        return "/add-staff";
     }
 
     /**
      * 添加员工
      * 添加员工
      *
-     * @param staff    新的员工信息
+     * @param id    新的员工信息
      * @param password 初始密码
      * @return 返回管理员主页
      */
     @RequestMapping(value = "/addStaff", method = POST)
-    public String addStaff(MutableStaff staff, String password) {
+    public String addStaff(@RequestParam(value = "id", defaultValue = "") long id,
+                           @RequestParam(value = "name", defaultValue = "") String name,
+                           @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
+                           @RequestParam(value = "email", defaultValue = "") String email,
+                           @RequestParam(value = "department", defaultValue = "") Long department,
+                           @RequestParam(value = "password", defaultValue = "")String password) {
         try {
-            administratorService.addStaff(staff, password);
+            if (administratorService.getStaffById(id) == null) {
+                MutableStaff staff = new MutableStaff(id,name,phoneNumber,email,department);
+                administratorService.addStaff(staff, password);
+            }
         } catch (DuplicatedUserException e) {
             e.printStackTrace();
         }

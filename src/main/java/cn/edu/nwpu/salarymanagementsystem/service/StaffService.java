@@ -78,7 +78,6 @@ public class StaffService {
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
         informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-
         staffMapper.alterProfile(informationMap);
     }
 

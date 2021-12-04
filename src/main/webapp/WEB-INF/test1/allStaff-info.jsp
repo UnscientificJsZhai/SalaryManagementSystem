@@ -45,12 +45,13 @@
 <jsp:include page="banner.jsp"/>
 <div class="container px-4 py-5" id="custom-cards">
     <h2>Section title</h2>
+    <br/>
+    <a href="/Admin/addStaff">add staff</a>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <showStaffTag:showStaff staffPairList="${staffList}"/>
         </table>
     </div>
-    <a href="/Admin/deleteStaff"
 </div>
 </body>
 </html>

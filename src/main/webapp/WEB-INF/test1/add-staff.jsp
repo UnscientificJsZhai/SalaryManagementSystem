@@ -82,7 +82,7 @@
                         <div class="col-12">
 
                             <label> phoneNumber
-                                <input name="phoneNumber" type="text" class="form-control" placeholder="phoneNumber" required>
+                                <input name="phoneNumber" type="text" class="form-control" placeholder="phoneNumber" >
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -92,7 +92,7 @@
                         <div class="col-12">
 
                             <label> email
-                                <input name="email" type="text" class="form-control" placeholder="email" required>
+                                <input name="email" type="text" class="form-control" placeholder="email" >
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -102,7 +102,7 @@
                         <div class="col-12">
 
                             <label> departmentId
-                                <input name="departmentId" type="text" class="form-control" placeholder="departmentId" required>
+                                <input name="department" type="number" class="form-control" placeholder="departmentId" >
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
