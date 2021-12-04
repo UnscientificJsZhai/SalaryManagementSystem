@@ -229,15 +229,14 @@
                     <tbody>
                     <c:forEach items="${taxInfo}" var="tax">
                         <tr>
-                            <td>${taxInfo.first}</td>
-                            <td>${taxInfo.second}</td>
+                            <td>${tax.first}</td>
+                            <td>${tax.second}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
 </main>
 

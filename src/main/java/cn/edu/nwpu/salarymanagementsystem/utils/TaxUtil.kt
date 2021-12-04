@@ -36,6 +36,7 @@ private val comparator = Comparator<Salary> { o1, o2 -> o1.month - o2.month }
  * @return 年份和个税数目的配对列表。
  */
 fun List<Salary>.totalTax(): List<Pair<Int, Double>> {
+    if(isEmpty()) return emptyList()
     this.sortedWith(comparator)
     val result = ArrayList<Pair<Int, Double>>()
     val maxMonth = maxOf {
@@ -52,6 +53,7 @@ fun List<Salary>.totalTax(): List<Pair<Int, Double>> {
                 sublist.add(salary)
             }
         }
+        if(sublist.isEmpty()) continue
         result.add(Pair(year + 1999, sublist.calculateTax()))
     }
     return result

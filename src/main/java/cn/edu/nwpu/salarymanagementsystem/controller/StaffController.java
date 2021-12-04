@@ -6,6 +6,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import cn.edu.nwpu.salarymanagementsystem.utils.StringUtil;
+import cn.edu.nwpu.salarymanagementsystem.utils.TaxUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,7 +46,7 @@ public class StaffController {
     public String getPersonalInformation(Model model, long id) {
         model.addAttribute("staffInfo", staffService.getPersonalInformation(id));
         model.addAttribute("salaryList", staffService.getSalaryList(id));
-//        model.addAttribute("taxInfo", staffService.calculateTax(staffService.getSalaryList(id)));
+        model.addAttribute("taxInfo", TaxUtil.totalTax(staffService.getSalaryList(id)));
         return "personal-info";
     }
 
