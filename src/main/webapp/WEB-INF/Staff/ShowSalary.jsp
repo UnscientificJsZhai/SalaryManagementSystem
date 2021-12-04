@@ -36,11 +36,8 @@
         <th>补贴</th>
         <th>是否已发放工资</th>
     </tr>
-    <dateTag:showDate >
-        ${staffId}
-    </dateTag:showDate >
+    <dateTag:showDate salaryList="${salaryList}"/>
 
-    <dateTag:showDate/>
     <c:forEach items="${salaryList}" var="salary" >
         <tr>
 <%--            把月份显示做成自定义tag--%>

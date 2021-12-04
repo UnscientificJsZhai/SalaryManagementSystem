@@ -1,11 +1,13 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -35,7 +37,7 @@ public class StaffController {
     public String logout(HttpSession session) {
         session.removeAttribute("staff");
         session.invalidate();
-        return "redirect:../Login";
+        return "../Login";
     }
 
     /**
@@ -50,7 +52,7 @@ public class StaffController {
         Long Id = (Long) session.getAttribute("staff");
         model.addAttribute("staffInfo",staffService.getPersonalInformation(Id));
         //model.addAttribute(staffService.getPersonalInformation(Id));
-        return "/Staff/ShowInfo";
+        return "/test1/personal-info";
     }
 
     /**
@@ -58,7 +60,7 @@ public class StaffController {
      *
      * @return StaffEdit页面
      */
-    @RequestMapping(value = "/editStaff", method = GET)
+    @RequestMapping(value = "/editStaffForm", method = GET)
     public String showStaffForm(HttpSession session, Model model){
         Long Id = (Long) session.getAttribute("staff");
         model.addAttribute("staffInfo",staffService.getPersonalInformation(Id));
@@ -67,11 +69,29 @@ public class StaffController {
     /**
      * 更新用户个人信息
      *
-     * @param staff 当前用户
      * @return 返回ShowInfo页面
      */
+//    @RequestMapping(value = "/editStaff", method = POST)
+//    public String updatePersonalInformation(Staff staff) {
+//        staffService.updatePersonalInformation(staff);
+//        return "redirect:/Staff/ShowInfo";
+//    }
     @RequestMapping(value = "/editStaff", method = POST)
-    public String updatePersonalInformation(Staff staff) {
+    public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "")long id,
+                                            @RequestParam(value = "name", defaultValue = "")String name,
+                                            @RequestParam(value = "phoneNumber", defaultValue = "")String phoneNumber,
+                                            @RequestParam(value = "email", defaultValue = "")String email,
+                                            @RequestParam(value = "department", defaultValue = "")Long department) {
+        if (name == null) {
+            name = "";
+        }
+        if(phoneNumber == null) {
+            phoneNumber = "";
+        }
+        if(email == null) {
+            email = "";
+        }
+        Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
         staffService.updatePersonalInformation(staff);
         return "redirect:/Staff/ShowInfo";
     }
@@ -107,7 +127,7 @@ public class StaffController {
         model.addAttribute("staffName",staffService.getPersonalInformation(id).getName());
         model.addAttribute("staffId",staffService.getPersonalInformation(id).getId());
         model.addAttribute("salaryList",staffService.getSalaryList(id));
-        return "/Staff/ShowSalary";
+        return "/test1/my-salary";
     }
 
     /**
