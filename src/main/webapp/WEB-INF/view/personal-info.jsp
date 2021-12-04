@@ -199,7 +199,10 @@
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="pb-2 border-bottom">Custom cards</h2>
         <br/>
-        <a href="/Admin/addSalary/${staffInfo.id}">addSalary</a>
+        <c:if test="${sessionScope.administrator != null}">
+            <a href="/Admin/addSalary/${staffInfo.id}">addSalary</a>
+        </c:if>
+
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <c:if test="${sessionScope.administrator != null}">
