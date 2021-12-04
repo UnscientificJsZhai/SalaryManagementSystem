@@ -46,22 +46,7 @@
     <h2>Section title</h2>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">name</th>
-                <th scope="col">department</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1,001</td>
-                <td>random</td>
-                <td>data</td>
-                <td><a href="<c:url value="/Staff/ShowInfo"/> ">details</a></td>
-            </tr>
-            </tbody>
+
         </table>
     </div>
 </div>

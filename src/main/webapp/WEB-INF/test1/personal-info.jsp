@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="dateTag" uri="dateTag"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -192,24 +192,13 @@
     </div>
 
     <div class="b-example-divider"></div>
-    <form action="<c:url value="/Staff/changePassword"/>" method="post">
-        <div class="form-floating">
-            <input name="password1" type="password" id="floatingInput7" class="form-control"
-                   placeholder="new pwd">
-            <label for="floatingInput7">new pwd</label>
-        </div>
-        <br/>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">click to search</button>
-    </form>
+
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="pb-2 border-bottom">Custom cards</h2>
-        <br/>
-        <form>
-            <input >
-        </form>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
-
+                <dateTag:showDate salaryList="${salaryList}" staff="${sessionScope.staff}"
+                                  administrator="${sessionScope.administrator}"/>
             </table>
         </div>
     </div>

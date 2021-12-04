@@ -25,5 +25,10 @@
     <welcome-file-list>
         <welcome-file>/WEB-INF/test1/sign-in.jsp</welcome-file>
     </welcome-file-list>
-
+    <jsp-config>
+        <taglib>
+            <taglib-uri>dateTag</taglib-uri>
+            <taglib-location>/WEB-INF/lib/tld/dateTag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>
