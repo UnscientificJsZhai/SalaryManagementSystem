@@ -5,15 +5,19 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
+import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import kotlin.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +38,49 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
+    @Autowired
+    private StaffService staffService;
+
 
     @RequestMapping("/AdminView")
     public String adminHome() {
 
         return "allStaff-info";
+    }
+
+    @RequestMapping(value = "/editStaff", method = POST)
+    public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "")long id,
+                                            @RequestParam(value = "name", defaultValue = "")String name,
+                                            @RequestParam(value = "phoneNumber", defaultValue = "")String phoneNumber,
+                                            @RequestParam(value = "email", defaultValue = "")String email,
+                                            @RequestParam(value = "department", defaultValue = "")Long department,
+                                            HttpSession session) {
+        if (name == null) {
+            name = "";
+        }
+        if(phoneNumber == null) {
+            phoneNumber = "";
+        }
+        if(email == null) {
+            email = "";
+        }
+        Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
+        staffService.updatePersonalInformation(staff);
+        return "redirect:/Admin/ShowInfo?id="+id;
+    }
+
+
+    /**
+     * 获取用户信息
+     *
+     * @param model model
+     * @return ShowInfo页面
+     */
+    @RequestMapping("/ShowInfo")
+    public String getPersonalInformation(Model model, long id) {
+        model.addAttribute("staffInfo",staffService.getPersonalInformation(id));
+        model.addAttribute("salaryList",staffService.getSalaryList(id));
+        return "personal-info";
     }
 
     /**

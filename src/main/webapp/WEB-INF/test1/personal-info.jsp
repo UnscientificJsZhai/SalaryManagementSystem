@@ -147,7 +147,7 @@
                     <h2>Staff Department</h2>
                     <p>${staffInfo.department}</p>
                     <c:if test="${sessionScope.administrator != null}">
-                        <form action="<c:url value="/Staff/editStaff"/>" method="post">
+                        <form action="<c:url value="/Admin/editStaff"/>" method="post">
                             <div class="form-floating">
                                 <input name="department" type="number" id="floatingInput4" class="form-control"
                                        placeholder="new department">
@@ -170,23 +170,26 @@
                     <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_防晒霜.svg"
                          alt="img6"/>
                 </div>
-                <div>
-                    <h2>Password</h2>
-                    <p>you can change pwd here!</p>
-                    <form action="<c:url value="/Staff/changePassword"/>" method="post">
-                        <div class="form-floating">
-                            <input name="password1" type="password" id="floatingInput5" class="form-control"
-                                   placeholder="new pwd">
-                            <label for="floatingInput5">new pwd</label>
+                <c:if test="${sessionScope.staff != null}">
+                    <div>
+                        <h2>Password</h2>
+                        <p>you can change pwd here!</p>
+                        <form action="<c:url value="/Staff/changePassword"/>" method="post">
+                            <div class="form-floating">
+                                <input name="password1" type="password" id="floatingInput5" class="form-control"
+                                       placeholder="new pwd">
+                                <label for="floatingInput5">new pwd</label>
+                                <br/>
+                                <input name="password2" type="password" id="floatingInput6" class="form-control"
+                                       placeholder="new pwd again">
+                                <label for="floatingInput6">new pwd again</label>
+                            </div>
                             <br/>
-                            <input name="password2" type="password" id="floatingInput6" class="form-control"
-                                   placeholder="new pwd again">
-                            <label for="floatingInput6">new pwd again</label>
-                        </div>
-                        <br/>
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
-                    </form>
-                </div>
+                            <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
+                        </form>
+                    </div>
+                </c:if>
+
             </div>
         </div>
     </div>
