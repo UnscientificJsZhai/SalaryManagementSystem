@@ -5,6 +5,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
+import cn.edu.nwpu.salarymanagementsystem.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +45,7 @@ public class StaffController {
     public String getPersonalInformation(Model model, long id) {
         model.addAttribute("staffInfo", staffService.getPersonalInformation(id));
         model.addAttribute("salaryList", staffService.getSalaryList(id));
-        model.addAttribute("taxInfo", staffService.calculateTax(staffService.getSalaryList(id)));
+//        model.addAttribute("taxInfo", staffService.calculateTax(staffService.getSalaryList(id)));
         return "personal-info";
     }
 
@@ -75,11 +76,16 @@ public class StaffController {
         if (email == null) {
             email = "";
         }
-        Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
-        session.setAttribute("staff", staff);
-        staffService.updatePersonalInformation(staff);
-        //noinspection SpringMVCViewInspection
-        return "redirect:/Staff/ShowInfo?id=" + id;
+        if (StringUtil.isEmail(email) && StringUtil.isPhone(phoneNumber)){
+            Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
+            session.setAttribute("staff", staff);
+            staffService.updatePersonalInformation(staff);
+            //noinspection SpringMVCViewInspection
+            return "redirect:/Staff/ShowInfo?id="+ id;
+        } else {
+            System.out.println("Error input");
+            return "personal-info";
+        }
     }
 
     /**
