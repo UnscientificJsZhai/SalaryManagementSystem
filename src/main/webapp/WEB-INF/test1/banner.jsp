@@ -47,12 +47,9 @@
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
-            <span class="fs-4">Simple header</span>
+            <span class="fs-4">Welcome ${sessionScope.staff.name} ${sessionScope.administrator.name}</span>
         </a>
         <ul class="nav nav-pills">
-            <c:if test="${sessionScope.staff !=null}">
-                <li class="nav-item"><a href="<c:url value="/Staff/ShowInfo"/> " class="nav-link" aria-current="page">PersonalInfo</a></li>
-            </c:if>
             <c:if test="${sessionScope.administrator != null}">
                 <li class="nav-item"><a href="#" class="nav-link">Staff</a></li>
             </c:if>

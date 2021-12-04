@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: mikasa
@@ -41,26 +42,28 @@
 </head>
 <body>
 <jsp:include page="banner.jsp"/>
-<h2>Section title</h2>
-<div class="table-responsive">
-    <table class="table table-striped table-sm">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scope="col">department</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1,001</td>
-            <td>random</td>
-            <td>data</td>
-            <td>placeholder</td>
-            <td>text</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container px-4 py-5" id="custom-cards">
+    <h2>Section title</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">department</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1,001</td>
+                <td>random</td>
+                <td>data</td>
+                <td><a href="<c:url value="/Staff/ShowInfo"/> ">details</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

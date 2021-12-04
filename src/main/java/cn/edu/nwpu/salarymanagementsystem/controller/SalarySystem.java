@@ -44,7 +44,7 @@ public class SalarySystem {
                                @RequestParam(value = "remember",defaultValue = "") String remember, HttpSession session, HttpServletResponse res) {
         //TODO 无法实现自由选择是否保存，先写成全部保留的方式
         if (administratorService.login(id, password)) {
-            session.setAttribute("administrator", id);
+            session.setAttribute("administrator", administratorService.getAdministratorInfo(id,password));
             if ("remember-me".equals(remember)){
                 Cookie cookie1 = new Cookie("name", id.toString());
                 cookie1.setMaxAge(24 * 60 * 60);
@@ -56,7 +56,7 @@ public class SalarySystem {
             }
             return "redirect:/Admin/AdminView";
         } else if (staffService.login(id, password)) {
-            session.setAttribute("staff", id);
+            session.setAttribute("staff", staffService.getPersonalInformation(id));
             if ("remember-me".equals(remember)){
                 Cookie cookie1 = new Cookie("name", id.toString());
                 cookie1.setMaxAge(24 * 60 * 60);
@@ -66,7 +66,7 @@ public class SalarySystem {
                 res.addCookie(cookie2);
                 res.addCookie(cookie2);
             }
-            return "redirect:/Staff/ShowInfo";
+            return "redirect:/Staff/ShowInfo?id="+id;
         } else {
             return "/test1/sign-in";
         }
