@@ -17,5 +17,18 @@
             <name>salaryList</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <name>staff</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>administrator</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>showDepartment</name>
+        <tag-class>cn.edu.nwpu.salarymanagementsystem.tag.DepartmentTag</tag-class>
+        <body-content>scriptless</body-content>
     </tag>
 </taglib>

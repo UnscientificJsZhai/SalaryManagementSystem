@@ -4,6 +4,7 @@ import cn.edu.nwpu.salarymanagementsystem.dao.AdministratorMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.administrator.Administrator;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.DepartmentTreeNode;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
@@ -63,6 +64,10 @@ public class AdministratorService {
      */
     public boolean login(long id, @NotNull String password) {
         return administratorMapper.login(id, password) != null;
+    }
+
+    public Administrator getAdministratorInfo(long id, String password) {
+        return administratorMapper.login(id, password);
     }
 
     /**

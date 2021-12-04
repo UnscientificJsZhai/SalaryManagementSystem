@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="dateTag" uri="dateTag"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -49,15 +49,17 @@
         <h2 class="pb-2 border-bottom">Columns with icons</h2>
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
             <div class="feature col">
-                <div class="feature-icon bg-primary bg-gradient">
-                    <svg class="bi" width="1em" height="1em"></svg>
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <img width="140" height="140" src="${pageContext.request.contextPath}/resources/img/沙滩_太阳.svg"
+                         alt="img1"/>
                 </div>
                 <h2>Staff Id</h2>
                 <p>${staffInfo.id}</p>
             </div>
             <div class="feature col">
-                <div class="feature-icon bg-primary bg-gradient">
-                    <svg class="bi" width="1em" height="1em"></svg>
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_帆船.svg"
+                         alt="img2"/>
                 </div>
                 <h2>Staff Name</h2>
                 <p>${staffInfo.name}</p>
@@ -85,8 +87,9 @@
                 </c:if>
             </div>
             <div class="feature col">
-                <div class="feature-icon bg-primary bg-gradient">
-                    <svg class="bi" width="1em" height="1em"></svg>
+                <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+                    <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_椰子汁.svg"
+                         alt="img3"/>
                 </div>
                 <h2>Staff phone</h2>
                 <p>${staffInfo.phoneNumber} </p>
@@ -107,17 +110,10 @@
                     </form>
                 </c:if>
             </div>
-        </div>
-    </div>
-
-    <div class="b-example-divider"></div>
-
-    <div class="container px-4 py-5" id="hanging-icons">
-        <h2 class="pb-2 border-bottom">Hanging icons</h2>
-        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-            <div class="col d-flex align-items-start">
+            <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"></svg>
+                    <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_照相机.svg"
+                         alt="img4"/>
                 </div>
                 <div>
                     <h2>Staff Email</h2>
@@ -142,9 +138,10 @@
                     </c:if>
                 </div>
             </div>
-            <div class="col d-flex align-items-start">
+            <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"></svg>
+                    <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_背包.svg"
+                         alt="img5"/>
                 </div>
                 <div>
                     <h2>Staff Department</h2>
@@ -168,18 +165,41 @@
                     </c:if>
                 </div>
             </div>
-            <div class="col d-flex align-items-start">
+            <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em"></svg>
+                    <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_防晒霜.svg"
+                         alt="img6"/>
                 </div>
                 <div>
-                    <h2>Unable to reach</h2>
-                    <p>we are still working!.</p>
-                    <a href="#" class="btn btn-primary">
-                        Primary button
-                    </a>
+                    <h2>Password</h2>
+                    <p>you can change pwd here!</p>
+                    <form action="<c:url value="/Staff/changePassword"/>" method="post">
+                        <div class="form-floating">
+                            <input name="password1" type="password" id="floatingInput5" class="form-control"
+                                   placeholder="new pwd">
+                            <label for="floatingInput5">new pwd</label>
+                            <br/>
+                            <input name="password2" type="password" id="floatingInput6" class="form-control"
+                                   placeholder="new pwd again">
+                            <label for="floatingInput6">new pwd again</label>
+                        </div>
+                        <br/>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="b-example-divider"></div>
+
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Custom cards</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <dateTag:showDate salaryList="${salaryList}" staff="${sessionScope.staff}"
+                                  administrator="${sessionScope.administrator}"/>
+            </table>
         </div>
     </div>
     <div class="b-example-divider"></div>

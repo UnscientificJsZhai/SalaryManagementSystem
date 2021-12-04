@@ -4,9 +4,11 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
+import kotlin.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -37,7 +42,8 @@ public class AdministratorController {
 
     @RequestMapping("/AdminView")
     public String adminHome(){
-        return "/Admin/AdminView";
+
+        return "/test1/staff-info";
     }
 
     /**
@@ -47,8 +53,13 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/showStaff", method = GET)
     public String showAllStaff(Model model) {
-        model.addAttribute("staffList",administratorService.getStaffList());
-        return "/Admin/ShowStaff";
+        ArrayList<Pair<MutableStaff,String>> staffPairList = new ArrayList<>();
+        List<MutableStaff> staffList = administratorService.getStaffList();
+        for(MutableStaff staff:staffList){
+            staffPairList.add(new Pair<>(staff,administratorService.getDepartmentById(staff.getDepartment()).getName()));
+        }
+        model.addAttribute("staffList",staffPairList);
+        return "/test1/staff-info";
     }
 
     /**
@@ -76,10 +87,11 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/addStaff", method = GET)
     public String showStaffForm() {
-        return "/Admin/AddStaff";
+        return "/test1/add-staff";
     }
 
     /**
+     * 添加员工
      * 添加员工
      *
      * @param staff    新的员工信息
@@ -243,22 +255,20 @@ public class AdministratorController {
      * @return EditSalary
      */
     @RequestMapping(value = "/addSalary", method = GET)
-    public String showSetSalaryForm(Model model, Long staff) {
-        model.addAttribute("staffInfo", administratorService.getStaffById(staff));
-        model.addAttribute("salaryList", administratorService.getSalaryListByStaff(staff));
-        return "/Admin/EditSalary";
+    public String showSetSalaryForm(Model model,long id) {
+        model.addAttribute("staffInfo",administratorService.getStaffById(id));
+        return "/test1/add-salary";
     }
 
     /**
      * 为一名员工设置一个薪水信息。
      *
-     * @param staff 目标员工
      * @param salary 设置的薪水
      * @return ShowStaff
      */
     @RequestMapping(value = "/addSalary", method = POST)
-    public String setSalary(Long staff, Salary salary) {
-        administratorService.setSalary(staff, salary);
+    public String setSalary(Salary salary,long id) {
+        administratorService.setSalary(id, salary);
         return "redirect:/Admin/ShowStaff";
     }
 
