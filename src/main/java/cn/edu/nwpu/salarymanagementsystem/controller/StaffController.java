@@ -3,6 +3,7 @@ package cn.edu.nwpu.salarymanagementsystem.controller;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
+import cn.edu.nwpu.salarymanagementsystem.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,9 +92,14 @@ public class StaffController {
         if(email == null) {
             email = "";
         }
-        Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
-        staffService.updatePersonalInformation(staff);
-        return "redirect:/Staff/ShowInfo";
+        if (StringUtil.isEmail(email) && StringUtil.isPhone(phoneNumber)){
+            Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
+            staffService.updatePersonalInformation(staff);
+            return "redirect:/Staff/ShowInfo";
+        } else {
+            System.out.println("Error input");
+            return "/Staff/StaffEdit";
+        }
     }
 
     /**
