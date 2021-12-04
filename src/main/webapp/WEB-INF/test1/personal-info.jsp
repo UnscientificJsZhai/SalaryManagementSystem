@@ -57,9 +57,7 @@
             </div>
             <div class="feature col">
                 <div class="feature-icon bg-primary bg-gradient">
-                    <svg class="bi" width="1em" height="1em">
-                        <use xlink:href="#people-circle"/>
-                    </svg>
+                    <svg class="bi" width="1em" height="1em"></svg>
                 </div>
                 <h2>Staff Name</h2>
                 <p>${staffInfo.name}</p>
@@ -69,10 +67,18 @@
                             <input name="name" type="text" class="form-control" id="floatingInput"
                                    placeholder="new name">
                             <label for="floatingInput">new name</label>
-                            <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
-                            <input name="phoneNumber" type="text" hidden="hidden" value="${staffInfo.phoneNumber}">
-                            <input name="department" type="number" hidden="hidden" value="${staffInfo.department}">
-                            <input name="email" type="text" hidden="hidden" value="${staffInfo.email}">
+                            <label>
+                                <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
+                            </label>
+                            <label>
+                                <input name="phoneNumber" type="text" hidden="hidden" value="${staffInfo.phoneNumber}">
+                            </label>
+                            <label>
+                                <input name="department" type="number" hidden="hidden" value="${staffInfo.department}">
+                            </label>
+                            <label>
+                                <input name="email" type="text" hidden="hidden" value="${staffInfo.email}">
+                            </label>
                         </div>
                         <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
                     </form>
@@ -80,9 +86,7 @@
             </div>
             <div class="feature col">
                 <div class="feature-icon bg-primary bg-gradient">
-                    <svg class="bi" width="1em" height="1em">
-                        <use xlink:href="#toggles2"/>
-                    </svg>
+                    <svg class="bi" width="1em" height="1em"></svg>
                 </div>
                 <h2>Staff phone</h2>
                 <p>${staffInfo.phoneNumber} </p>
@@ -92,10 +96,12 @@
                             <input name="phoneNumber" type="text" class="form-control" id="floatingInput2"
                                    placeholder="new phoneNumber">
                             <label for="floatingInput2">new phoneNumber</label>
-                            <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
-                            <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
-                            <input name="department" type="number" hidden="hidden" value="${staffInfo.department}">
-                            <input name="email" type="text" hidden="hidden" value="${staffInfo.email}">
+                            <label>
+                                <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
+                                <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
+                                <input name="department" type="number" hidden="hidden" value="${staffInfo.department}">
+                                <input name="email" type="text" hidden="hidden" value="${staffInfo.email}">
+                            </label>
                         </div>
                         <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
                     </form>
@@ -111,9 +117,7 @@
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em">
-                        <use xlink:href="#toggles2"/>
-                    </svg>
+                    <svg class="bi" width="1em" height="1em"></svg>
                 </div>
                 <div>
                     <h2>Staff Email</h2>
@@ -121,12 +125,17 @@
                     <c:if test="${sessionScope.staff != null}">
                         <form action="<c:url value="/Staff/editStaff"/>" method="post">
                             <div class="form-floating">
-                                <input name="email" type="text" class="form-control" id="floatingInput3" placeholder="name@example.com">
+                                <input name="email" type="text" class="form-control" id="floatingInput3"
+                                       placeholder="name@example.com">
                                 <label for="floatingInput3">new email</label>
-                                <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
-                                <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
-                                <input name="phoneNumber" type="text" hidden="hidden" value="${staffInfo.phoneNumber}">
-                                <input name="department" type="number" hidden="hidden" value="${staffInfo.department}">
+                                <label>
+                                    <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
+                                    <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
+                                    <input name="phoneNumber" type="text" hidden="hidden"
+                                           value="${staffInfo.phoneNumber}">
+                                    <input name="department" type="number" hidden="hidden"
+                                           value="${staffInfo.department}">
+                                </label>
                             </div>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
                         </form>
@@ -135,9 +144,7 @@
             </div>
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em">
-                        <use xlink:href="#cpu-fill"/>
-                    </svg>
+                    <svg class="bi" width="1em" height="1em"></svg>
                 </div>
                 <div>
                     <h2>Staff Department</h2>
@@ -148,11 +155,13 @@
                                 <input name="department" type="number" id="floatingInput4" class="form-control"
                                        placeholder="new department">
                                 <label for="floatingInput4">new department</label>
-                                <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
-                                <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
-                                <input name="phoneNumber" type="text" hidden="hidden"
-                                       value="${staffInfo.phoneNumber}">
-                                <input name="email" type="text" hidden="hidden" value="${staffInfo.email}">
+                                <label>
+                                    <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
+                                    <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
+                                    <input name="phoneNumber" type="text" hidden="hidden"
+                                           value="${staffInfo.phoneNumber}">
+                                    <input name="email" type="text" hidden="hidden" value="${staffInfo.email}">
+                                </label>
                             </div>
                             <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
                         </form>
@@ -161,9 +170,7 @@
             </div>
             <div class="col d-flex align-items-start">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <svg class="bi" width="1em" height="1em">
-                        <use xlink:href="#tools"/>
-                    </svg>
+                    <svg class="bi" width="1em" height="1em"></svg>
                 </div>
                 <div>
                     <h2>Unable to reach</h2>
@@ -175,10 +182,7 @@
             </div>
         </div>
     </div>
-
     <div class="b-example-divider"></div>
 </main>
-
-
 </body>
 </html>

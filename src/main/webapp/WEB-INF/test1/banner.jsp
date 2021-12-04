@@ -51,7 +51,7 @@
         </a>
         <ul class="nav nav-pills">
             <c:if test="${sessionScope.staff !=null}">
-                <li class="nav-item"><a href="<c:url value="/Staff/ShowInfo"/> " class="nav-link active" aria-current="page">PersonalInfo</a></li>
+                <li class="nav-item"><a href="<c:url value="/Staff/ShowInfo"/> " class="nav-link" aria-current="page">PersonalInfo</a></li>
             </c:if>
             <c:if test="${sessionScope.staff != null}">
                 <li class="nav-item"><a href="<c:url value="/Staff/showSalary"/>" class="nav-link">MySalary</a></li>
@@ -61,6 +61,9 @@
             </c:if>
             <c:if test="${sessionScope.administrator != null}">
                 <li class="nav-item"><a href="#" class="nav-link">Department</a></li>
+            </c:if>
+            <c:if test="${sessionScope.staff != null || sessionScope.administrator != null}">
+                <li class="nav-item"><a href="<c:url value="/logout"/> " class="nav-link active">Sign out</a></li>
             </c:if>
         </ul>
     </header>

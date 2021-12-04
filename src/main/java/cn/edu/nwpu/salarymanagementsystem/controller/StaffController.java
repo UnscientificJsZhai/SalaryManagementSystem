@@ -28,17 +28,7 @@ public class StaffController {
     private StaffService staffService;
 
 
-    /**
-     * 员工注销
-     *
-     * @return Login
-     */
-    @RequestMapping(value = "/logout", method = GET)
-    public String logout(HttpSession session) {
-        session.removeAttribute("staff");
-        session.invalidate();
-        return "../Login";
-    }
+
 
     /**
      * 获取用户信息
