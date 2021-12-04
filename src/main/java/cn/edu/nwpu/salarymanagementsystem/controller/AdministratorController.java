@@ -313,7 +313,7 @@ public class AdministratorController {
     @RequestMapping(value = "/addSalary", method = GET)
     public String showSetSalaryForm(Model model, long id) {
         model.addAttribute("staffInfo", administratorService.getStaffById(id));
-        return "/test1/add-salary";
+        return "/add-salary";
     }
 
     /**
@@ -334,9 +334,8 @@ public class AdministratorController {
      * @return EditSalary页面
      */
     @RequestMapping(value = "/editSalary", method = GET)
-    public String showEditSalaryForm(Model model, Long staff) {
-        model.addAttribute("salaryList", administratorService.getSalaryListByStaff(staff));
-        model.addAttribute("staffInfo", administratorService.getStaffById(staff));
+    public String showEditSalaryForm(Model model, long id,int month) {
+        
         return "/Admin/EditSalary";
     }
 

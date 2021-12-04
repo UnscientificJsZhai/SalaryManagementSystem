@@ -198,6 +198,8 @@
 
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="pb-2 border-bottom">Custom cards</h2>
+        <br/>
+        <a href="/Admin/addSalary">addSalary</a>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <dateTag:showDate salaryList="${salaryList}" staff="${sessionScope.staff}"

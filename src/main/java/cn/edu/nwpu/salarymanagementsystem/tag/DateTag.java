@@ -67,18 +67,16 @@ public class DateTag extends SimpleTagSupport {
                         "</tr>");
             }
         }
-        else{
+        if (administrator!=null){
             for (int i = 0; i < monthList.length; i++) {
                 outPrint.append("<tr>\n" +
                         "<td>" + year+"-"+ monthList[i] +"</td>\n" +
-                        "<td>" + "<input name=\"postWage\" type=\"text\" value=\"" + salaryList.get(i).getPostWage() +"\" ></td>\n" +
-                        "<td>" + "<input name=\"postWage\" type=\"text\" value=\""+ salaryList.get(i).getMeritPay() +"\" ></td>\n" +
-                        "<td>" + "<input name=\"postWage\" type=\"text\" value=\""+ salaryList.get(i).getSeniorityPay() +"\" ></td>\n" +
-                        "<td>" + "<input name=\"postWage\" type=\"text\" value=\""+salaryList.get(i).getSubsidy() +"\" ></td>\n" +
-                        "<td>" + "<input name=\"postWage\" type=\"text\" value=\""+salaryList.get(i).isPaid() +"\" ></td>\n");
-                if(administrator != null){
-                    outPrint.append("<td><input type=\"submit\" value=\"修改\"></td>\n");
-                }
+                        "<td>" + salaryList.get(i).getPostWage() +"</td>\n" +
+                        "<td>" + salaryList.get(i).getMeritPay() +"</td>\n" +
+                        "<td>" + salaryList.get(i).getSeniorityPay() +"</td>\n" +
+                        "<td>" + salaryList.get(i).getSubsidy() +"</td>\n" +
+                        "<td>" + salaryList.get(i).isPaid() +"</td>\n");
+                    outPrint.append("<a href=\"/Admin/editSalary\">edit</a>");
                 outPrint.append("</tr>");
             }
         }
