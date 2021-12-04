@@ -29,6 +29,7 @@
     id:${staffId}
 </h3>
 <table>
+    <input type="submit" value="修改">
     <tr>
         <th>岗位工资</th>
         <th>绩效工资</th>
