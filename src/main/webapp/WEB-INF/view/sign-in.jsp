@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: mikasa
@@ -45,7 +46,7 @@
 
 <main class="form-signin">
     <jsp:include page="banner.jsp"/>
-    <form action="/login" method="post">
+    <form action="<c:url value="/login"/> " method="post">
         <img class="mb-4" src="${pageContext.request.contextPath}/resources/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
@@ -67,5 +68,6 @@
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
     </form>
 </main>
+
 </body>
 </html>

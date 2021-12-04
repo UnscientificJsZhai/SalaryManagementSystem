@@ -10,13 +10,12 @@
     <uri>http://mycompany.com</uri>
 
     <!-- Invoke 'Generate' action to add tags or functions -->
-
     <tag>
-        <name>showDepartment</name>
-        <tag-class>cn.edu.nwpu.salarymanagementsystem.tag.DepartmentTag</tag-class>
-        <body-content>empty</body-content>
+        <name>showStaff</name>
+        <tag-class>cn.edu.nwpu.salarymanagementsystem.tag.ShowStaffTag</tag-class>
+        <body-content>scriptless</body-content>
         <attribute>
-            <name>treeNodes</name>
+            <name>staffPairList</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>

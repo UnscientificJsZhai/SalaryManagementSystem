@@ -39,6 +39,7 @@
     <c:choose>
        <c:when test="#{sessionScope.administrator == null && sessionScope.staff == null}"><a herf="#">重新登录</a></c:when>
     </c:choose>
+	<a href="/Admin/editSalary">edit</a>
 
 <!-- <script> 
 //取出传回来的参数并判断

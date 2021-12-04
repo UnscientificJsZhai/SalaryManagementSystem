@@ -8,6 +8,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.utils.TaxUtil;
+import kotlin.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,6 @@ public class StaffService {
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
         informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-
         staffMapper.alterProfile(informationMap);
     }
 
@@ -103,7 +103,7 @@ public class StaffService {
      * @param id 用户名。
      * @return 工资信息。
      */
-    public List<? extends Salary> getSalaryList(long id) {
+    public List<MutableSalary> getSalaryList(long id) {
         return salaryMapper.queryById(id);
     }
 
@@ -121,24 +121,5 @@ public class StaffService {
         } else {
             return department.getName();
         }
-    }
-
-    /**
-     * 计算个税。
-     *
-     * @param staff 要计算个税的用户。
-     * @param year  时间范围（年）。1代表2000年，2代表2001年，以此类推。
-     */
-    public double calculateTax(long staff, int year) {
-        final List<MutableSalary> salaryList = new ArrayList<>();
-
-        for (int month = 1; month <= 12; month++) {
-            MutableSalary salary = salaryMapper.queryByMonth(staff, (year - 1) * 12 + month);
-            if (salary != null) {
-                salaryList.add(salary);
-            }
-        }
-
-        return TaxUtil.calculateTax(salaryList);
     }
 }

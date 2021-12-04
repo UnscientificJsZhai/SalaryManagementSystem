@@ -11,76 +11,86 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 /**
- * @ClassName SalarySystem
- * @Description 网上薪酬系统的登陆控制器
+ * 网上薪酬系统的登陆控制器。
+ *
  * @Author xuLyi
- * @Version 1.0
  */
-
-
 @Controller
 public class SalarySystem {
 
-    @Autowired
     private AdministratorService administratorService;
-
-    @Autowired
     private StaffService staffService;
 
+    @Autowired
+    public void setAdministratorService(AdministratorService administratorService) {
+        this.administratorService = administratorService;
+    }
+
+    @Autowired
+    public void setStaffService(StaffService staffService) {
+        this.staffService = staffService;
+    }
 
     /**
      * 登录请求
      *
-     * @param id       用户ID
-     * @param password
-     * @param session
+     * @param id       用户ID。
+     * @param password 密码。
+     * @param session  session。
      */
     @RequestMapping("/login")
     public String processLogin(@RequestParam(value = "id", defaultValue = "") Long id,
                                @RequestParam(value = "password", defaultValue = "") String password,
-                               @RequestParam(value = "remember",defaultValue = "") String remember, HttpSession session, HttpServletResponse res) {
+                               @RequestParam(value = "remember", defaultValue = "") String remember, HttpSession session, HttpServletResponse res) {
         //TODO 无法实现自由选择是否保存，先写成全部保留的方式
         if (administratorService.login(id, password)) {
-            session.setAttribute("administrator", id);
-            if ("remember-me".equals(remember)){
-                Cookie cookie1 = new Cookie("name", id.toString());
-                cookie1.setMaxAge(24 * 60 * 60);
-                res.addCookie(cookie1);
-                Cookie cookie2 = new Cookie("password", password);
-                cookie1.setMaxAge(24 * 60 * 60);
-                res.addCookie(cookie2);
-                res.addCookie(cookie2);
-            }
-            return "redirect:/Admin/AdminView";
+            session.setAttribute("administrator", administratorService.getAdministratorInfo(id, password));
+            setCookie(id, password, remember, res);
+            return "redirect:/Admin/showStaff";
         } else if (staffService.login(id, password)) {
-            session.setAttribute("staff", id);
-            if ("remember-me".equals(remember)){
-                Cookie cookie1 = new Cookie("name", id.toString());
-                cookie1.setMaxAge(24 * 60 * 60);
-                res.addCookie(cookie1);
-                Cookie cookie2 = new Cookie("password", password);
-                cookie1.setMaxAge(24 * 60 * 60);
-                res.addCookie(cookie2);
-                res.addCookie(cookie2);
-            }
-            return "redirect:/Staff/ShowInfo";
+            session.setAttribute("staff", staffService.getPersonalInformation(id));
+            setCookie(id, password, remember, res);
+            return "redirect:/Staff/ShowInfo?id=" + id;
         } else {
-            return "/test1/sign-in";
+            return "/sign-in";
         }
     }
 
+    /**
+     * 登录成功后为Cookie传值。
+     *
+     * @param id       用户的id。
+     * @param password 密码。
+     * @param remember 是否记住。
+     * @param res      Http响应。
+     */
+    private void setCookie(Long id, String password, String remember, HttpServletResponse res) {
+        if ("remember-me".equals(remember)) {
+            Cookie cookie1 = new Cookie("name", id.toString());
+            cookie1.setMaxAge(24 * 60 * 60);
+            res.addCookie(cookie1);
+            Cookie cookie2 = new Cookie("password", password);
+            cookie1.setMaxAge(24 * 60 * 60);
+            res.addCookie(cookie2);
+            res.addCookie(cookie2);
+        }
+    }
 
+    /**
+     * 登出。
+     *
+     * @param session session。
+     * @return 回到登录页面。
+     */
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
-        if (session.getAttribute("administrator") != null){
+    public String logout(HttpSession session) {
+        if (session.getAttribute("administrator") != null) {
             session.removeAttribute("administrator");
         }
-        if (session.getAttribute("staff") != null){
+        if (session.getAttribute("staff") != null) {
             session.removeAttribute("staff");
         }
-        return "/test1/sign-in";
+        return "sign-in";
     }
 }

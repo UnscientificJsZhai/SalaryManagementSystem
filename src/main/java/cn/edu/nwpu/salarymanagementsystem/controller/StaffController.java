@@ -1,8 +1,12 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
+import cn.edu.nwpu.salarymanagementsystem.utils.StringUtil;
+import cn.edu.nwpu.salarymanagementsystem.utils.TaxUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,125 +15,98 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
- * @ClassName StaffController {@link StaffService}
- * @Description 员工控制器
+ * 员工操作的控制器。
+ *
  * @Author xuLyi
- * @Version 1.0
+ * @see StaffService
  */
 @Controller
 @RequestMapping("/Staff")
 public class StaffController {
 
-    @Autowired
     private StaffService staffService;
 
-
-
+    @Autowired
+    public void setStaffService(StaffService staffService) {
+        this.staffService = staffService;
+    }
 
     /**
-     * 获取用户信息
+     * 获取用户信息。
      *
-     * @param model model
-     * @param session session
-     * @return ShowInfo页面
+     * @param model model。
+     * @return 信息展示页面。
      */
     @RequestMapping("/ShowInfo")
-    public String getPersonalInformation(Model model, HttpSession session) {
-        Long Id = (Long) session.getAttribute("staff");
-        model.addAttribute("staffInfo",staffService.getPersonalInformation(Id));
-        //model.addAttribute(staffService.getPersonalInformation(Id));
-        return "/test1/personal-info";
+    public String getPersonalInformation(Model model, long id) {
+        model.addAttribute("staffInfo", staffService.getPersonalInformation(id));
+        model.addAttribute("salaryList", staffService.getSalaryList(id));
+        model.addAttribute("taxInfo", TaxUtil.totalTax(staffService.getSalaryList(id)));
+        return "personal-info";
     }
 
     /**
-     * 进入员工信息修改页面
+     * 更新用户个人信息。
      *
-     * @return StaffEdit页面
+     * @param id          要更新个人信息的用户id。
+     * @param name        用户姓名。
+     * @param phoneNumber 手机号。
+     * @param email       电子邮箱。
+     * @param department  部门信息。
+     * @param session     session。
+     * @return 返回到当前用户。
      */
-    @RequestMapping(value = "/editStaffForm", method = GET)
-    public String showStaffForm(HttpSession session, Model model){
-        Long Id = (Long) session.getAttribute("staff");
-        model.addAttribute("staffInfo",staffService.getPersonalInformation(Id));
-        return "/Staff/StaffEdit";
-    }
-    /**
-     * 更新用户个人信息
-     *
-     * @return 返回ShowInfo页面
-     */
-//    @RequestMapping(value = "/editStaff", method = POST)
-//    public String updatePersonalInformation(Staff staff) {
-//        staffService.updatePersonalInformation(staff);
-//        return "redirect:/Staff/ShowInfo";
-//    }
     @RequestMapping(value = "/editStaff", method = POST)
-    public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "")long id,
-                                            @RequestParam(value = "name", defaultValue = "")String name,
-                                            @RequestParam(value = "phoneNumber", defaultValue = "")String phoneNumber,
-                                            @RequestParam(value = "email", defaultValue = "")String email,
-                                            @RequestParam(value = "department", defaultValue = "")Long department) {
+    public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "") long id,
+                                            @RequestParam(value = "name", defaultValue = "") String name,
+                                            @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
+                                            @RequestParam(value = "email", defaultValue = "") String email,
+                                            @RequestParam(value = "department", defaultValue = "") Long department,
+                                            HttpSession session) {
         if (name == null) {
             name = "";
         }
-        if(phoneNumber == null) {
+        if (phoneNumber == null) {
             phoneNumber = "";
         }
-        if(email == null) {
+        if (email == null) {
             email = "";
         }
-        Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
-        staffService.updatePersonalInformation(staff);
-        return "redirect:/Staff/ShowInfo";
+        if (StringUtil.isEmail(email) && StringUtil.isPhone(phoneNumber)){
+            Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
+            session.setAttribute("staff", staff);
+            staffService.updatePersonalInformation(staff);
+            //noinspection SpringMVCViewInspection
+            return "redirect:/Staff/ShowInfo?id="+ id;
+        } else {
+            System.out.println("Error input");
+            return "personal-info";
+        }
     }
 
     /**
-     * 更新密码
+     * 更新密码。
      *
-     * @param password1 第一次输入的密码
-     * @param password2 第二次输入的密码
-     * @param session session
+     * @param password1 第一次输入的密码。
+     * @param password2 第二次输入的密码。
+     * @param session   session。
      */
     @RequestMapping("/changePassword")
     public String updatePassword(String password1, String password2, HttpSession session, Model model) {
         if (password1.equals(password2)) {
-            Long staff = (Long) session.getAttribute("staff");
-            staffService.updatePassword(staff, password1);
+            Staff staff = (Staff) session.getAttribute("staff");
+            staffService.updatePassword(staff.getId(), password1);
+            //noinspection SpringMVCViewInspection
+            return "redirect:/Staff/ShowInfo?id=" + staff.getId();
         } else {
             String error = "Change Failed";
-            model.addAttribute("ERROR",error);
-            return "/Staff/StaffEdit";
+            model.addAttribute("ERROR", error);
+            return "redirect:/Staff/editStaff";
         }
-        return "redirect:/Staff/ShowInfo";
     }
-
-    /**
-     * 查询所有工资信息。
-     *
-     * @return ShowSalary页面。
-     */
-    @RequestMapping("/showSalary")
-    public String getSalaryList(Model model, HttpSession session) {
-        long id = (long) session.getAttribute("staff");
-        model.addAttribute("staffName",staffService.getPersonalInformation(id).getName());
-        model.addAttribute("staffId",staffService.getPersonalInformation(id).getId());
-        model.addAttribute("salaryList",staffService.getSalaryList(id));
-        return "/test1/my-salary";
-    }
-
-    /**
-     * 计算所得税
-     *
-     * @return 某年的个人所得税
-     */
-    @RequestMapping("/tax")
-    public String calculateTax(Model model, int year, HttpSession session) {
-        long id = (long) session.getAttribute("staff");
-        model.addAttribute("tax",staffService.calculateTax(id,year));
-        return "/Staff/ShowInfo";
-    }
-
 }

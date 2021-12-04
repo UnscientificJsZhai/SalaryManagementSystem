@@ -108,5 +108,4 @@ public interface DepartmentMapper {
      * @return 满足条件的部门信息的列表。 若没有满足的列表的size为0
      */
     List<MutableDepartment> queryByLevel(int level);
-
 }

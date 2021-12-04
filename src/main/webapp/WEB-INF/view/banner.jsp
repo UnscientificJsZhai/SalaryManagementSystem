@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -47,20 +47,14 @@
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"></svg>
-            <span class="fs-4">Simple header</span>
+            <span class="fs-4">Welcome ${sessionScope.staff.name} ${sessionScope.administrator.name}</span>
         </a>
         <ul class="nav nav-pills">
-            <c:if test="${sessionScope.staff !=null}">
-                <li class="nav-item"><a href="<c:url value="/Staff/ShowInfo"/> " class="nav-link" aria-current="page">PersonalInfo</a></li>
-            </c:if>
-            <c:if test="${sessionScope.staff != null}">
-                <li class="nav-item"><a href="<c:url value="/Staff/showSalary"/>" class="nav-link">MySalary</a></li>
+            <c:if test="${sessionScope.administrator != null}">
+                <li class="nav-item"><a href="<c:url value="/Admin/showStaff"/>" class="nav-link">Staff</a></li>
             </c:if>
             <c:if test="${sessionScope.administrator != null}">
-                <li class="nav-item"><a href="#" class="nav-link">Staff</a></li>
-            </c:if>
-            <c:if test="${sessionScope.administrator != null}">
-                <li class="nav-item"><a href="#" class="nav-link">Department</a></li>
+                <li class="nav-item"><a href="<c:url value="/Admin/showDepartment"/> " class="nav-link">Department</a></li>
             </c:if>
             <c:if test="${sessionScope.staff != null || sessionScope.administrator != null}">
                 <li class="nav-item"><a href="<c:url value="/logout"/> " class="nav-link active">Sign out</a></li>
@@ -68,5 +62,6 @@
         </ul>
     </header>
 </div>
+
 </body>
 </html>

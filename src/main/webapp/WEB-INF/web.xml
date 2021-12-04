@@ -23,7 +23,20 @@
 
     <display-name>xinSystem</display-name>
     <welcome-file-list>
-        <welcome-file>/WEB-INF/test1/sign-in.jsp</welcome-file>
+        <welcome-file>/WEB-INF/view/sign-in.jsp</welcome-file>
     </welcome-file-list>
-
+    <jsp-config>
+        <taglib>
+            <taglib-uri>dateTag</taglib-uri>
+            <taglib-location>/WEB-INF/lib/tld/dateTag.tld</taglib-location>
+        </taglib>
+        <taglib>
+            <taglib-uri>showStaffTag</taglib-uri>
+            <taglib-location>/WEB-INF/lib/tld/showStaffTag.tld</taglib-location>
+        </taglib>
+        <taglib>
+            <taglib-uri>departmentTag</taglib-uri>
+            <taglib-location>/WEB-INF/lib/tld/departmentTag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 </web-app>
