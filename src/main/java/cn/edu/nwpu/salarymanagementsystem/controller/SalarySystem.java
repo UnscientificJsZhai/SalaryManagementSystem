@@ -11,6 +11,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 /**
  * @ClassName SalarySystem
  * @Description 网上薪酬系统的登陆控制器
@@ -66,10 +68,19 @@ public class SalarySystem {
             }
             return "redirect:/Staff/ShowInfo";
         } else {
-            return "../Login";
+            return "/test1/sign-in";
         }
-
     }
 
 
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        if (session.getAttribute("administrator") != null){
+            session.removeAttribute("administrator");
+        }
+        if (session.getAttribute("staff") != null){
+            session.removeAttribute("staff");
+        }
+        return "/test1/sign-in";
+    }
 }
