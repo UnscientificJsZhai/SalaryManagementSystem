@@ -50,6 +50,7 @@
             <showStaffTag:showStaff staffPairList="${staffList}"/>
         </table>
     </div>
+    <a href="/Admin/deleteStaff"
 </div>
 </body>
 </html>

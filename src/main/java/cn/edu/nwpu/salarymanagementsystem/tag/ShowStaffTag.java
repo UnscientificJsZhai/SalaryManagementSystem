@@ -36,8 +36,8 @@ public class ShowStaffTag extends SimpleTagSupport {
                     "<td>" + staff.getName() + "</td>\n" +
                     "<td>" + staff.getDepartment() + "</td>\n" +
                     "<td>" + departmentName + "</td>\n" +
-                    "<td><a href=\"<c:url value=\"/Admin/searchStaff?sid=${staff.id}\"/>\">查看信息</a></td>" +
-                    "<td><a name=\"del\" href=\"#?sid=${staff.id}\">删除</a></td>" +
+                    "<td>" + "<a href=\"/Staff/ShowInfo"+ "?id="+staff.getId()+"\">details</a>"+"</td>\n" +
+                    "<td>" + "<a href=\"/Admin/deleteStaff"+ "?id="+staff.getId()+"\">delete</a>"+"</td>\n" +
                     "</tr>");
         }
 

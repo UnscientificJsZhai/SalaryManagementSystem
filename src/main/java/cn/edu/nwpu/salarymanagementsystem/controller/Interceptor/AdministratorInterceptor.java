@@ -18,11 +18,10 @@ public class AdministratorInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
         HttpSession session = request.getSession();
-        Long administrator = (Long) session.getAttribute("administrator");
         //如果session中没有管理员信息，或者信息不对，则跳转到登录界面
-        if (administrator == null) {
+        if (session.getAttribute("administrator") == null) {
             request.setAttribute("message", "You don't have permission.");
-            request.getRequestDispatcher("/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/test1/sign-in.jsp").forward(request, response);
             return false;
         }
         return true;

@@ -34,21 +34,21 @@
         <property name="suffix" value=".jsp" />
     </bean>
     <!-- 拦截器 -->
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            &lt;!&ndash; 配置拦截器作用的路径 &ndash;&gt;-->
-<!--            <mvc:mapping path="/Admin/**" />-->
-<!--            &lt;!&ndash; 配置不需要拦截作用的路径 &ndash;&gt;-->
-<!--            <mvc:exclude-mapping path="/login" />-->
-<!--            &lt;!&ndash; 定义<mvc:interceptor>元素中，表示匹配指定路径的请求才进行拦截 &ndash;&gt;-->
-<!--            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.Interceptor.AdministratorInterceptor" />-->
-<!--        </mvc:interceptor>-->
-<!--        <mvc:interceptor>-->
-<!--            &lt;!&ndash; 配置拦截器作用的路径 &ndash;&gt;-->
-<!--            <mvc:mapping path="/Staff/**" />-->
-<!--            <mvc:exclude-mapping path="/login" />-->
-<!--            &lt;!&ndash; 定义在<mvc:interceptor>元素中，表示匹配指定路径的请求才进行拦截 &ndash;&gt;-->
-<!--            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.Interceptor.StaffInterceptor" />-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 配置拦截器作用的路径 -->
+            <mvc:mapping path="/Admin/**" />
+            <!-- 配置不需要拦截作用的路径 -->
+<!--            <mvc:exclude-mapping path="/" />-->
+            <!-- 定义<mvc:interceptor>元素中，表示匹配指定路径的请求才进行拦截 -->
+            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.Interceptor.AdministratorInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- 配置拦截器作用的路径 -->
+            <mvc:mapping path="/Staff/**" />
+<!--            <mvc:exclude-mapping path="/" />-->
+            <!-- 定义在<mvc:interceptor>元素中，表示匹配指定路径的请求才进行拦截 -->
+            <bean class="cn.edu.nwpu.salarymanagementsystem.controller.Interceptor.StaffInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
