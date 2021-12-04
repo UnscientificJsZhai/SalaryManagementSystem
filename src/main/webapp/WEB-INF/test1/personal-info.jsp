@@ -150,7 +150,7 @@
                         <form action="<c:url value="/Admin/editStaff"/>" method="post">
                             <div class="form-floating">
                                 <input name="department" type="number" id="floatingInput4" class="form-control"
-                                       placeholder="new department">
+                                       placeholder="new department" required>
                                 <label for="floatingInput4">new department</label>
                                 <label>
                                     <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +67,8 @@ public class AdministratorController {
                                             @RequestParam(value = "department", defaultValue = "") Long department) {
         try {
             administratorService.updateStaffDepartment(id, department);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            return "/wa";
         }
         //noinspection SpringMVCViewInspection
         return "redirect:/Admin/ShowInfo" + "?id=" + id;
@@ -168,8 +169,13 @@ public class AdministratorController {
      * 更改一个员工的部门。
      */
     @RequestMapping(value = "/changeStaffDepartment", method = POST)
-    public String changeDepartment(Long staff, Long department) throws SQLIntegrityConstraintViolationException {
-        administratorService.updateStaffDepartment(staff, department);
+    public String changeDepartment(Long staff, Long department, Model model) {
+        try {
+            administratorService.updateStaffDepartment(staff, department);
+        } catch (SQLException e) {
+            return "/wa";
+        }
+
         return "redirect:/Admin/showStaff";
     }
 
@@ -186,10 +192,10 @@ public class AdministratorController {
     }
 
     /**
-     * 获取所有部门信息
+     * 获取所有部门信息。
      *
-     * @param model model
-     * @return ShowDepartment页面
+     * @param model model。
+     * @return ShowDepartment页面。
      */
     @RequestMapping("/showDepartment")
     public String getDepartmentList(Model model) {
@@ -202,7 +208,7 @@ public class AdministratorController {
             e.printStackTrace();
             treeNodes = new ArrayList<>(0);
         }
-        model.addAttribute("treeNodes",treeNodes);
+        model.addAttribute("treeNodes", treeNodes);
         return "/allDepartment-info";
     }
 
