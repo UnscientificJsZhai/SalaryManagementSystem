@@ -33,18 +33,7 @@ public class AdministratorController {
     @Autowired
     private AdministratorService administratorService;
 
-    /**
-     * 管理员注销
-     *
-     * @param session session
-     * @return Login页面
-     */
-    @RequestMapping(value = "/logout", method = GET)
-    public String logout(HttpSession session) {
-        session.removeAttribute("administrator");
-        session.invalidate();
-        return "redirect:../Login";
-    }
+
 
     @RequestMapping("/AdminView")
     public String adminHome(){
