@@ -117,4 +117,23 @@ public abstract class Salary {
 
         return map;
     }
+
+    /**
+     * 总计。
+     *
+     * @return 计算该月工资总计。
+     */
+    public double total() {
+        return postWage + meritPay + seniorityPay + subsidy;
+    }
+
+    /**
+     * 判断薪水信息是否合法。<br/>
+     * 月份必须大于0。每部分工资必须大于等于0。
+     *
+     * @return 薪水信息的合法性。如果合法返回true，否则false。
+     */
+    public boolean isLegal() {
+        return month > 0 && postWage >= 0 && meritPay >= 0 && seniorityPay >= 0 && subsidy >= 0;
+    }
 }

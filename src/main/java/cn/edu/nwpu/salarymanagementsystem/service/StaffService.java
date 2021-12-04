@@ -4,13 +4,16 @@ import cn.edu.nwpu.salarymanagementsystem.dao.DepartmentMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.SalaryMapper;
 import cn.edu.nwpu.salarymanagementsystem.dao.StaffMapper;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
+import cn.edu.nwpu.salarymanagementsystem.utils.TaxUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,12 +72,14 @@ public class StaffService {
      * @param information 修改后的用户个人信息的数据类。
      */
     public void updatePersonalInformation(@NotNull Staff information) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        final HashMap<String, Object> informationMap = new HashMap<>();
+
+        informationMap.put(StaffMapper.ID, information.getId());
         informationMap.put(StaffMapper.EMAIL, information.getEmail());
         informationMap.put(StaffMapper.PHONE, information.getPhoneNumber());
         informationMap.put(StaffMapper.NAME, information.getName());
-        //TODO
-//        staffMapper.alterProfile(informationMap, information.getId());
+
+        staffMapper.alterProfile(informationMap);
     }
 
     /**
@@ -84,10 +89,12 @@ public class StaffService {
      * @param newPassword 新密码，要求已经经过验证确认两次输入的值相同。
      */
     public void updatePassword(long staffId, @NotNull String newPassword) {
-        final HashMap<String, String> informationMap = new HashMap<>();
+        final HashMap<String, Object> informationMap = new HashMap<>();
+
+        informationMap.put(StaffMapper.ID, staffId);
         informationMap.put(StaffMapper.PASSWORD, newPassword);
-        //TODO
-//        staffMapper.alterProfile(informationMap, staffId);
+
+        staffMapper.alterProfile(informationMap);
     }
 
     /**
@@ -114,5 +121,24 @@ public class StaffService {
         } else {
             return department.getName();
         }
+    }
+
+    /**
+     * 计算个税。
+     *
+     * @param staff 要计算个税的用户。
+     * @param year  时间范围（年）。1代表2000年，2代表2001年，以此类推。
+     */
+    public double calculateTax(long staff, int year) {
+        final List<MutableSalary> salaryList = new ArrayList<>();
+
+        for (int month = 1; month <= 12; month++) {
+            MutableSalary salary = salaryMapper.queryByMonth(staff, (year - 1) * 12 + month);
+            if (salary != null) {
+                salaryList.add(salary);
+            }
+        }
+
+        return TaxUtil.calculateTax(salaryList);
     }
 }

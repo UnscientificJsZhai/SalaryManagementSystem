@@ -128,10 +128,9 @@ public interface StaffMapper {
     /**
      * 修改个人信息。 <br/>
      * 可选：密码 真实姓名 电话（位数检验） 邮件（格式检验） <br/>
+     * 需要加上需要更改的员工的ID
      *
      * @param profile 要更改的信息，以键值对进行体现。
-     * @param staffId 需要传id来确认更改者是谁。
-     * @throws SQLSyntaxErrorException 如果map中没有一个满足的修改项目。
      */
-    void alterProfile(@Param("profile") Map<String, String> profile, @Param("staffId") long staffId) throws SQLSyntaxErrorException;
+    void alterProfile(@Param("profile") Map<String, Object> profile) ;
 }
