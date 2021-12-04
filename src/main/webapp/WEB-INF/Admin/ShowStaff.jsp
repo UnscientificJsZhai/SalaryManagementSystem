@@ -94,6 +94,7 @@ img {
 					<td><a href="<c:url value="/Admin/addSalary?sid=${staff.id}"/>">添加薪酬</a></td>
 					<td><a href="<c:url value="/Admin/editSalary?sid=${staff.id}"/>">修改薪酬</a></td>
 					<td><a href="<c:url value="/Admin/searchSalary?sid=${staff.id}"/>">查看薪酬</a></td>
+					<td><a href="<c:url value="/Admin/searchStaff?sid=${staff.id}"/>">修改薪酬</a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -102,7 +103,7 @@ img {
 	<div class="bottom">
 		<span>${sessionScope.pageIndex}/${sessionScope.totalPage}</span>
 		<c:choose>
-			<c:when test="${department.pid == null}">
+			<c:when test="${department.id == null}">
 				<a href="<c:url value="/Admin/searchStaff?pageIndex=1"/>">首页</a>
 				<%--        所有员工--%>
 				<c:if test="${sessionScope.pageIndex != 1}">

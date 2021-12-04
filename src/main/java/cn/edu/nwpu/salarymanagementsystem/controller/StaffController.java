@@ -40,7 +40,7 @@ public class StaffController {
     public String getPersonalInformation(Model model, long id) {
         model.addAttribute("staffInfo",staffService.getPersonalInformation(id));
         model.addAttribute("salaryList",staffService.getSalaryList(id));
-        return "/test1/personal-info";
+        return "personal-info";
     }
 
 

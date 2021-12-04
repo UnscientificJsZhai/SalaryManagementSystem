@@ -51,7 +51,7 @@
         </a>
         <ul class="nav nav-pills">
             <c:if test="${sessionScope.administrator != null}">
-                <li class="nav-item"><a href="#" class="nav-link">Staff</a></li>
+                <li class="nav-item"><a href="<c:url value="/Admin/showStaff"/>" class="nav-link">Staff</a></li>
             </c:if>
             <c:if test="${sessionScope.administrator != null}">
                 <li class="nav-item"><a href="#" class="nav-link">Department</a></li>

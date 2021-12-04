@@ -1,12 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: mikasa
   Date: 2021/12/4
-  Time: 11:05
+  Time: 14:53
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="dateTag" uri="dateTag" %>
+<%@taglib prefix="showStaffTag" uri="showStaffTag" %>
 <html>
 <head>
     <title>Title</title>
@@ -42,12 +43,14 @@
 </head>
 <body>
 <jsp:include page="banner.jsp"/>
-<h2>Section title</h2>
-<div class="table-responsive">
-    <table class="table table-striped table-sm">
-        <dateTag:showDate salaryList="${salaryList}" staff="${sessionScope.staff}" administrator="${sessionScope.administrator}"/>
-    </table>
+<div class="container px-4 py-5" id="custom-cards">
+    <h2>Section title</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <showStaffTag:showStaff staffPairList="${staffList}"/>
+        </table>
+    </div>
+    <a href="/Admin/deleteStaff"
 </div>
 </body>
 </html>
-

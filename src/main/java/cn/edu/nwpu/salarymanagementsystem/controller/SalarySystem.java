@@ -68,7 +68,7 @@ public class SalarySystem {
             }
             return "redirect:/Staff/ShowInfo?id="+id;
         } else {
-            return "/test1/sign-in";
+            return "/sign-in";
         }
     }
 
@@ -81,6 +81,6 @@ public class SalarySystem {
         if (session.getAttribute("staff") != null){
             session.removeAttribute("staff");
         }
-        return "/test1/sign-in";
+        return "sign-in";
     }
 }
