@@ -254,7 +254,7 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/addDepartment", method = GET)
     public String showDepartmentForm() {
-        return "/Admin/AddDepartment";
+        return "/add-department";
     }
 
     /**
@@ -266,7 +266,7 @@ public class AdministratorController {
     @RequestMapping(value = "/addDepartment", method = POST)
     public String addDepartment(MutableDepartment department) {
         administratorService.addDepartment(department);
-        return "redirect:/Admin/ShowDepartment";
+        return "redirect:/Admin/showDepartment";
     }
 
     /**

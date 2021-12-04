@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="departmentTag" uri="departmentTag" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -45,5 +46,6 @@
 <body>
 <jsp:include page="banner.jsp"/>
 <departmentTag:showDepartment treeNodes="${treeNodes}"/>
+<a href="<c:url value="/Admin/addDepartment"/>">add</a>
 </body>
 </html>

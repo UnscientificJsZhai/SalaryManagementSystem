@@ -53,7 +53,7 @@
         <div class="row g-5">
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">staff info</h4>
-                <form class="needs-validation" novalidate action="<c:url value="/Admin/addSalary"/> " method="post">
+                <form class="needs-validation" novalidate action="<c:url value="/Admin/addDepartment"/> " method="post">
                     <div class="row g-3">
 
                         <div class="col-12">
@@ -64,35 +64,31 @@
                                 Please enter your shipping address.
                             </div>
                         </div>
-
                         <div class="col-12">
                             <label> name
-                                <input name="name" type="text" class="form-control" placeholder="name" required>
+                                <input name="name" type="text" class="form-control" placeholder="name" required >
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
                         </div>
-
                         <div class="col-12">
-
                             <label> parentDepartment
-                                <input name="parentDepartment" type="text" class="form-control" placeholder="parentDepartment" required>
+                                <input name="parentDepartment" type="text" class="form-control" placeholder="parentDepartment">
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
                         </div>
-
                         <div class="col-12">
-
                             <label> level
-                                <input name="level" type="text" class="form-control" placeholder="level" required>
+                                <input name="level" type="text" class="form-control" placeholder="level" >
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
                             </div>
                         </div>
+
                     </div>
                     <br/>
                     <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
