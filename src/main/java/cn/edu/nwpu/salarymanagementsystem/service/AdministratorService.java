@@ -12,6 +12,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -204,6 +205,18 @@ public class AdministratorService {
      */
     public List<MutableSalary> getSalaryListByStaff(long staff) {
         return salaryMapper.queryById(staff);
+    }
+
+    /**
+     * 根据月份查询一个员工特定月的薪水信息。
+     *
+     * @param staff 要查询的员工的id。
+     * @param month 要查询的月份。月份定义同{@link Salary#getMonth()}。
+     * @return 查询到的薪水信息。如果给定的信息没有查询到薪水信息则返回null。
+     */
+    @Nullable
+    public MutableSalary getMutableSalary(long staff, int month) {
+        return salaryMapper.queryByMonth(staff, month);
     }
 
     /**
