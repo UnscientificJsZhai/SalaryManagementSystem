@@ -1,5 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.Date;
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -39,7 +44,9 @@ public class StaffController {
     @RequestMapping("/ShowInfo")
     public String getPersonalInformation(Model model, long id) {
         model.addAttribute("staffInfo", staffService.getPersonalInformation(id));
-        model.addAttribute("salaryList", staffService.getSalaryList(id));
+        List<MutableSalary> list = staffService.getSalaryList(id);
+
+        model.addAttribute("salaryList",list );
         return "personal-info";
     }
 

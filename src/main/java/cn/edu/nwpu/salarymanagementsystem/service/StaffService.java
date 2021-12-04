@@ -102,7 +102,7 @@ public class StaffService {
      * @param id 用户名。
      * @return 工资信息。
      */
-    public List<? extends Salary> getSalaryList(long id) {
+    public List<MutableSalary> getSalaryList(long id) {
         return salaryMapper.queryById(id);
     }
 

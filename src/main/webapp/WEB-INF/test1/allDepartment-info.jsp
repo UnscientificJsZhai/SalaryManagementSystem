@@ -47,5 +47,6 @@
 <jsp:include page="banner.jsp"/>
 <departmentTag:showDepartment treeNodes="${treeNodes}"/>
 <a href="<c:url value="/Admin/addDepartment"/>">add</a>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
