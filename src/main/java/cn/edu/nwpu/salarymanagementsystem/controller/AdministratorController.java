@@ -4,7 +4,6 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
@@ -14,13 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
-
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -43,7 +38,7 @@ public class AdministratorController {
     @RequestMapping("/AdminView")
     public String adminHome(){
 
-        return "/test1/staff-info";
+        return "allStaff-info";
     }
 
     /**
@@ -59,7 +54,7 @@ public class AdministratorController {
             staffPairList.add(new Pair<>(staff,administratorService.getDepartmentById(staff.getDepartment()).getName()));
         }
         model.addAttribute("staffList",staffPairList);
-        return "/test1/staff-info";
+        return "allStaff-info";
     }
 
     /**
