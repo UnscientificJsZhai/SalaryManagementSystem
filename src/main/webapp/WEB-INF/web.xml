@@ -23,7 +23,7 @@
 
     <display-name>xinSystem</display-name>
     <welcome-file-list>
-        <welcome-file>/WEB-INF/test1/sign-in.jsp</welcome-file>
+        <welcome-file>/WEB-INF/view/sign-in.jsp</welcome-file>
     </welcome-file-list>
     <jsp-config>
         <taglib>

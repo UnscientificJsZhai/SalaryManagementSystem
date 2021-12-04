@@ -1,5 +1,6 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -40,6 +43,7 @@ public class StaffController {
     public String getPersonalInformation(Model model, long id) {
         model.addAttribute("staffInfo", staffService.getPersonalInformation(id));
         model.addAttribute("salaryList", staffService.getSalaryList(id));
+        model.addAttribute("taxInfo", staffService.calculateTax(staffService.getSalaryList(id)));
         return "personal-info";
     }
 
@@ -96,18 +100,5 @@ public class StaffController {
             model.addAttribute("ERROR", error);
             return "redirect:/Staff/editStaff";
         }
-    }
-
-
-    /**
-     * 计算所得税。
-     *
-     * @return 某年的个人所得税的页面。
-     */
-    @RequestMapping("/tax")
-    public String calculateTax(Model model, int year, HttpSession session) {
-        long id = (long) session.getAttribute("staff");
-        model.addAttribute("tax", staffService.calculateTax(id, year));
-        return "/Staff/ShowInfo"; //TODO 计算个人所得税的页面
     }
 }

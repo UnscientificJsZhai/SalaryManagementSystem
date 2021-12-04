@@ -64,10 +64,13 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/editStaff", method = POST)
     public String updatePersonalInformation(@RequestParam(value = "id", defaultValue = "") long id,
-                                            @RequestParam(value = "department", defaultValue = "") Long department) {
+                                            @RequestParam(value = "department", defaultValue = "") Long department,
+                                            Model model) {
         try {
             administratorService.updateStaffDepartment(id, department);
         } catch (Exception e) {
+            String result = "无效的部门id";
+            model.addAttribute("result",result);
             return "/wa";
         }
         //noinspection SpringMVCViewInspection
@@ -111,26 +114,6 @@ public class AdministratorController {
     }
 
     /**
-     * 通过ID查找员工。
-     *
-     * @param id 待查找的员工id。
-     * @return ShowStaff页面。
-     */
-    @RequestMapping("/searchStaff")
-    public String searchStaff(long id, Model model) {
-        model.addAttribute("staffResult", administratorService.getStaffById(id));
-        return "/Admin/showStaff";
-        //TODO 未使用且未测试
-    }
-
-    @RequestMapping("/showStaffResult")
-    public String showStaffResult(Model model) {
-        model.getAttribute("staffResult");
-        return "/Admin/showStaff";
-        //TODO 未使用且未测试
-    }
-
-    /**
      * 进入添加员工页面。
      *
      * @return addStaff页面。
@@ -162,20 +145,6 @@ public class AdministratorController {
         } catch (DuplicatedUserException e) {
             e.printStackTrace();
         }
-        return "redirect:/Admin/showStaff";
-    }
-
-    /**
-     * 更改一个员工的部门。
-     */
-    @RequestMapping(value = "/changeStaffDepartment", method = POST)
-    public String changeDepartment(Long staff, Long department, Model model) {
-        try {
-            administratorService.updateStaffDepartment(staff, department);
-        } catch (SQLException e) {
-            return "/wa";
-        }
-
         return "redirect:/Admin/showStaff";
     }
 
@@ -212,46 +181,17 @@ public class AdministratorController {
         return "/allDepartment-info";
     }
 
-    /**
-     * 获取部门信息的层级关系。
-     *
-     * @return 一个列表，列表中是所有最上级部门。
-     */
-    @RequestMapping
-    public String getDepartmentTree(Model model) {
-        try {
-            model.addAttribute("departmentTree", administratorService.getDepartmentTree());
-        } catch (DepartmentTreeException e) {
-            e.printStackTrace();
-        }
-        return "/Admin/ShowDepartment";
-        //TODO 暂时未实现
-    }
-
-    /**
-     * 通过id查找部门。
-     *
-     * @param id 待查找的部门id。
-     * @return ShowStaff页面。
-     */
-    @RequestMapping("/searchDepartment")
-    public String searchDepartment(long id, Model model) {
-        model.addAttribute("departmentResult", administratorService.getStaffById(id));
-        return "/Admin/showStaff";
-        //TODO 暂时未实现
-    }
-
-    /**
-     * 删除部门。
-     *
-     * @param department 要删除的部门。
-     * @return ShowDepartment页面。
-     */
-    @RequestMapping("/deleteDepartment")
-    public String deleteDepartments(Long department) {
-        administratorService.deleteDepartments(department);
-        return "redirect:/Admin/ShowDepartment";
-    }
+//    /**
+//     * 删除部门。
+//     *
+//     * @param department 要删除的部门。
+//     * @return ShowDepartment页面。
+//     */
+//    @RequestMapping("/deleteDepartment")
+//    public String deleteDepartments(Long department) {
+//        administratorService.deleteDepartments(department);
+//        return "redirect:/Admin/ShowDepartment";
+//    }
 
     /**
      * 进入添加部门页面。
@@ -334,13 +274,15 @@ public class AdministratorController {
                             @RequestParam(value = "subsidy", defaultValue = "") double subsidy,
                             @RequestParam(value = "paid", defaultValue = "") boolean paid,
                             long id,
-                            HttpSession session) {
+                            HttpSession session, Model model) {
         MutableSalary salary = new MutableSalary(month, postWage, meritPay, seniorityPay, subsidy, paid);
         if (administratorService.setSalary(id, salary)) {
             return "redirect:/Admin/showStaff";
         } else {
             session.removeAttribute("administrator");
-            return "/wow";//TODO 准备添加404页面
+            String result = "无效的薪水设置";
+            model.addAttribute("result", result);
+            return "wa";//TODO 准备添加404页面
         }
     }
 
