@@ -14,6 +14,7 @@ import kotlin.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -141,7 +142,7 @@ public class AdministratorController {
      * 添加员工
      * 添加员工
      *
-     * @param id    新的员工信息
+     * @param id       新的员工信息
      * @param password 初始密码
      * @return 返回管理员主页
      */
@@ -151,10 +152,10 @@ public class AdministratorController {
                            @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
                            @RequestParam(value = "email", defaultValue = "") String email,
                            @RequestParam(value = "department", defaultValue = "") Long department,
-                           @RequestParam(value = "password", defaultValue = "")String password) {
+                           @RequestParam(value = "password", defaultValue = "") String password) {
         try {
             if (administratorService.getStaffById(id) == null) {
-                MutableStaff staff = new MutableStaff(id,name,phoneNumber,email,department);
+                MutableStaff staff = new MutableStaff(id, name, phoneNumber, email, department);
                 administratorService.addStaff(staff, password);
             }
         } catch (DuplicatedUserException e) {
@@ -310,8 +311,8 @@ public class AdministratorController {
      *
      * @return EditSalary
      */
-    @RequestMapping(value = "/addSalary", method = GET)
-    public String showSetSalaryForm(Model model, long id) {
+    @RequestMapping(value = "/addSalary/{id}", method = GET)
+    public String showSetSalaryForm(Model model, @PathVariable long id) {
         model.addAttribute("staffInfo", administratorService.getStaffById(id));
         return "/add-salary";
     }
@@ -319,13 +320,25 @@ public class AdministratorController {
     /**
      * 为一名员工设置一个薪水信息。
      *
-     * @param salary 设置的薪水
+     * @param month 设置的薪水
      * @return ShowStaff
      */
     @RequestMapping(value = "/addSalary", method = POST)
-    public String setSalary(Salary salary, long id) {
-        administratorService.setSalary(id, salary);
-        return "redirect:/Admin/showStaff";
+    public String setSalary(@RequestParam(value = "month", defaultValue = "")int month,
+                            @RequestParam(value = "postWage", defaultValue = "")double postWage,
+                            @RequestParam(value = "meritPay", defaultValue = "")double meritPay,
+                            @RequestParam(value = "seniorityPay", defaultValue = "")double seniorityPay,
+                            @RequestParam(value = "subsidy", defaultValue = "")double subsidy,
+                            @RequestParam(value = "paid", defaultValue = "")boolean paid,
+                            long id,
+                            HttpSession session) {
+        MutableSalary salary = new MutableSalary(month, postWage, meritPay, seniorityPay, subsidy, paid);
+        if (administratorService.setSalary(id, salary)) {
+            return "redirect:/Admin/showStaff";
+        } else {
+            session.removeAttribute("administrator");
+            return "/wow";
+        }
     }
 
     /**
@@ -333,22 +346,31 @@ public class AdministratorController {
      *
      * @return EditSalary页面
      */
-    @RequestMapping(value = "/editSalary", method = GET)
-    public String showEditSalaryForm(Model model, long id,int month) {
-        
-        return "/Admin/EditSalary";
+    @RequestMapping(value = "/editSalary/{id}/{month}", method = GET)
+    public String showEditSalaryForm(Model model,
+                                     @PathVariable long id,
+                                     @PathVariable int month) {
+        Salary salary = administratorService.getMutableSalary(id, month);
+        model.addAttribute("id",id);
+        model.addAttribute("salary", salary);
+        return "alter-salary";
     }
 
     /**
      * 为一名员工更改一个薪水信息。
      *
-     * @param staff  目标员工
-     * @param salary 薪水信息
      * @return ShowStaff
      */
     @RequestMapping(value = "/editSalary", method = POST)
-    public String updateSalary(Long staff, Salary salary) {
-        administratorService.updateSalary(staff, salary);
+    public String updateSalary(long id,
+                               @RequestParam(value = "month", defaultValue = "")int month,
+                               @RequestParam(value = "postWage", defaultValue = "")double postWage,
+                               @RequestParam(value = "meritPay", defaultValue = "")double meritPay,
+                               @RequestParam(value = "seniorityPay", defaultValue = "")double seniorityPay,
+                               @RequestParam(value = "subsidy", defaultValue = "")double subsidy,
+                               @RequestParam(value = "paid", defaultValue = "")boolean paid) {
+        MutableSalary salary = new MutableSalary(month, postWage, meritPay, seniorityPay, subsidy, paid);
+        administratorService.updateSalary(id, salary);
         return "redirect:/Admin/showStaff";
     }
 }

@@ -109,7 +109,7 @@
                             </label>
                         </div>
                         <div class="col-12">
-                            <label> id
+                            <label>
                                 <input name="id" type="number" hidden="hidden" value="${staffInfo.id}" >
                             </label>
                         </div>

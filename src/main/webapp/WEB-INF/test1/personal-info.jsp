@@ -199,11 +199,17 @@
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="pb-2 border-bottom">Custom cards</h2>
         <br/>
-        <a href="/Admin/addSalary">addSalary</a>
+        <a href="/Admin/addSalary/${staffInfo.id}">addSalary</a>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
-                <dateTag:showDate salaryList="${salaryList}" staff="${sessionScope.staff}"
-                                  administrator="${sessionScope.administrator}"/>
+                <c:if test="${sessionScope.administrator != null}">
+                    <dateTag:showDate salaryList="${salaryList}" staff="${staffInfo}"
+                                      administrator="${sessionScope.administrator}"/>
+                </c:if>
+                <c:if test="${sessionScope.staff != null}">
+                    <dateTag:showDate salaryList="${salaryList}" staff="${sessionScope.staff}"
+                                      administrator="${null}"/>
+                </c:if>
             </table>
         </div>
     </div>

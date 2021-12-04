@@ -53,7 +53,7 @@
         <div class="row g-5">
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">staff info</h4>
-                <form class="needs-validation" novalidate action="<c:url value="/Admin/addSalary"/> " method="post">
+                <form class="needs-validation" novalidate action="<c:url value="/Admin/editSalary"/> " method="post">
                     <div class="row g-3">
 
                         <div class="col-12">
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-12">
                             <label> postWage
-                                <input name="postWage" type="text" class="form-control" placeholder="postWage" required>
+                                <input name="postWage" type="text" class="form-control" placeholder="postWage" required value="${salary.postWage}">
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -76,7 +76,7 @@
                         <div class="col-12">
 
                             <label> meritPay
-                                <input name="meritPay" type="text" class="form-control" placeholder="meritPay" required>
+                                <input name="meritPay" type="text" class="form-control" placeholder="meritPay" required value="${salary.meritPay}">
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -86,7 +86,7 @@
                         <div class="col-12">
 
                             <label> seniorityPay
-                                <input name="seniorityPay" type="text" class="form-control" placeholder="seniorityPay" required>
+                                <input name="seniorityPay" type="text" class="form-control" placeholder="seniorityPay" required value="${salary.seniorityPay}">
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -96,7 +96,7 @@
                         <div class="col-12">
 
                             <label> subsidy
-                                <input name="subsidy" type="text" class="form-control" placeholder="subsidy" required>
+                                <input name="subsidy" type="text" class="form-control" placeholder="subsidy" required value="${salary.subsidy}">
                             </label>
                             <div class="invalid-feedback">
                                 Please enter your shipping address.
@@ -105,12 +105,12 @@
 
                         <div class="col-12">
                             <label> paid
-                                <input name="paid" type="text" class="form-control" placeholder="paid" required>
+                                <input name="paid" type="text" class="form-control" placeholder="paid" required value="${salary.paid}">
                             </label>
                         </div>
                         <div class="col-12">
-                            <label> id
-                                <input name="id" type="number" hidden="hidden" value="${staffInfo.id}" >
+                            <label>
+                                <input name="id" type="number" hidden="hidden" value="${id}">
                             </label>
                         </div>
                     </div>
