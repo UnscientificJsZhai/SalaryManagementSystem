@@ -39,6 +39,7 @@ public class DepartmentTag extends SimpleTagSupport {
                 .append("<a href=\"/administrator/editDepartment?departmentId=${department.id}\">修改</a>");
         outPrint.append("<hr>");
         for (DepartmentTreeNode node : departmentTreeNode) {
+            outPrint.append("\t\t");
             outPrint.append(traverse(departmentTreeNode));
         }
 
