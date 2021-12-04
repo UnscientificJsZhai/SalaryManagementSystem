@@ -10,7 +10,7 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary
  * @receiver 薪水列表。
  * @return 计算出的个税数额。
  */
-private fun List<Salary>.calculateTax(): Double {
+fun List<Salary>.calculateTax(): Double {
     var total = 0.0
     for (salaryItem in this) {
         total += (salaryItem.total() - 5000).coerceAtLeast(0.0)
