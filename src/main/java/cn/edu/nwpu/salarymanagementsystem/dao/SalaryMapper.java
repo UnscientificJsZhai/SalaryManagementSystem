@@ -3,7 +3,6 @@ package cn.edu.nwpu.salarymanagementsystem.dao;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;

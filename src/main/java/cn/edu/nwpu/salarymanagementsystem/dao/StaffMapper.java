@@ -4,7 +4,6 @@ import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 import java.util.Map;
 
@@ -132,5 +131,5 @@ public interface StaffMapper {
      *
      * @param profile 要更改的信息，以键值对进行体现。
      */
-    void alterProfile(@Param("profile") Map<String, Object> profile) ;
+    void alterProfile(@Param("profile") Map<String, Object> profile);
 }
