@@ -78,6 +78,7 @@ img {
 				<td><a href="<c:url value="/Staff/editStaffForm?sid=${staffInfo.id}"/>">修改</a></td>
 			</tr>
 		</table>
+		<input name="postWage" type="text" value="" >
 	</form>
 </body>
 </html>
