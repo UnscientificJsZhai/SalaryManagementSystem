@@ -124,5 +124,6 @@
 
 <script src="${pageContext.request.contextPath}/resources/css/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/form-validation.js"></script>
+
 </body>
 </html>

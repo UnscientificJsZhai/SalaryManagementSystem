@@ -181,17 +181,46 @@ public class AdministratorController {
         return "/allDepartment-info";
     }
 
-//    /**
-//     * 删除部门。
-//     *
-//     * @param department 要删除的部门。
-//     * @return ShowDepartment页面。
-//     */
-//    @RequestMapping("/deleteDepartment")
-//    public String deleteDepartments(Long department) {
-//        administratorService.deleteDepartments(department);
-//        return "redirect:/Admin/ShowDepartment";
-//    }
+    /**
+     * 获取部门信息的层级关系。
+     *
+     * @return 一个列表，列表中是所有最上级部门。
+     */
+    @RequestMapping
+    public String getDepartmentTree(Model model) {
+        try {
+            model.addAttribute("departmentTree", administratorService.getDepartmentTree());
+        } catch (DepartmentTreeException e) {
+            e.printStackTrace();
+        }
+        return "/Admin/ShowDepartment";
+        //TODO 暂时未实现
+    }
+
+    /**
+     * 通过id查找部门。
+     *
+     * @param id 待查找的部门id。
+     * @return ShowStaff页面。
+     */
+    @RequestMapping("/searchDepartment")
+    public String searchDepartment(long id, Model model) {
+        model.addAttribute("departmentResult", administratorService.getStaffById(id));
+        return "/Admin/showStaff";
+        //TODO 暂时未实现
+    }
+
+    /**
+     * 删除部门。
+     *
+     * @param id 要删除的部门。
+     * @return ShowDepartment页面。
+     */
+    @RequestMapping("/deleteDepartment/{id}")
+    public String deleteDepartments(@PathVariable long id) {
+        administratorService.deleteDepartments(id);
+        return "redirect:/Admin/showDepartment";
+    }
 
     /**
      * 进入添加部门页面。

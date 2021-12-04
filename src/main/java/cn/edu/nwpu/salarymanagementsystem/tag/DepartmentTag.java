@@ -39,6 +39,9 @@ public class DepartmentTag extends SimpleTagSupport {
                 .append("<a href=\"/Admin/editDepartment/")
                 .append(department.getId())
                 .append("\">edit</a>")
+                .append("<a href=\"/Admin/deleteDepartment/")
+                .append(department.getId())
+                .append("\">delete</a>")
                 .append("<br/>");
         for (DepartmentTreeNode node : departmentTreeNode
         ) {

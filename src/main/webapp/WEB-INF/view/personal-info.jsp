@@ -214,6 +214,32 @@
         </div>
     </div>
     <div class="b-example-divider"></div>
+
+    <div class="container px-4 py-5" id="icon-grid">
+        <h2 class="pb-2 border-bottom">Icon grid</h2>
+        <div>
+            <div class="bd-example">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">year</th>
+                        <th scope="col">tax</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${taxInfo}" var="tax">
+                        <tr>
+                            <td>${taxInfo.first}</td>
+                            <td>${taxInfo.second}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 </main>
+
 </body>
 </html>

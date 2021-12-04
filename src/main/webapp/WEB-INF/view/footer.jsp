@@ -11,6 +11,11 @@
     <title>Title</title>
 </head>
 <body>
-
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">this is the end of the page</span>
+        <a href="#">click to reach top</a>
+    </div>
+</footer>
 </body>
 </html>
