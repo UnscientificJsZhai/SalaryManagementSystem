@@ -2,8 +2,6 @@ package cn.edu.nwpu.salarymanagementsystem.tag;
 
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.DepartmentTreeNode;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
-import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
-import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -24,7 +22,7 @@ public class DepartmentTag extends SimpleTagSupport {
         try {
             StringBuilder outPrint = new StringBuilder();
             for (DepartmentTreeNode treeNode : treeNodes) {
-                traverse(treeNode,outPrint);
+                traverse(treeNode, outPrint);
                 outPrint.append("<br/>");
             }
             out.println(outPrint.toString());
@@ -33,16 +31,18 @@ public class DepartmentTag extends SimpleTagSupport {
         }
     }
 
-    public void traverse(DepartmentTreeNode departmentTreeNode,StringBuilder str) {
+    public void traverse(DepartmentTreeNode departmentTreeNode, StringBuilder str) {
         MutableDepartment department = departmentTreeNode.getData();
         int level = department.getLevel();
-        str.append("--".repeat(Math.max(0, level-1)))
+        str.append("--".repeat(Math.max(0, level - 1)))
                 .append(department.getName())
-                .append("")
+                .append("<a href=\"/Admin/editDepartment/")
+                .append(department.getId())
+                .append("\">edit</a>")
                 .append("<br/>");
-        for (DepartmentTreeNode node:departmentTreeNode
-             ) {
-            traverse(node,str);
+        for (DepartmentTreeNode node : departmentTreeNode
+        ) {
+            traverse(node, str);
         }
     }
 

@@ -280,10 +280,10 @@ public class AdministratorController {
      *
      * @return EditDepartment页面。
      */
-    @RequestMapping(value = "/editDepartment", method = GET)
-    public String showEditDepartmentForm(Model model, Long department) {
-        model.addAttribute("departmentInfo", administratorService.getDepartmentById(department));
-        return "/Admin/EditDepartment";
+    @RequestMapping(value = "/editDepartment/{departmentId}", method = GET)
+    public String showEditDepartmentForm(Model model, @PathVariable long departmentId) {
+        model.addAttribute("departmentInfo", administratorService.getDepartmentById(departmentId));
+        return "/alter-department";
     }
 
     /**
@@ -294,8 +294,8 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/editDepartment", method = POST)
     public String updateDepartment(MutableDepartment department) {
-        administratorService.addDepartment(department);
-        return "redirect:/Admin/ShowDepartment";
+        administratorService.updateSingleDepartment(department.getId(),department.getName());
+        return "redirect:/Admin/showDepartment";
     }
 
     /**

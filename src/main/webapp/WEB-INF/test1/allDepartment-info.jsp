@@ -43,6 +43,7 @@
     <link href="${pageContext.request.contextPath}/resources/css/cheatsheet.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="banner.jsp"/>
 <departmentTag:showDepartment treeNodes="${treeNodes}"/>
 </body>
 </html>
