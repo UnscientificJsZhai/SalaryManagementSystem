@@ -40,12 +40,12 @@ public class SalarySystem {
 
         if (administratorService.login(Id, password)) {
             session.setAttribute("administrator", Id);
-            return "redirect:/Admin/ShowStaff";
+            return "redirect:/Admin/AdminView";
         } else if (staffService.login(Id, password)) {
             session.setAttribute("staff", Id);
-            return "redirect:/staff/ShowInfo";
+            return "redirect:/Staff/ShowInfo";
         } else {
-            return "/Login.jsp";
+            return "../Login";
         }
 
     }
