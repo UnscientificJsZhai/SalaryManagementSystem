@@ -39,27 +39,31 @@ public class SalarySystem {
     @RequestMapping("/login")
     public String processLogin(@RequestParam(value = "id", defaultValue = "") Long id,
                                @RequestParam(value = "password", defaultValue = "") String password,
-                               HttpSession session, HttpServletResponse res) {
+                               @RequestParam(value = "remember",defaultValue = "") String remember, HttpSession session, HttpServletResponse res) {
         //TODO 无法实现自由选择是否保存，先写成全部保留的方式
         if (administratorService.login(id, password)) {
             session.setAttribute("administrator", id);
-            Cookie cookie1 = new Cookie("name", id.toString());
-            cookie1.setMaxAge(24 * 60 * 60);
-            res.addCookie(cookie1);
-            Cookie cookie2 = new Cookie("password", password);
-            cookie1.setMaxAge(24 * 60 * 60);
-            res.addCookie(cookie2);
-            res.addCookie(cookie2);
+            if ("remember-me".equals(remember)){
+                Cookie cookie1 = new Cookie("name", id.toString());
+                cookie1.setMaxAge(24 * 60 * 60);
+                res.addCookie(cookie1);
+                Cookie cookie2 = new Cookie("password", password);
+                cookie1.setMaxAge(24 * 60 * 60);
+                res.addCookie(cookie2);
+                res.addCookie(cookie2);
+            }
             return "redirect:/Admin/AdminView";
         } else if (staffService.login(id, password)) {
             session.setAttribute("staff", id);
-            Cookie cookie1 = new Cookie("name", id.toString());
-            cookie1.setMaxAge(24 * 60 * 60);
-            res.addCookie(cookie1);
-            Cookie cookie2 = new Cookie("password", password);
-            cookie1.setMaxAge(24 * 60 * 60);
-            res.addCookie(cookie2);
-            res.addCookie(cookie2);
+            if ("remember-me".equals(remember)){
+                Cookie cookie1 = new Cookie("name", id.toString());
+                cookie1.setMaxAge(24 * 60 * 60);
+                res.addCookie(cookie1);
+                Cookie cookie2 = new Cookie("password", password);
+                cookie1.setMaxAge(24 * 60 * 60);
+                res.addCookie(cookie2);
+                res.addCookie(cookie2);
+            }
             return "redirect:/Staff/ShowInfo";
         } else {
             return "../Login";

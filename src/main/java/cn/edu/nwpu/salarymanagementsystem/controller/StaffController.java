@@ -52,7 +52,7 @@ public class StaffController {
         Long Id = (Long) session.getAttribute("staff");
         model.addAttribute("staffInfo",staffService.getPersonalInformation(Id));
         //model.addAttribute(staffService.getPersonalInformation(Id));
-        return "/Staff/ShowInfo";
+        return "/test1/personal-info";
     }
 
     /**
@@ -81,7 +81,7 @@ public class StaffController {
                                             @RequestParam(value = "name", defaultValue = "")String name,
                                             @RequestParam(value = "phoneNumber", defaultValue = "")String phoneNumber,
                                             @RequestParam(value = "email", defaultValue = "")String email,
-                                            @RequestParam(value = "department", defaultValue = "")long department) {
+                                            @RequestParam(value = "department", defaultValue = "")Long department) {
         if (name == null) {
             name = "";
         }
@@ -127,7 +127,7 @@ public class StaffController {
         model.addAttribute("staffName",staffService.getPersonalInformation(id).getName());
         model.addAttribute("staffId",staffService.getPersonalInformation(id).getId());
         model.addAttribute("salaryList",staffService.getSalaryList(id));
-        return "/Staff/ShowSalary";
+        return "/test1/my-salary";
     }
 
     /**

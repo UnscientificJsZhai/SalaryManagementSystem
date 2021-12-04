@@ -47,6 +47,7 @@ img {
 	padding-right: 50px;
 }
 </style>
+	<jsp:include page="/WEB-INF/test1/banner.jsp"/>
 </head>
 <body style="background: url(showinfo.jpg); background-size: cover">
 

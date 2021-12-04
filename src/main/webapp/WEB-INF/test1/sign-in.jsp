@@ -39,10 +39,12 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/resources/css/signin.css" rel="stylesheet">
+
 </head>
 <body class="text-center">
 
 <main class="form-signin">
+    <jsp:include page="banner.jsp"/>
     <form action="/login" method="post">
         <img class="mb-4" src="${pageContext.request.contextPath}/resources/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
@@ -56,11 +58,11 @@
             <label for="floatingPassword">Password</label>
         </div>
 
-<%--        <div class="checkbox mb-3">--%>
-<%--            <label>--%>
-<%--                <input name="remember" type="checkbox" value="remember-me"> Remember me--%>
-<%--            </label>--%>
-<%--        </div>--%>
+        <div class="checkbox mb-3">
+            <label>
+                <input name="remember" type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
     </form>
