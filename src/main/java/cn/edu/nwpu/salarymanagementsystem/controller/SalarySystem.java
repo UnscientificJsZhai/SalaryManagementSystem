@@ -54,7 +54,7 @@ public class SalarySystem {
                 res.addCookie(cookie2);
                 res.addCookie(cookie2);
             }
-            return "redirect:/Admin/AdminView";
+            return "redirect:/Admin/showStaff";
         } else if (staffService.login(id, password)) {
             session.setAttribute("staff", staffService.getPersonalInformation(id));
             if ("remember-me".equals(remember)){

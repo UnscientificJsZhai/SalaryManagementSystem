@@ -42,6 +42,7 @@ public class AdministratorController {
 
     @RequestMapping("/AdminView")
     public String adminHome(){
+
         return "/test1/staff-info";
     }
 
@@ -58,7 +59,7 @@ public class AdministratorController {
             staffPairList.add(new Pair<>(staff,administratorService.getDepartmentById(staff.getDepartment()).getName()));
         }
         model.addAttribute("staffList",staffPairList);
-        return "/Admin/ShowStaff";
+        return "/test1/staff-info";
     }
 
     /**
@@ -86,10 +87,11 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/addStaff", method = GET)
     public String showStaffForm() {
-        return "/Admin/AddStaff";
+        return "/test1/add-staff";
     }
 
     /**
+     * 添加员工
      * 添加员工
      *
      * @param staff    新的员工信息
@@ -253,22 +255,20 @@ public class AdministratorController {
      * @return EditSalary
      */
     @RequestMapping(value = "/addSalary", method = GET)
-    public String showSetSalaryForm(Model model, Long staff) {
-        model.addAttribute("staffInfo", administratorService.getStaffById(staff));
-        model.addAttribute("salaryList", administratorService.getSalaryListByStaff(staff));
-        return "/Admin/EditSalary";
+    public String showSetSalaryForm(Model model,long id) {
+        model.addAttribute("staffInfo",administratorService.getStaffById(id));
+        return "/test1/add-salary";
     }
 
     /**
      * 为一名员工设置一个薪水信息。
      *
-     * @param staff 目标员工
      * @param salary 设置的薪水
      * @return ShowStaff
      */
     @RequestMapping(value = "/addSalary", method = POST)
-    public String setSalary(Long staff, Salary salary) {
-        administratorService.setSalary(staff, salary);
+    public String setSalary(Salary salary,long id) {
+        administratorService.setSalary(id, salary);
         return "redirect:/Admin/ShowStaff";
     }
 
