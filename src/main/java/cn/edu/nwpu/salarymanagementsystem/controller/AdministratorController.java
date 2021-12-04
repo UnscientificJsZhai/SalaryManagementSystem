@@ -1,11 +1,11 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.Department;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.DepartmentTreeNode;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DuplicatedUserException;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
@@ -207,8 +207,17 @@ public class AdministratorController {
      */
     @RequestMapping("/showDepartment")
     public String getDepartmentList(Model model) {
-        model.addAttribute("departmentList", administratorService.getDepartmentList());
-        return "/Admin/ShowDepartment";
+        List<MutableDepartment> list = administratorService.getDepartmentList();
+
+        List<DepartmentTreeNode> treeNodes;
+        try {
+            treeNodes = DepartmentTreeNode.getTree(list);
+        } catch (DepartmentTreeException e) {
+            e.printStackTrace();
+            treeNodes = new ArrayList<>(0);
+        }
+        model.addAttribute("treeNodes",treeNodes);
+        return "/allDepartment-info";
     }
 
     /**
@@ -324,12 +333,12 @@ public class AdministratorController {
      * @return ShowStaff
      */
     @RequestMapping(value = "/addSalary", method = POST)
-    public String setSalary(@RequestParam(value = "month", defaultValue = "")int month,
-                            @RequestParam(value = "postWage", defaultValue = "")double postWage,
-                            @RequestParam(value = "meritPay", defaultValue = "")double meritPay,
-                            @RequestParam(value = "seniorityPay", defaultValue = "")double seniorityPay,
-                            @RequestParam(value = "subsidy", defaultValue = "")double subsidy,
-                            @RequestParam(value = "paid", defaultValue = "")boolean paid,
+    public String setSalary(@RequestParam(value = "month", defaultValue = "") int month,
+                            @RequestParam(value = "postWage", defaultValue = "") double postWage,
+                            @RequestParam(value = "meritPay", defaultValue = "") double meritPay,
+                            @RequestParam(value = "seniorityPay", defaultValue = "") double seniorityPay,
+                            @RequestParam(value = "subsidy", defaultValue = "") double subsidy,
+                            @RequestParam(value = "paid", defaultValue = "") boolean paid,
                             long id,
                             HttpSession session) {
         MutableSalary salary = new MutableSalary(month, postWage, meritPay, seniorityPay, subsidy, paid);
@@ -351,7 +360,7 @@ public class AdministratorController {
                                      @PathVariable long id,
                                      @PathVariable int month) {
         Salary salary = administratorService.getMutableSalary(id, month);
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
         model.addAttribute("salary", salary);
         return "alter-salary";
     }
@@ -363,12 +372,12 @@ public class AdministratorController {
      */
     @RequestMapping(value = "/editSalary", method = POST)
     public String updateSalary(long id,
-                               @RequestParam(value = "month", defaultValue = "")int month,
-                               @RequestParam(value = "postWage", defaultValue = "")double postWage,
-                               @RequestParam(value = "meritPay", defaultValue = "")double meritPay,
-                               @RequestParam(value = "seniorityPay", defaultValue = "")double seniorityPay,
-                               @RequestParam(value = "subsidy", defaultValue = "")double subsidy,
-                               @RequestParam(value = "paid", defaultValue = "")boolean paid) {
+                               @RequestParam(value = "month", defaultValue = "") int month,
+                               @RequestParam(value = "postWage", defaultValue = "") double postWage,
+                               @RequestParam(value = "meritPay", defaultValue = "") double meritPay,
+                               @RequestParam(value = "seniorityPay", defaultValue = "") double seniorityPay,
+                               @RequestParam(value = "subsidy", defaultValue = "") double subsidy,
+                               @RequestParam(value = "paid", defaultValue = "") boolean paid) {
         MutableSalary salary = new MutableSalary(month, postWage, meritPay, seniorityPay, subsidy, paid);
         administratorService.updateSalary(id, salary);
         return "redirect:/Admin/showStaff";

@@ -54,7 +54,7 @@
                 <li class="nav-item"><a href="<c:url value="/Admin/showStaff"/>" class="nav-link">Staff</a></li>
             </c:if>
             <c:if test="${sessionScope.administrator != null}">
-                <li class="nav-item"><a href="#" class="nav-link">Department</a></li>
+                <li class="nav-item"><a href="<c:url value="/Admin/showDepartment"/> " class="nav-link">Department</a></li>
             </c:if>
             <c:if test="${sessionScope.staff != null || sessionScope.administrator != null}">
                 <li class="nav-item"><a href="<c:url value="/logout"/> " class="nav-link active">Sign out</a></li>

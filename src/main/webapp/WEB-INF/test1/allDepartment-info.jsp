@@ -43,6 +43,6 @@
     <link href="${pageContext.request.contextPath}/resources/css/cheatsheet.css" rel="stylesheet">
 </head>
 <body>
-<departmentTag:showDepartment/>
+<departmentTag:showDepartment treeNodes="${treeNodes}"/>
 </body>
 </html>

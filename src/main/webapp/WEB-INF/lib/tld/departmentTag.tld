@@ -13,7 +13,11 @@
 
     <tag>
         <name>showDepartment</name>
-        <tag-class>cn.edu.nwpu.salarymanagementsystem.tag.DateTag</tag-class>
+        <tag-class>cn.edu.nwpu.salarymanagementsystem.tag.DepartmentTag</tag-class>
         <body-content>empty</body-content>
+        <attribute>
+            <name>treeNodes</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 </taglib>

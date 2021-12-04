@@ -1,6 +1,7 @@
 package cn.edu.nwpu.salarymanagementsystem.tag;
 
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.DepartmentTreeNode;
+import cn.edu.nwpu.salarymanagementsystem.pojo.data.department.MutableDepartment;
 import cn.edu.nwpu.salarymanagementsystem.pojo.exception.DepartmentTreeException;
 import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
 
@@ -12,38 +13,37 @@ import java.util.ArrayList;
 
 public class DepartmentTag extends SimpleTagSupport {
 
-    public void doTag() throws JspException, IOException {
-        JspWriter out = getJspContext().getOut();
-        ArrayList<DepartmentTreeNode> treeNodes = null;
-        try {
-            treeNodes = new AdministratorService().getDepartmentTree();
-            StringBuilder outPrint = new StringBuilder();
-            for (DepartmentTreeNode treeNode : treeNodes) {
-                outPrint.append(traverse(treeNode));
-            }
-            out.println(outPrint.toString());
-        } catch (DepartmentTreeException | NullPointerException e) {
-            out.println();
-        }
+    private ArrayList<DepartmentTreeNode> treeNodes;
 
+    public void setTreeNodes(ArrayList<DepartmentTreeNode> treeNodes) {
+        this.treeNodes = treeNodes;
     }
 
-    public String traverse(DepartmentTreeNode departmentTreeNode) {
-
-        StringBuilder outPrint = new StringBuilder("");
-        outPrint.append(departmentTreeNode.getData().getId()).append("\t")
-                .append(departmentTreeNode.getData().getName()).append("\t")
-                .append(departmentTreeNode.getData().getParentDepartment()).append("\t")
-                .append(departmentTreeNode.getData().getLevel()).append("\t")
-                .append("<a name=\"del\" href=\"#?departmentId=${department.id}\">删除</a>").append("\t")
-                .append("<a href=\"/administrator/editDepartment?departmentId=${department.id}\">修改</a>");
-        outPrint.append("<hr>");
-        for (DepartmentTreeNode node : departmentTreeNode) {
-            outPrint.append("\t\t");
-            outPrint.append(traverse(departmentTreeNode));
+    public void doTag() throws JspException, IOException {
+        JspWriter out = getJspContext().getOut();
+        try {
+            StringBuilder outPrint = new StringBuilder();
+            for (DepartmentTreeNode treeNode : treeNodes) {
+                traverse(treeNode,outPrint);
+                outPrint.append("<br/>");
+            }
+            out.println(outPrint.toString());
+        } catch (NullPointerException e) {
+            out.println();
         }
+    }
 
-        return outPrint.toString();
+    public void traverse(DepartmentTreeNode departmentTreeNode,StringBuilder str) {
+        MutableDepartment department = departmentTreeNode.getData();
+        int level = department.getLevel();
+        str.append("--".repeat(Math.max(0, level-1)))
+                .append(department.getName())
+                .append("")
+                .append("<br/>");
+        for (DepartmentTreeNode node:departmentTreeNode
+             ) {
+            traverse(node,str);
+        }
     }
 
 }
