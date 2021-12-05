@@ -136,14 +136,16 @@ public class AdministratorController {
                            @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
                            @RequestParam(value = "email", defaultValue = "") String email,
                            @RequestParam(value = "department", defaultValue = "") Long department,
-                           @RequestParam(value = "password", defaultValue = "") String password) {
+                           @RequestParam(value = "password", defaultValue = "") String password,
+                           Model model) {
         try {
             if (administratorService.getStaffById(id) == null) {
                 MutableStaff staff = new MutableStaff(id, name, phoneNumber, email, department);
                 administratorService.addStaff(staff, password);
             }
         } catch (DuplicatedUserException e) {
-            e.printStackTrace();
+            model.addAttribute("result", "添加员工错误！");
+            return "/wa";
         }
         return "redirect:/Admin/showStaff";
     }
