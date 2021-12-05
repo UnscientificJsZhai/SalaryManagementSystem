@@ -20,10 +20,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cheatsheet/">
 
-
-
     <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/assets/dist/css/bootstrap.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -40,12 +38,19 @@
             }
         }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/resources/css/cheatsheet.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="banner.jsp"/>
-<departmentTag:showDepartment treeNodes="${treeNodes}"/>
-<a href="<c:url value="/Admin/addDepartment"/>">add</a>
+<div class="container px-4 py-5" id="custom-cards">
+    <div>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h3>Departments List</h3></div>
+            <div class="panel-body">
+                <departmentTag:showDepartment treeNodes="${treeNodes}"/>
+            </div>
+        </div>
+    </div>
+    <a href="<c:url value="/Admin/addDepartment"/>">add</a>
+</div>
 </body>
 </html>
