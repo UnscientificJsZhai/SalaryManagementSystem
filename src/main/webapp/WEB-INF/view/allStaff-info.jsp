@@ -46,7 +46,9 @@
 <div class="container px-4 py-5" id="custom-cards">
     <h2>Staff List</h2>
     <br/>
-    <a href="<c:url value="/Admin/addStaff"/>">add staff</a>
+    <a href="<c:url value="/Admin/addStaff"/>">
+        <button type="button" class="btn btn-success">Add staff</button>
+    </a>
     <br/>
     <div class="table-responsive">
         <table class="table table-striped table-sm">

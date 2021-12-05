@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Add Staff</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -66,17 +66,11 @@
                             <label> password
                                 <input name="password" type="password" class="form-control" placeholder="password" required>
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
                         <div class="col-12">
                             <label> name
                                 <input name="name" type="text" class="form-control" placeholder="name" required>
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
 
                         <div class="col-12">
@@ -84,9 +78,6 @@
                             <label> phoneNumber
                                 <input name="phoneNumber" type="text" class="form-control" placeholder="phoneNumber" >
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
 
                         <div class="col-12">
@@ -94,9 +85,6 @@
                             <label> email
                                 <input name="email" type="text" class="form-control" placeholder="email" >
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
 
                         <div class="col-12">
@@ -104,9 +92,6 @@
                             <label> departmentId
                                 <input name="department" type="number" class="form-control" placeholder="departmentId" >
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
                     </div>
                     <br/>

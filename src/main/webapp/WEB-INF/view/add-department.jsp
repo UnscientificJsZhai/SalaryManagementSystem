@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Add Department</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -47,7 +47,7 @@
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <h2>add staff</h2>
+            <h2>Add Department</h2>
         </div>
 
         <div class="row g-5">
@@ -61,7 +61,7 @@
                                 <input name="id" type="text" class="form-control" placeholder="id" required>
                             </label>
                             <div class="invalid-feedback">
-                                Please enter your shipping address.
+                                Id of new Department
                             </div>
                         </div>
                         <div class="col-12">
@@ -69,7 +69,7 @@
                                 <input name="name" type="text" class="form-control" placeholder="name" required >
                             </label>
                             <div class="invalid-feedback">
-                                Please enter your shipping address.
+                                Name of new Department
                             </div>
                         </div>
                         <div class="col-12">
@@ -77,7 +77,7 @@
                                 <input name="parentDepartment" type="text" class="form-control" placeholder="parentDepartment">
                             </label>
                             <div class="invalid-feedback">
-                                Please enter your shipping address.
+                                Name of parent Department(maybe empty)
                             </div>
                         </div>
                         <div class="col-12">
@@ -85,7 +85,7 @@
                                 <input name="level" type="text" class="form-control" placeholder="level" >
                             </label>
                             <div class="invalid-feedback">
-                                Please enter your shipping address.
+                                Level of new Department
                             </div>
                         </div>
 

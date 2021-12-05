@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Add Salary</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -58,49 +58,33 @@
 
                         <div class="col-12">
                             <label> month
-                                <input name="month" type="text" class="form-control" placeholder="month" required value="${salary.month}">
+                                <input name="month" type="text" class="form-control" placeholder="month" required
+                                       value="${salary.month}">
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
                         <div class="col-12">
                             <label> postWage
                                 <input name="postWage" type="text" class="form-control" placeholder="postWage" required>
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
 
                         <div class="col-12">
-
                             <label> meritPay
                                 <input name="meritPay" type="text" class="form-control" placeholder="meritPay" required>
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
 
                         <div class="col-12">
-
                             <label> seniorityPay
-                                <input name="seniorityPay" type="text" class="form-control" placeholder="seniorityPay" required>
+                                <input name="seniorityPay" type="text" class="form-control" placeholder="seniorityPay"
+                                       required>
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
 
                         <div class="col-12">
-
                             <label> subsidy
                                 <input name="subsidy" type="text" class="form-control" placeholder="subsidy" required>
                             </label>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
                         </div>
 
                         <div class="col-12">
@@ -110,7 +94,7 @@
                         </div>
                         <div class="col-12">
                             <label>
-                                <input name="id" type="number" hidden="hidden" value="${staffInfo.id}" >
+                                <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
                             </label>
                         </div>
                     </div>

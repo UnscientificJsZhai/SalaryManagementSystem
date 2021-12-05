@@ -58,10 +58,12 @@ public class DateTag extends SimpleTagSupport {
                         "        <th>工龄工资</th>\n" +
                         "        <th>补贴</th>\n" +
                         "        <th>是否已发放工资</th>\n");
+        if (administrator != null) {
+            outPrint.append("<th>操作</th>\n");
+        }
         outPrint.append("</tr>\n");
 
         if (administrator != null) {
-            outPrint.append("<th>操作</th>\n");
             for (int i = 0; i < salaryList.size(); i++) {
                 Salary salary = salaryList.get(i);
                 outPrint.append("<tr>\n" +

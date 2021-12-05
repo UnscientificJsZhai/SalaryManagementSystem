@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Staff Information</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -273,13 +273,15 @@
     <div class="b-example-divider"></div>
 
     <div class="container px-4 py-5" id="custom-cards">
-        <h2 class="pb-2 border-bottom shadow p-3 mb-5 bg-white rounded">Custom Cards</h2>
+        <h2 class="pb-2 border-bottom shadow p-3 mb-5 bg-white rounded">Salary</h2>
         <br/>
-        <a href="/Admin/addSalary/${staffInfo.id}">
-            <button type="button" class="btn btn-success">
-                addSalary
-            </button>
-        </a>
+        <c:if test="${sessionScope.administrator != null}">
+            <a href="/Admin/addSalary/${staffInfo.id}">
+                <button type="button" class="btn btn-success">
+                    Add Salary
+                </button>
+            </a>
+        </c:if>
         <br/>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -297,7 +299,7 @@
     <div class="b-example-divider"></div>
 
     <div class="container px-4 py-5" id="icon-grid">
-        <h2 class="pb-2 border-bottom shadow p-3 mb-5 bg-white rounded">Icon grid</h2>
+        <h2 class="pb-2 border-bottom shadow p-3 mb-5 bg-white rounded">Personal Income Tax</h2>
         <div>
             <div class="bd-example">
                 <table class="table table-striped">

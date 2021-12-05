@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Departments List</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -50,7 +50,9 @@
             </div>
         </div>
     </div>
-    <a href="<c:url value="/Admin/addDepartment"/>">add</a>
+    <a href="<c:url value="/Admin/addDepartment"/>">
+        <button type="button" class="btn btn-success">Add a Department</button>
+    </a>
 </div>
 </body>
 </html>
