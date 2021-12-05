@@ -1,7 +1,5 @@
 package cn.edu.nwpu.salarymanagementsystem.controller;
 
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.MutableSalary;
-import cn.edu.nwpu.salarymanagementsystem.pojo.data.salary.Salary;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.MutableStaff;
 import cn.edu.nwpu.salarymanagementsystem.pojo.data.staff.Staff;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -43,7 +39,9 @@ public class StaffController {
      * @return 信息展示页面。
      */
     @RequestMapping("/ShowInfo")
-    public String getPersonalInformation(Model model, long id) {
+    public String getPersonalInformation(Model model,HttpSession session) {
+        Staff staff = (Staff)session.getAttribute("staff");
+        long id = staff.getId();
         model.addAttribute("staffInfo", staffService.getPersonalInformation(id));
         model.addAttribute("salaryList", staffService.getSalaryList(id));
         model.addAttribute("taxInfo", TaxUtil.totalTax(staffService.getSalaryList(id)));
@@ -67,7 +65,8 @@ public class StaffController {
                                             @RequestParam(value = "phoneNumber", defaultValue = "") String phoneNumber,
                                             @RequestParam(value = "email", defaultValue = "") String email,
                                             @RequestParam(value = "department", defaultValue = "") Long department,
-                                            HttpSession session) {
+                                            HttpSession session,
+                                            Model model) {
         if (name == null) {
             name = "";
         }
@@ -77,15 +76,15 @@ public class StaffController {
         if (email == null) {
             email = "";
         }
-        if (StringUtil.isEmail(email) && StringUtil.isPhone(phoneNumber)){
+        if (StringUtil.isEmail(email) && StringUtil.isPhone(phoneNumber)) {
             Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
             session.setAttribute("staff", staff);
             staffService.updatePersonalInformation(staff);
-            //noinspection SpringMVCViewInspection
-            return "redirect:/Staff/ShowInfo?id="+ id;
+            return "redirect:/Staff/ShowInfo";
         } else {
-            System.out.println("Error input");
-            return "personal-info";
+            String result = "错误的更改";
+            model.addAttribute("result",result);
+            return "/wa";
         }
     }
 
@@ -102,7 +101,7 @@ public class StaffController {
             Staff staff = (Staff) session.getAttribute("staff");
             staffService.updatePassword(staff.getId(), password1);
             //noinspection SpringMVCViewInspection
-            return "redirect:/Staff/ShowInfo?id=" + staff.getId();
+            return "redirect:/Staff/ShowInfo";
         } else {
             String error = "Change Failed";
             model.addAttribute("ERROR", error);

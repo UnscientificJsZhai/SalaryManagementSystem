@@ -36,9 +36,9 @@ public class DepartmentTag extends SimpleTagSupport {
         int level = department.getLevel();
         str.append("--".repeat(Math.max(0, level - 1)))
                 .append(department.getName())
-                .append("<a href=\"/Admin/editDepartment/")
+                .append("   <a href=\"/Admin/editDepartment/")
                 .append(department.getId())
-                .append("\">edit</a>")
+                .append("\">edit</a>   ")
                 .append("<a href=\"/Admin/deleteDepartment/")
                 .append(department.getId())
                 .append("\">delete</a>")
@@ -48,5 +48,4 @@ public class DepartmentTag extends SimpleTagSupport {
             traverse(node, str);
         }
     }
-
 }

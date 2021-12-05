@@ -30,10 +30,7 @@ public class DateTag extends SimpleTagSupport {
     }
 
     /**
-     * 显示日期的自定义标签
-     *
-     * @throws JspException
-     * @throws IOException
+     * 显示日期的自定义标签。
      */
     public void doTag() throws JspException, IOException {
 

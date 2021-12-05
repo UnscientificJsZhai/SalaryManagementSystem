@@ -4,6 +4,7 @@ import cn.edu.nwpu.salarymanagementsystem.service.AdministratorService;
 import cn.edu.nwpu.salarymanagementsystem.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,7 +43,9 @@ public class SalarySystem {
     @RequestMapping("/login")
     public String processLogin(@RequestParam(value = "id", defaultValue = "") Long id,
                                @RequestParam(value = "password", defaultValue = "") String password,
-                               @RequestParam(value = "remember", defaultValue = "") String remember, HttpSession session, HttpServletResponse res) {
+                               @RequestParam(value = "remember", defaultValue = "") String remember,
+                               Model model,
+                               HttpSession session, HttpServletResponse res) {
         //TODO 无法实现自由选择是否保存，先写成全部保留的方式
         if (administratorService.login(id, password)) {
             session.setAttribute("administrator", administratorService.getAdministratorInfo(id, password));
@@ -51,9 +54,10 @@ public class SalarySystem {
         } else if (staffService.login(id, password)) {
             session.setAttribute("staff", staffService.getPersonalInformation(id));
             setCookie(id, password, remember, res);
-            return "redirect:/Staff/ShowInfo?id=" + id;
+            return "redirect:/Staff/ShowInfo";
         } else {
-            return "/sign-in";
+            model.addAttribute("result", "登录错误！");
+            return "/wa";
         }
     }
 

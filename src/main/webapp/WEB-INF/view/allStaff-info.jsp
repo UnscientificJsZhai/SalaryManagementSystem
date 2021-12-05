@@ -10,7 +10,7 @@
 <%@taglib prefix="showStaffTag" uri="showStaffTag" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Administrator Dashboard</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -21,7 +21,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/assets/dist/css/bootstrap.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -44,9 +44,10 @@
 <body>
 <jsp:include page="banner.jsp"/>
 <div class="container px-4 py-5" id="custom-cards">
-    <h2>Section title</h2>
+    <h2>Staff List</h2>
     <br/>
-    <a href="/Admin/addStaff">add staff</a>
+    <a href="<c:url value="/Admin/addStaff"/>">add staff</a>
+    <br/>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
             <showStaffTag:showStaff staffPairList="${staffList}"/>

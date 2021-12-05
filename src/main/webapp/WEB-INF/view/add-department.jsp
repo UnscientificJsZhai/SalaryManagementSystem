@@ -20,7 +20,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
 
     <!-- Bootstrap core CSS -->
-    <link href="${pageContext.request.contextPath}/resources/css/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/assets/dist/css/bootstrap.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
