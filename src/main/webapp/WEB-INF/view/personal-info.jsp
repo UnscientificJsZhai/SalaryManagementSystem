@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="dateTag" uri="dateTag"%>
+<%@taglib prefix="dateTag" uri="dateTag" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -46,29 +46,47 @@
 <jsp:include page="banner.jsp"/>
 <main>
     <div class="container px-4 py-5" id="featured-3">
-        <h2 class="pb-2 border-bottom">Columns with icons</h2>
+        <h2 class="shadow-lg p-3 mb-5 bg-white rounded">Personal Information:</h2>
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
             <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-                    <img width="140" height="140" src="${pageContext.request.contextPath}/resources/img/沙滩_太阳.svg"
+                    <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_太阳.svg"
                          alt="img1"/>
                 </div>
-                <h2>Staff Id</h2>
-                <p>${staffInfo.id}</p>
+                <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                    <h2>Staff Id</h2>
+                </div>
+                <div class="text-primary shadow-none p-3 mb-5 bg-light rounded">
+                    <p>${staffInfo.id}</p>
+                </div>
             </div>
             <div class="feature col">
                 <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
                     <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_帆船.svg"
                          alt="img2"/>
                 </div>
-                <h2>Staff Name</h2>
-                <p>${staffInfo.name}</p>
+                <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                    <h2>Staff Name</h2>
+                </div>
+                <div class="text-primary shadow-none p-3 mb-5 bg-light rounded">
+                    <c:if test="${staffInfo.name != null}">
+                        <p>${staffInfo.name}</p>
+                    </c:if>
+                    <c:if test="${staffInfo.name == null}">
+                        <p>未设置</p>
+                    </c:if>
+                </div>
                 <c:if test="${sessionScope.staff != null}">
                     <form action="<c:url value="/Staff/editStaff"/>" method="post">
                         <div class="form-floating">
-                            <input name="name" type="text" class="form-control" id="floatingInput"
-                                   placeholder="new name">
-                            <label for="floatingInput">new name</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">New name</span>
+                                </div>
+                                <input name="name" type="text" id="floatingInput" class="form-control"
+                                       placeholder="new name" aria-label="new name"
+                                       aria-describedby="basic-addon1">
+                            </div>
                             <label>
                                 <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
                             </label>
@@ -91,14 +109,28 @@
                     <img width="50" height="50" src="${pageContext.request.contextPath}/resources/img/沙滩_椰子汁.svg"
                          alt="img3"/>
                 </div>
-                <h2>Staff phone</h2>
-                <p>${staffInfo.phoneNumber} </p>
+                <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                    <h2>Staff phone</h2>
+                </div>
+                <div class="text-primary shadow-none p-3 mb-5 bg-light rounded">
+                    <c:if test="${staffInfo.phoneNumber != null}">
+                        <p>${staffInfo.phoneNumber} </p>
+                    </c:if>
+                    <c:if test="${staffInfo.phoneNumber == null}">
+                        <p>未设置</p>
+                    </c:if>
+                </div>
                 <c:if test="${sessionScope.staff != null}">
                     <form action="<c:url value="/Staff/editStaff"/>" method="post">
                         <div class="form-floating">
-                            <input name="phoneNumber" type="text" class="form-control" id="floatingInput2"
-                                   placeholder="new phoneNumber">
-                            <label for="floatingInput2">new phoneNumber</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon6">New PhoneNum</span>
+                                </div>
+                                <input name="phoneNumber" type="text" id="floatingInput2" class="form-control"
+                                       placeholder="new phoneNumber" aria-label="new phoneNumber"
+                                       aria-describedby="basic-addon1">
+                            </div>
                             <label>
                                 <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
                                 <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
@@ -116,14 +148,32 @@
                          alt="img4"/>
                 </div>
                 <div>
-                    <h2>Staff Email</h2>
-                    <p>${staffInfo.email}</p>
+                    <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                        <h2>Staff Email</h2>
+                    </div>
+                    <div class="text-primary">
+                        <c:if test="${staffInfo.email != null}">
+                            <div class="shadow-none p-3 mb-5 bg-light rounded">
+                                <p>${staffInfo.email}</p>
+                            </div>
+                        </c:if>
+                        <c:if test="${staffInfo.email == null}">
+                            <div class="shadow-none p-3 mb-5 bg-light rounded">
+                                <p>未设置</p>
+                            </div>
+                        </c:if>
+                    </div>
                     <c:if test="${sessionScope.staff != null}">
                         <form action="<c:url value="/Staff/editStaff"/>" method="post">
                             <div class="form-floating">
-                                <input name="email" type="text" class="form-control" id="floatingInput3"
-                                       placeholder="name@example.com">
-                                <label for="floatingInput3">new email</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon4">New Email</span>
+                                    </div>
+                                    <input name="email" type="text" id="floatingInput3" class="form-control"
+                                           placeholder="name@example.com" aria-label="name@example.com"
+                                           aria-describedby="basic-addon1">
+                                </div>
                                 <label>
                                     <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
                                     <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
@@ -144,14 +194,28 @@
                          alt="img5"/>
                 </div>
                 <div>
-                    <h2>Staff Department</h2>
-                    <p>${staffInfo.department}</p>
+                    <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                        <h2>Staff Department</h2>
+                    </div>
+                    <div class="text-primary shadow-none p-3 mb-5 bg-light rounded">
+                        <c:if test="${staffInfo.department != null}">
+                            <p>${staffInfo.department}</p>
+                        </c:if>
+                        <c:if test="${staffInfo.department == null}">
+                            <p>未设置</p>
+                        </c:if>
+                    </div>
                     <c:if test="${sessionScope.administrator != null}">
                         <form action="<c:url value="/Admin/editStaff"/>" method="post">
                             <div class="form-floating">
-                                <input name="department" type="number" id="floatingInput4" class="form-control"
-                                       placeholder="new department" required>
-                                <label for="floatingInput4">new department</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon5">New Department</span>
+                                    </div>
+                                    <input name="department" type="number" id="floatingInput4" class="form-control"
+                                           placeholder="new department" aria-label="new department"
+                                           aria-describedby="basic-addon1">
+                                </div>
                                 <label>
                                     <input name="id" type="number" hidden="hidden" value="${staffInfo.id}">
                                     <input name="name" type="text" hidden="hidden" value="${staffInfo.name}">
@@ -172,24 +236,36 @@
                 </div>
                 <c:if test="${sessionScope.staff != null}">
                     <div>
-                        <h2>Password</h2>
-                        <p>you can change pwd here!</p>
+                        <div class="shadow-sm p-3 mb-5 bg-white rounded">
+                            <h2>Password</h2>
+                        </div>
+                        <div class="text-primary shadow-none p-3 mb-5 bg-light rounded">
+                            <p>you can change password here!</p>
+                        </div>
+
                         <form action="<c:url value="/Staff/changePassword"/>" method="post">
                             <div class="form-floating">
-                                <input name="password1" type="password" id="floatingInput5" class="form-control"
-                                       placeholder="new pwd" required>
-                                <label for="floatingInput5">new pwd</label>
-                                <br/>
-                                <input name="password2" type="password" id="floatingInput6" class="form-control"
-                                       placeholder="new pwd again" required>s
-                                <label for="floatingInput6">new pwd again</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">新密码</span>
+                                    </div>
+                                    <input name="password1" type="password" id="floatingInput5" class="form-control"
+                                           placeholder="new password" aria-label="new password"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2">请再次输入</span>
+                                    </div>
+                                    <input name="password2" type="password" id="floatingInput6" class="form-control"
+                                           placeholder="new password again" aria-label="new password again"
+                                           aria-describedby="basic-addon2">
+                                </div>
                             </div>
-                            <br/>
-                            <button class="w-100 btn btn-lg btn-primary" type="submit">click to alter</button>
+                            <button class="w-100 btn btn-lg btn-primary" type="submit">click to update</button>
                         </form>
                     </div>
                 </c:if>
-
             </div>
         </div>
     </div>
@@ -197,12 +273,14 @@
     <div class="b-example-divider"></div>
 
     <div class="container px-4 py-5" id="custom-cards">
-        <h2 class="pb-2 border-bottom">Custom cards</h2>
+        <h2 class="pb-2 border-bottom shadow p-3 mb-5 bg-white rounded">Custom Cards</h2>
         <br/>
-        <c:if test="${sessionScope.administrator != null}">
-            <a href="/Admin/addSalary/${staffInfo.id}">addSalary</a>
-        </c:if>
-
+        <a href="/Admin/addSalary/${staffInfo.id}">
+            <button type="button" class="btn btn-success">
+                addSalary
+            </button>
+        </a>
+        <br/>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <c:if test="${sessionScope.administrator != null}">
@@ -219,7 +297,7 @@
     <div class="b-example-divider"></div>
 
     <div class="container px-4 py-5" id="icon-grid">
-        <h2 class="pb-2 border-bottom">Icon grid</h2>
+        <h2 class="pb-2 border-bottom shadow p-3 mb-5 bg-white rounded">Icon grid</h2>
         <div>
             <div class="bd-example">
                 <table class="table table-striped">

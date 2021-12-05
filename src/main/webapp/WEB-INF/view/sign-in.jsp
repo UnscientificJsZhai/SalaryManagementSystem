@@ -48,7 +48,7 @@
     <jsp:include page="banner.jsp"/>
     <form action="<c:url value="/login"/> " method="post">
         <img class="mb-4" src="${pageContext.request.contextPath}/resources/css/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 fw-normal shadow-sm p-3 mb-5 bg-white rounded">Please sign in</h1>
 
         <div class="form-floating">
             <input name="id" value="${cookie.name.value}" type="number" class="form-control" id="floatingInput" placeholder="name@example.com" required>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="checkbox mb-3">
-            <label>
+            <label class="shadow-sm p-3 mb-5 bg-white rounded">
                 <input name="remember" type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
