@@ -51,11 +51,11 @@
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">
-            <input name="id" value="${cookie.name.value}" type="number" class="form-control" id="floatingInput" placeholder="name@example.com" >
+            <input name="id" value="${cookie.name.value}" type="number" class="form-control" id="floatingInput" placeholder="name@example.com" required>
             <label for="floatingInput">Id</label>
         </div>
         <div class="form-floating">
-            <input name="password" value="${cookie.password.value}" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input name="password" value="${cookie.password.value}" type="password" class="form-control" id="floatingPassword" placeholder="Password" requireds>
             <label for="floatingPassword">Password</label>
         </div>
 

@@ -80,7 +80,6 @@ public class StaffController {
             Staff staff = new MutableStaff(id, name, phoneNumber, email, department);
             session.setAttribute("staff", staff);
             staffService.updatePersonalInformation(staff);
-            //noinspection SpringMVCViewInspection
             return "redirect:/Staff/ShowInfo";
         } else {
             String result = "错误的更改";

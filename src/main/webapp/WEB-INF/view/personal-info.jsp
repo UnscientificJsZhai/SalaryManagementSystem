@@ -177,11 +177,11 @@
                         <form action="<c:url value="/Staff/changePassword"/>" method="post">
                             <div class="form-floating">
                                 <input name="password1" type="password" id="floatingInput5" class="form-control"
-                                       placeholder="new pwd">
+                                       placeholder="new pwd" required>
                                 <label for="floatingInput5">new pwd</label>
                                 <br/>
                                 <input name="password2" type="password" id="floatingInput6" class="form-control"
-                                       placeholder="new pwd again">
+                                       placeholder="new pwd again" required>s
                                 <label for="floatingInput6">new pwd again</label>
                             </div>
                             <br/>
